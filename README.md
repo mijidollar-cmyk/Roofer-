@@ -16,3 +16,7 @@ After deployment, Cloudflare Pages provides a `*.pages.dev` URL. If the URL is n
 ## Important
 
 The complete binary-asset package is available as the fixed website ZIP from the project workspace. The GitHub connector used for this repository does not accept local file paths for binary uploads, so binary assets must be uploaded through GitHub's web interface or deployed directly to Cloudflare Pages.
+
+## Deployment
+
+Latest site changes are committed to `main` and are ready for the connected Cloudflare Pages deployment.

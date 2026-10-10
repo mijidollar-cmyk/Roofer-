@@ -6,33 +6,28 @@ body{margin:0!important;overflow-x:hidden!important}
 
 /* ================= HEADER ================= */
 .site-header{position:relative!important;background:#fff!important;z-index:100!important;box-shadow:0 2px 12px rgba(6,36,64,.08)!important}
-.site-header .header-inner{width:100%!important;max-width:1180px!important;height:76px!important;min-height:76px!important;margin:0 auto!important;padding:0 20px!important;display:grid!important;grid-template-columns:190px minmax(0,1fr) 150px!important;gap:12px!important;align-items:center!important;overflow:visible!important}
-.site-header .brand{grid-column:1!important;width:190px!important;min-width:190px!important;margin:0!important;display:flex!important;align-items:center!important;gap:10px!important;overflow:hidden!important}
-.site-header .brand-mark{width:42px!important;height:42px!important;min-width:42px!important;flex:0 0 42px!important}
-.site-header .brand strong{font-size:22px!important;line-height:1!important;white-space:nowrap!important}
-.site-header .brand small{display:block!important;font-size:8px!important;line-height:1!important;letter-spacing:1px!important;white-space:nowrap!important}
-.site-header .main-nav{grid-column:2!important;display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:2px!important;width:100%!important;min-width:0!important;margin:0!important;padding:0!important;overflow:visible!important;flex-wrap:nowrap!important}
-.site-header .main-nav a{display:inline-flex!important;align-items:center!important;justify-content:center!important;flex:0 0 auto!important;width:auto!important;min-width:max-content!important;height:44px!important;min-height:44px!important;padding:0 7px!important;font-size:11px!important;line-height:1.15!important;font-weight:700!important;white-space:nowrap!important;word-break:normal!important;overflow-wrap:normal!important;overflow:visible!important;flex-shrink:0!important;border:0!important;border-bottom:3px solid transparent!important;text-decoration:none!important}
+.site-header .header-inner{width:100%!important;max-width:1240px!important;height:76px!important;min-height:76px!important;margin:0 auto!important;padding:0 20px!important;display:grid!important;grid-template-columns:190px minmax(0,1fr) 146px!important;gap:10px!important;align-items:center!important;overflow:visible!important}
+.site-header .brand{grid-column:1!important;width:190px!important;min-width:190px!important;margin:0!important;display:flex!important;align-items:center!important;gap:9px!important;overflow:hidden!important}
+.site-header .brand-mark{width:40px!important;height:40px!important;min-width:40px!important;flex:0 0 40px!important}
+.site-header .brand strong{font-size:21px!important;line-height:1!important;white-space:nowrap!important}
+.site-header .brand small{display:block!important;font-size:8px!important;line-height:1!important;letter-spacing:.8px!important;white-space:nowrap!important}
+.site-header .main-nav{grid-column:2!important;display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:0!important;width:100%!important;min-width:0!important;margin:0!important;padding:0!important;overflow:visible!important;flex-wrap:nowrap!important}
+.site-header .main-nav a{display:inline-flex!important;align-items:center!important;justify-content:center!important;flex:0 1 auto!important;width:auto!important;min-width:max-content!important;height:44px!important;min-height:44px!important;padding:0 5px!important;font-size:10px!important;line-height:1.15!important;font-weight:700!important;white-space:nowrap!important;word-break:normal!important;overflow-wrap:normal!important;overflow:visible!important;border:0!important;border-bottom:3px solid transparent!important;text-decoration:none!important}
 .site-header .main-nav a:hover,.site-header .main-nav a.active{color:#00527d!important;border-bottom-color:#ffc400!important}
-.site-header .header-cta{grid-column:3!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;width:150px!important;min-width:150px!important;height:46px!important;min-height:44px!important;margin:0!important;padding:0 10px!important;font-size:12px!important;line-height:1!important;white-space:nowrap!important}
+.site-header .header-cta{grid-column:3!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;width:146px!important;min-width:146px!important;height:44px!important;min-height:44px!important;margin:0!important;padding:0 8px!important;font-size:11px!important;line-height:1!important;white-space:nowrap!important}
 .site-header .nav-toggle{display:none!important}
 
+/* Full desktop: compact one-row navigation that always fits. */
 @media(min-width:1201px){
- .site-header .header-inner{max-width:1240px!important;grid-template-columns:205px minmax(0,1fr) 154px!important;gap:16px!important}
- .site-header .brand{width:205px!important;min-width:205px!important}
- .site-header .main-nav{gap:3px!important}
- .site-header .main-nav a{padding:0 8px!important;font-size:12px!important}
- .site-header .header-cta{width:154px!important;min-width:154px!important}
-}
-
-@media(min-width:1101px) and (max-width:1200px){
- .site-header .header-inner{grid-template-columns:185px minmax(0,1fr) 150px!important;gap:12px!important}
- .site-header .brand{width:185px!important;min-width:185px!important}
+ .site-header .header-inner{max-width:1240px!important;grid-template-columns:195px minmax(0,1fr) 150px!important;gap:12px!important}
+ .site-header .brand{width:195px!important;min-width:195px!important}
  .site-header .main-nav{gap:1px!important}
- .site-header .main-nav a{padding:0 4px!important;font-size:10px!important}
+ .site-header .main-nav a{padding:0 6px!important;font-size:11px!important}
+ .site-header .header-cta{width:150px!important;min-width:150px!important}
 }
 
-@media(min-width:761px) and (max-width:1100px){
+/* Medium desktop/tablet: use a real menu before captions can become crowded. */
+@media(min-width:761px) and (max-width:1200px){
  .site-header .header-inner{height:72px!important;min-height:72px!important;padding:0 14px!important;display:flex!important;gap:10px!important}
  .site-header .brand{width:auto!important;min-width:0!important;flex:1 1 auto!important;gap:7px!important}
  .site-header .brand-mark{width:38px!important;height:38px!important;min-width:38px!important;flex-basis:38px!important}
@@ -74,8 +69,7 @@ body{margin:0!important;overflow-x:hidden!important}
 .image-card{min-height:1px!important}
 .image-card img{display:block!important;width:100%!important;height:auto!important;aspect-ratio:3/2!important;object-fit:cover!important}
 .project-row img{display:block!important;width:100%!important;height:145px!important;aspect-ratio:3/2!important;object-fit:cover!important}
-@media(min-width:1201px){.site-header .header-inner{height:82px!important;min-height:82px!important}}
-@media(min-width:761px) and (max-width:1100px){.site-header .header-inner{height:72px!important;min-height:72px!important}}
+@media(min-width:761px) and (max-width:1200px){.site-header .header-inner{height:72px!important;min-height:72px!important}}
 @media(max-width:760px){.site-header .header-inner{height:68px!important;min-height:68px!important}.hero{height:620px!important;min-height:620px!important}}
 
 /* ================= BLOG / CONTENT ================= */

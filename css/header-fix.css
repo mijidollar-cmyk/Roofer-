@@ -1,4 +1,4 @@
-/* Standardized site header: one stable desktop row and a readable mobile navigation row. */
+/* Standardized site header: stable desktop row, compact tablet row, readable mobile navigation. */
 .site-header{background:#fff;position:relative;z-index:50;box-shadow:0 2px 12px rgba(6,36,64,.08)}
 .site-header .header-inner{min-height:76px;display:flex;align-items:center;gap:14px;overflow:visible}
 .site-header .brand{min-width:210px;flex:0 0 auto;gap:10px;min-height:44px}
@@ -11,12 +11,15 @@
 .site-header .header-cta{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;min-width:154px;height:46px;min-height:44px;padding:0 14px;font-size:12px;line-height:1;white-space:nowrap}
 .site-header .nav-toggle{display:none}
 @media(max-width:1100px){
-  .site-header .header-inner{gap:8px}
-  .site-header .brand{min-width:180px}
+  .site-header .header-inner{min-height:76px;display:flex;flex-wrap:wrap;gap:0;padding-top:8px;padding-bottom:0}
+  .site-header .brand{min-width:180px;flex:1 1 auto}
   .site-header .brand strong{font-size:20px}
-  .site-header .main-nav{gap:2px}
-  .site-header .main-nav a{font-size:11px;padding:0 5px}
-  .site-header .header-cta{min-width:138px;padding:0 10px;font-size:11px}
+  .site-header .header-cta{min-width:154px;height:44px;padding:0 12px;font-size:12px}
+  .site-header .main-nav{order:3;flex:0 0 100%;width:100%;margin:8px 0 0;justify-content:flex-start;gap:2px;overflow-x:auto;overflow-y:hidden;padding:0 0 2px;border-top:1px solid #e8eef2;scrollbar-width:none}
+  .site-header .main-nav::-webkit-scrollbar{display:none}
+  .site-header .main-nav a{flex:0 0 auto;font-size:12px;padding:0 9px;min-height:42px;border-bottom:2px solid transparent}
+  .site-header .main-nav a:first-child{margin-left:4px}
+  .site-header .main-nav a:last-child{margin-right:4px}
 }
 @media(max-width:760px){
   .site-header .header-inner{min-height:64px;display:flex;flex-wrap:wrap;gap:0;padding-top:8px;padding-bottom:8px}

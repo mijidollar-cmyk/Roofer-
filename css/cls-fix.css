@@ -1,0 +1,12 @@
+/* CLS hardening: reserve the desktop page geometry before content paints. */
+.topbar{height:38px!important;min-height:38px!important}
+.topbar-inner{height:38px!important;min-height:38px!important}
+.site-header .header-inner{height:82px!important;min-height:82px!important}
+.hero{height:570px!important;min-height:570px!important}
+.hero-image{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:cover!important}
+.image-card{min-height:1px!important}
+.image-card img{display:block!important;width:100%!important;height:auto!important;aspect-ratio:3/2!important;object-fit:cover!important}
+.project-row img{display:block!important;width:100%!important;height:145px!important;aspect-ratio:3/2!important;object-fit:cover!important}
+@media(min-width:1201px){.site-header .header-inner{height:82px!important;min-height:82px!important}}
+@media(min-width:761px) and (max-width:1100px){.site-header .header-inner{height:72px!important;min-height:72px!important}}
+@media(max-width:760px){.site-header .header-inner{height:68px!important;min-height:68px!important}.hero{height:620px!important;min-height:620px!important}.site-header .main-nav{top:68px!important}}

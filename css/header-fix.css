@@ -11,15 +11,12 @@
 .site-header .header-cta{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;min-width:154px;height:46px;min-height:44px;padding:0 14px;font-size:12px;line-height:1;white-space:nowrap}
 .site-header .nav-toggle{display:none}
 @media(max-width:1100px){
-  .site-header .header-inner{min-height:76px;display:flex;flex-wrap:wrap;gap:0;padding-top:8px;padding-bottom:0}
-  .site-header .brand{min-width:180px;flex:1 1 auto}
+  .site-header .header-inner{gap:8px}
+  .site-header .brand{min-width:180px}
   .site-header .brand strong{font-size:20px}
-  .site-header .header-cta{min-width:154px;height:44px;padding:0 12px;font-size:12px}
-  .site-header .main-nav{order:3;flex:0 0 100%;width:100%;margin:8px 0 0;justify-content:flex-start;gap:2px;overflow-x:auto;overflow-y:hidden;padding:0 0 2px;border-top:1px solid #e8eef2;scrollbar-width:none}
-  .site-header .main-nav::-webkit-scrollbar{display:none}
-  .site-header .main-nav a{flex:0 0 auto;font-size:12px;padding:0 9px;min-height:42px;border-bottom:2px solid transparent}
-  .site-header .main-nav a:first-child{margin-left:4px}
-  .site-header .main-nav a:last-child{margin-right:4px}
+  .site-header .main-nav{gap:2px}
+  .site-header .main-nav a{font-size:11px;padding:0 5px}
+  .site-header .header-cta{min-width:138px;padding:0 10px;font-size:11px}
 }
 @media(max-width:760px){
   .site-header .header-inner{min-height:64px;display:flex;flex-wrap:wrap;gap:0;padding-top:8px;padding-bottom:8px}
@@ -39,4 +36,20 @@
   .site-header .brand strong{font-size:18px}
   .site-header .header-cta{font-size:11px;padding:0 10px}
   .site-header .main-nav a{font-size:11px;padding:0 8px}
+}
+
+/* Force the article header to use a two-row tablet layout; this intentionally outranks the legacy article nav rules. */
+@media(max-width:1100px) and (min-width:761px){
+  body:has(#main-content article.section)>header.site-header .header-inner{display:flex!important;flex-wrap:wrap!important;align-items:center!important;min-height:76px!important;gap:0!important;padding-top:8px!important;padding-bottom:0!important}
+  body:has(#main-content article.section)>header.site-header .brand{order:1!important;flex:1 1 auto!important;min-width:0!important;margin-right:12px!important}
+  body:has(#main-content article.section)>header.site-header .header-cta{order:2!important;flex:0 0 auto!important;min-width:180px!important;height:46px!important}
+  body:has(#main-content article.section)>header.site-header .main-nav{order:3!important;flex:0 0 100%!important;width:100%!important;min-width:0!important;margin:8px 0 0!important;display:flex!important;justify-content:flex-start!important;align-items:center!important;gap:0!important;overflow-x:auto!important;overflow-y:hidden!important;padding:0 0 2px!important;border-top:1px solid #e8eef2!important;box-shadow:none!important;scrollbar-width:none!important;flex-wrap:nowrap!important}
+  body:has(#main-content article.section)>header.site-header .main-nav::-webkit-scrollbar{display:none}
+  body:has(#main-content article.section)>header.site-header .main-nav a{flex:0 0 auto!important;min-width:0!important;min-height:42px!important;padding:0 10px!important;font-size:12px!important;white-space:nowrap!important;border-bottom:2px solid transparent!important}
+  body:has(#main-content article.section)>header.site-header .main-nav a:first-child{margin-left:4px!important}
+  body:has(#main-content article.section)>header.site-header .main-nav a:last-child{margin-right:4px!important}
+}
+@media(max-width:760px){
+  body:has(#main-content article.section)>header.site-header .header-inner{display:flex!important;flex-wrap:wrap!important;gap:0!important}
+  body:has(#main-content article.section)>header.site-header .main-nav{order:3!important;flex:0 0 100%!important;width:100%!important;display:flex!important;overflow-x:auto!important;flex-direction:row!important}
 }

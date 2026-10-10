@@ -10,7 +10,7 @@
 .site-header .main-nav a:hover,.site-header .main-nav a.active{color:#00527d;border-bottom-color:#ffc400}
 .site-header .header-cta{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;min-width:154px;height:46px;min-height:44px;padding:0 14px;font-size:12px;line-height:1;white-space:nowrap}
 .site-header .nav-toggle{display:none}
-@media(max-width:1100px){
+@media(max-width:1200px){
   .site-header .header-inner{gap:8px}
   .site-header .brand{min-width:180px}
   .site-header .brand strong{font-size:20px}
@@ -38,8 +38,8 @@
   .site-header .main-nav a{font-size:11px;padding:0 8px}
 }
 
-/* Force the article header to use a two-row tablet layout; this intentionally outranks the legacy article nav rules. */
-@media(max-width:1100px) and (min-width:761px){
+/* Blog/article headers: keep the logo + CTA on row one and give navigation its own full-width row whenever the viewport cannot comfortably fit every item. */
+@media(max-width:1200px) and (min-width:761px){
   body:has(#main-content article.section)>header.site-header .header-inner{display:flex!important;flex-wrap:wrap!important;align-items:center!important;min-height:76px!important;gap:0!important;padding-top:8px!important;padding-bottom:0!important}
   body:has(#main-content article.section)>header.site-header .brand{order:1!important;flex:1 1 auto!important;min-width:0!important;margin-right:12px!important}
   body:has(#main-content article.section)>header.site-header .header-cta{order:2!important;flex:0 0 auto!important;min-width:180px!important;height:46px!important}

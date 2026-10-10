@@ -1,13 +1,12 @@
-# Cloudflare Pages response headers for faster repeat visits and efficient static delivery
+# Cloudflare Pages response headers for fast static delivery
 /
   Cache-Control: public, max-age=300, s-maxage=3600, stale-while-revalidate=86400
 
 /*.html
   Cache-Control: public, max-age=300, s-maxage=3600, stale-while-revalidate=86400
-  Clear-Site-Data: "cache"
 
 /css/*
-  Cache-Control: public, max-age=300, s-maxage=3600, stale-while-revalidate=86400
+  Cache-Control: public, max-age=31536000, immutable
 
 /images/*
-  Cache-Control: public, max-age=300, s-maxage=3600, stale-while-revalidate=86400
+  Cache-Control: public, max-age=31536000, immutable

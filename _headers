@@ -4,7 +4,7 @@
 
 /*.html
   Cache-Control: public, max-age=300, s-maxage=3600, stale-while-revalidate=86400
-  Link: </css/style.css>; rel="stylesheet", </css/header-fix.css?v=20261010-16>; rel="stylesheet", </css/blog-articles.css?v=20261010-13>; rel="stylesheet", </css/site-final.css?v=20261010-13>; rel="stylesheet", </css/cls-fix.css?v=20261010-1>; rel="stylesheet"
+  Link: </css/style.css>; rel="stylesheet", </css/site-final.css?v=20261010-17>; rel="stylesheet"
 
 /css/*
   Cache-Control: public, max-age=31536000, immutable

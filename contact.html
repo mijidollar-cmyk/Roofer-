@@ -10,6 +10,17 @@
 <link rel="stylesheet" href="css/style.css?v=20261010-2">
 <link rel="stylesheet" href="css/header-stable.css?v=20261011-1">
 <link rel="stylesheet" href="css/contrast-fix.css?v=20261011-1">
+<style>
+@media(max-width:760px){
+  body>header.site-header .header-inner{position:relative;min-height:68px!important;flex-wrap:nowrap!important;padding:8px 14px!important;gap:8px!important;overflow:visible!important}
+  body>header.site-header .brand{flex:1 1 auto!important;min-width:0!important;width:auto!important}
+  body>header.site-header .header-cta{flex:0 0 auto!important;min-width:120px!important;width:auto!important;height:44px!important;padding:0 10px!important;font-size:11px!important}
+  body>header.site-header .nav-toggle{display:inline-flex!important;flex:0 0 44px!important;margin-left:0!important;position:relative!important;z-index:20!important}
+  body>header.site-header .main-nav{display:none!important;position:absolute!important;top:68px!important;left:0!important;right:0!important;width:100%!important;height:auto!important;z-index:15!important;flex-direction:column!important;align-items:stretch!important;gap:0!important;padding:8px 14px!important;background:#fff!important;border-top:1px solid #e8eef2!important;box-shadow:0 10px 24px rgba(6,36,64,.16)!important;overflow:visible!important}
+  body>header.site-header .main-nav.open{display:flex!important}
+  body>header.site-header .main-nav a{display:flex!important;width:100%!important;min-height:48px!important;height:48px!important;padding:0 12px!important;justify-content:flex-start!important;border-bottom:1px solid #e8eef2!important;white-space:nowrap!important}
+}
+</style>
 </head>
 <body>
 <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -65,7 +76,16 @@
 </main>
 <footer class="site-footer"><div class="container"><div class="footer-grid"><div><strong>Hyper Roof</strong><p>Roof repair, replacement, installation, emergency, and commercial roofing services in Miami.</p></div><div><h2>Services</h2><nav aria-label="Footer services"><a href="roof-repair-miami.html">Roof Repair</a><a href="roof-replacement-miami.html">Roof Replacement</a><a href="emergency-roof-repair-miami.html">Emergency Roofing</a><a href="commercial-roofing-miami.html">Commercial Roofing</a></nav></div><div><h2>Contact</h2><p><a href="tel:+15555550187">(555) 555-0187</a></p><p><a href="mailto:info@hyperroof.com">info@hyperroof.com</a></p><p>Miami, FL 33101</p></div></div><div class="footer-bottom"><span>© 2026 Hyper Roof. All rights reserved.</span><a href="index.html">Home</a></div></div></footer>
 <script>
-(function(){var b=document.getElementById('nav-toggle'),n=document.getElementById('primary-navigation');if(!b||!n)return;b.addEventListener('click',function(){var o=n.classList.toggle('open');b.setAttribute('aria-expanded',String(o));b.setAttribute('aria-label',o?'Close navigation menu':'Open navigation menu')});window.addEventListener('resize',function(){if(window.innerWidth>1200){n.classList.remove('open');b.setAttribute('aria-expanded','false');b.setAttribute('aria-label','Open navigation menu')}})})();
+(function(){
+  var b=document.getElementById('nav-toggle'),n=document.getElementById('primary-navigation');
+  if(!b||!n)return;
+  function closeMenu(){n.classList.remove('open');b.setAttribute('aria-expanded','false');b.setAttribute('aria-label','Open navigation menu')}
+  b.addEventListener('click',function(e){e.stopPropagation();var o=n.classList.toggle('open');b.setAttribute('aria-expanded',String(o));b.setAttribute('aria-label',o?'Close navigation menu':'Open navigation menu')});
+  n.querySelectorAll('a').forEach(function(a){a.addEventListener('click',closeMenu)});
+  document.addEventListener('click',function(e){if(!n.contains(e.target)&&e.target!==b&&!b.contains(e.target))closeMenu()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMenu()});
+  window.addEventListener('resize',function(){if(window.innerWidth>760)closeMenu()});
+})();
 </script>
 </body>
 </html>

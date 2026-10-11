@@ -1,0 +1,33 @@
+/* Hyper Roof — WCAG contrast safety net for text, controls, and muted UI. */
+:root{--contrast-text:#243746;--contrast-muted:#405264;--contrast-link:#00527d;--contrast-navy:#062440;--contrast-yellow:#ffc400}
+body{color:var(--contrast-text)!important}
+p,li,dt,dd,small,label,figcaption,caption{color:var(--contrast-text)}
+.muted,.text-muted,.secondary,.description,.meta,.subtext,.eyebrow:not(.dark),.blog-date{color:var(--contrast-muted)!important}
+a{color:var(--contrast-link)}
+input,textarea,select{color:#1f3448!important;background:#fff!important;border-color:#8a9aa8!important}
+input::placeholder,textarea::placeholder{color:#405264!important;opacity:1!important}
+button{color:#1f3448}
+.btn-yellow{color:#111827!important;background:#ffc400!important}
+.btn-outline{color:#fff!important;background:transparent!important;border-color:#fff!important}
+.topbar{color:#f3f7fa!important;background:#041b2e!important}
+.topbar a{color:#fff!important}
+.site-footer,.footer-grid{color:#d6e0e7!important;background:#041b2e!important}
+.site-footer p,.footer-grid p,.footer-bottom{color:#d6e0e7!important}
+.footer-grid a,.footer-grid nav a{color:#fff!important}
+.hero{color:#fff!important}
+.hero p{color:#f5f8fa!important}
+.service-strip{color:#fff!important;background:#062440!important}
+.service-grid p{color:#d6e0e7!important}
+.insured-badge{color:#1f3448!important;background:#fff!important}
+.insured-badge small{color:#405264!important}
+.testimonial-grid p,.about-copy p,.benefits span{color:#405264!important}
+.testimonial-grid span{color:#5a3b00!important}
+#main-content,#main-content p,#main-content li,#main-content td,#main-content dd{color:#405264!important}
+#main-content h1,#main-content h2,#main-content h3,#main-content h4,#main-content th{color:#062440!important}
+#main-content a:not(.btn-yellow):not(.btn-outline){color:#00527d!important;text-decoration:underline!important;text-underline-offset:2px}
+#main-content table th{background:#e5eef5!important;color:#062440!important}
+#main-content table td{background:#fff!important}
+.blog-card p,.blog-cta p,.blog-intro p{color:#405264!important}
+.blog-card h2 a,.blog-link,.blog-back{color:#00527d!important}
+summary{color:#1f3448!important;background:#fff!important}
+@media(forced-colors:active){input,textarea,select,button{forced-color-adjust:auto}}

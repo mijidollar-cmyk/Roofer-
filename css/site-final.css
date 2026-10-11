@@ -4,6 +4,29 @@ html{scroll-behavior:auto!important}
 body{margin:0!important;overflow-x:hidden!important}
 .container{width:100%!important;max-width:1180px!important;margin:0 auto!important;padding-left:20px!important;padding-right:20px!important}
 
+/* ================= ACCESSIBILITY / CONTRAST ================= */
+/* Keep body copy and muted UI text at WCAG AA-friendly contrast levels. */
+:root{--text:#1f3448;--muted-accessible:#4a5b6b;--link:#00527d;--navy:#062440;--yellow:#ffc400}
+body{color:var(--text)!important}
+.topbar{color:#f3f7fa!important}
+.topbar a{color:#ffffff!important}
+.site-header .brand strong{color:#062440!important}
+.site-header .brand small{color:#405264!important}
+.site-header .main-nav a{color:#1f3448!important}
+.site-header .main-nav a:hover,.site-header .main-nav a.active{color:#00527d!important}
+.btn-yellow{color:#111827!important;background:#ffc400!important}
+.hero p{color:#f5f8fa!important}
+.insured-badge small{color:#4a5b6b!important}
+.service-grid p{color:#d6e0e7!important}
+.about-copy p,.testimonial-grid p,#main-content article.section>.container>p,#main-content article.section>.container>li{color:#405264!important}
+.benefits span{color:#4a5b6b!important}
+.home-blog .blog-date{color:#536576!important}
+.home-blog .blog-card p{color:#405264!important}
+.footer-grid,.site-footer{color:#d6e0e7!important}
+.footer-grid p{color:#d6e0e7!important}
+.footer-grid a,.footer-grid nav a{color:#ffffff!important}
+.footer-bottom{color:#d6e0e7!important}
+
 /* ================= HEADER ================= */
 .site-header{position:relative!important;background:#fff!important;z-index:100!important;box-shadow:0 2px 12px rgba(6,36,64,.08)!important}
 .site-header .header-inner{width:100%!important;max-width:1240px!important;height:76px!important;min-height:76px!important;margin:0 auto!important;padding:0 20px!important;display:grid!important;grid-template-columns:190px minmax(0,1fr) 146px!important;gap:10px!important;align-items:center!important;overflow:visible!important}
@@ -17,7 +40,6 @@ body{margin:0!important;overflow-x:hidden!important}
 .site-header .header-cta{grid-column:3!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;width:146px!important;min-width:146px!important;height:44px!important;min-height:44px!important;margin:0!important;padding:0 8px!important;font-size:11px!important;line-height:1!important;white-space:nowrap!important;position:relative!important;z-index:3!important}
 .site-header .nav-toggle{display:none!important}
 
-/* Full desktop: compact one-row navigation that always fits. */
 @media(min-width:1201px){
  .site-header .header-inner{max-width:1240px!important;grid-template-columns:195px minmax(0,1fr) 150px!important;gap:12px!important}
  .site-header .brand{width:195px!important;min-width:195px!important}
@@ -26,7 +48,6 @@ body{margin:0!important;overflow-x:hidden!important}
  .site-header .header-cta{width:150px!important;min-width:150px!important}
 }
 
-/* Medium desktop/tablet: use a real menu before captions can become crowded. */
 @media(min-width:761px) and (max-width:1200px){
  .site-header .header-inner{height:72px!important;min-height:72px!important;padding:0 14px!important;display:flex!important;gap:10px!important}
  .site-header .brand{width:auto!important;min-width:0!important;flex:1 1 auto!important;gap:7px!important}
@@ -41,8 +62,6 @@ body{margin:0!important;overflow-x:hidden!important}
  .site-header .main-nav a:hover,.site-header .main-nav a.active{background:#f3f7fa!important;border:0!important}
 }
 
-/* Article pages use the shared header but older article markup has no toggle button.
-   Keep every navigation label directly tappable and prevent the CTA from covering links. */
 @media(min-width:761px) and (max-width:1200px){
  body>header.site-header:not(:has(.nav-toggle)) .header-inner{display:flex!important;gap:6px!important;padding-left:14px!important;padding-right:14px!important}
  body>header.site-header:not(:has(.nav-toggle)) .brand{flex:0 0 180px!important;width:180px!important;min-width:180px!important}

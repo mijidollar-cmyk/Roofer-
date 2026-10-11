@@ -29,5 +29,8 @@ button{color:#1f3448}
 #main-content table td{background:#fff!important}
 .blog-card p,.blog-cta p,.blog-intro p{color:#405264!important}
 .blog-card h2 a,.blog-link,.blog-back{color:#00527d!important}
+.home-blog .blog-view{color:#00527d!important;background:#fff!important;border:2px solid #00527d!important}
+.home-blog .blog-view:hover{color:#fff!important;background:#00527d!important;border-color:#00527d!important}
+.home-blog .blog-view:focus-visible{outline:3px solid #062440!important;outline-offset:3px!important}
 summary{color:#1f3448!important;background:#fff!important}
 @media(forced-colors:active){input,textarea,select,button{forced-color-adjust:auto}}

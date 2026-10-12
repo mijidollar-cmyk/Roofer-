@@ -24,7 +24,7 @@ jobs:
           import re
 
           footer = Path('footer.html').read_text(encoding='utf-8').strip()
-          header_link = '<link rel="stylesheet" href="css/header-stable.css?v=20261012-1">'
+          header_link = '<link rel="stylesheet" href="css/header-stable.css?v=20261012-2">'
 
           for path in Path('.').glob('*.html'):
               if path.name == 'footer.html':
@@ -35,8 +35,7 @@ jobs:
               # Replace every existing footer with the shared footer.
               text = re.sub(r'<footer\b[^>]*>.*?</footer>', footer, text, flags=re.I | re.S)
 
-              # Ensure every page gets the stable header CSS. Remove older duplicate
-              # header-stable links first so the page has one authoritative version.
+              # Ensure every page gets the current stable header CSS and remove older duplicates.
               text = re.sub(r'\s*<link\s+rel=["\']stylesheet["\']\s+href=["\']css/header-stable\.css[^>]*>', '', text, flags=re.I)
               if re.search(r'</head>', text, flags=re.I):
                   text = re.sub(r'</head>', f'  {header_link}\n</head>', text, count=1, flags=re.I)
@@ -49,5 +48,5 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add '*.html'
           git diff --cached --quiet && exit 0
-          git commit -m "Fix header overlap across blog pages"
+          git commit -m "Sync responsive header cache version"
           git push

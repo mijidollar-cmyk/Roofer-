@@ -1,0 +1,66 @@
+name: Apply SEO and copy improvements
+
+on:
+  push:
+    paths:
+      - '.github/workflows/seo-copy-improvements.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  improve:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Improve homepage SEO and copy
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          p = Path('index.html')
+          s = p.read_text()
+          s = re.sub(r'<meta name="description" content="[^"]*">', '<meta name="description" content="Miami roofing contractor for roof repair, roof replacement, emergency roofing and commercial roofing. Get a free roofing estimate in Miami, FL.">', s, count=1)
+          s = re.sub(r'<title>[^<]*</title>', '<title>Miami Roofing Contractor | Roof Repair & Replacement | Hyper Roof</title>', s, count=1)
+          if 'rel="canonical"' not in s:
+              s = s.replace('<meta name="theme-color" content="#062440">', '<meta name="theme-color" content="#062440">\n<link rel="canonical" href="https://hyperroof.com/">', 1)
+          s = s.replace('Trusted Roofing Contractor in Miami, FL</h1>', 'Miami Roofing Contractor for Repair, Replacement & Storm Damage</h1>')
+          s = s.replace('Hyper Roof provides dependable roof repair, roof replacement, new roof installation, emergency roofing, and commercial roofing for homes and businesses throughout Miami.', 'Get dependable roof repair, roof replacement, new roof installation, emergency roofing, and commercial roofing for Miami homes and businesses. Start with a clear recommendation and a free estimate.')
+          s = s.replace('Local Roofing Experts Serving Miami Homeowners and Businesses', 'Roofing Services for Miami Homeowners and Businesses')
+          s = s.replace('A Reliable Miami Roofing Company', 'Reliable Roofing Services in Miami, FL')
+          s = s.replace('Recent Miami Roofing Work', 'Recent Roofing Projects in Miami')
+          s = s.replace('What Miami Roofing Customers Say', 'What Miami Roofing Customers Say About Our Service')
+          p.write_text(s)
+
+          # Add a concise local-service FAQ/schema block before </head> if absent.
+          p = Path('index.html')
+          s = p.read_text()
+          if '"@type":"FAQPage"' not in s:
+              schema = '''<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What roofing services are available in Miami?","acceptedAnswer":{"@type":"Answer","text":"Hyper Roof provides information and contractor referral options for roof repair, roof replacement, new roof installation, emergency roofing and commercial roofing in Miami."}},{"@type":"Question","name":"How do I know if my Miami roof needs repair or replacement?","acceptedAnswer":{"@type":"Answer","text":"Active leaks, missing or damaged roofing materials, repeated repairs, widespread deterioration and storm damage can indicate the need for a professional roof assessment."}},{"@type":"Question","name":"How can I request a roofing estimate in Miami?","acceptedAnswer":{"@type":"Answer","text":"Contact Hyper Roof to request a roofing estimate and discuss the condition and needs of your property."}}]}</script>'''
+              s = s.replace('</head>', schema + '\n</head>', 1)
+              p.write_text(s)
+          PY
+      - name: Improve recent project image consistency
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('css/style.css')
+          s = p.read_text()
+          s = s.replace('.project-row img{width:100%;height:145px;object-fit:cover}', '.project-row img{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover}')
+          s = s.replace('.project-row img{height:auto;aspect-ratio:16/10}', '.project-row img{height:auto;aspect-ratio:16/10}')
+          p.write_text(s)
+          PY
+      - name: Commit improvements
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html css/style.css
+          git diff --cached --quiet || git commit -m "Improve Miami SEO copy and project image sizing"
+          git push
+      - name: Remove one-time workflow
+        if: success()
+        run: |
+          git rm .github/workflows/seo-copy-improvements.yml
+          git commit -m "Remove one-time SEO patch workflow"
+          git push

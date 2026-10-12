@@ -2,11 +2,11 @@
 .site-header .header-inner{overflow:visible!important;min-width:0!important}
 .site-header .brand,.site-header .main-nav,.site-header .header-cta{min-width:0}
 
-/* Desktop: keep the navigation tabs visually centered in the header. */
+/* Desktop: center navigation only inside the space between logo and estimate button. */
 @media (min-width:1301px){
   .site-header .header-inner{min-height:82px!important;display:grid!important;grid-template-columns:220px minmax(0,1fr) 166px!important;align-items:center!important;column-gap:12px!important}
   .site-header .brand{grid-column:1!important;grid-row:1!important;width:220px!important;min-width:220px!important}
-  .site-header .main-nav{grid-column:2!important;grid-row:1!important;display:flex!important;width:100%!important;min-width:0!important;margin:0!important;justify-content:center!important;align-items:center!important;gap:7px!important;overflow:visible!important;white-space:nowrap!important}
+  .site-header .main-nav{grid-column:2!important;grid-row:1!important;display:flex!important;width:max-content!important;max-width:100%!important;min-width:0!important;margin:0 auto!important;justify-content:center!important;align-items:center!important;gap:7px!important;overflow:visible!important;white-space:nowrap!important}
   .site-header .main-nav a{flex:0 0 auto!important;width:auto!important;min-width:44px!important;padding:0 4px!important;font-size:13px!important;white-space:nowrap!important}
   .site-header .header-cta{grid-column:3!important;grid-row:1!important;display:inline-flex!important;flex:0 0 166px!important;width:166px!important;min-width:166px!important;height:48px!important;justify-self:end!important}
   .site-header .nav-toggle{display:none!important}

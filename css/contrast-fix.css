@@ -1,4 +1,4 @@
-/* Hyper Roof — WCAG contrast safety net for text, controls, and muted UI. */
+/* Hyper Roof — WCAG AA contrast safety net. */
 :root{--contrast-text:#1f3448;--contrast-muted:#4a5b6b;--contrast-link:#00527d;--contrast-navy:#062440;--contrast-yellow:#ffc400}
 body{color:var(--contrast-text)!important;background:#fff!important}
 p,li,dt,dd,small,label,figcaption,caption{color:var(--contrast-text)}
@@ -9,39 +9,14 @@ input::placeholder,textarea::placeholder{color:#4a5b6b!important;opacity:1!impor
 button{color:#1f3448}
 .btn-yellow{color:#111827!important;background:#ffc400!important}
 .btn-outline{color:#fff!important;background:#062440!important;border-color:#fff!important}
-.topbar{color:#f3f7fa!important;background:#041b2e!important}
-.topbar a{color:#fff!important}
-.site-header,.site-header .main-nav.open{background:#fff!important}
-.site-header .main-nav a,.site-header .main-nav a:visited{color:#1f3448!important}
-.site-header .main-nav a:hover,.site-header .main-nav a:focus-visible,.site-header .main-nav a.active{color:#00527d!important}
-.site-header .main-nav.open a,.site-header .main-nav.open a:visited{color:#1f3448!important;background:#fff!important}
-.site-header .main-nav.open a:hover,.site-header .main-nav.open a:focus-visible,.site-header .main-nav.open a.active{color:#00527d!important;background:#f3f7fa!important}
-.nav-toggle{color:#062440!important;background:#fff!important}
-.site-footer,.footer-grid{color:#dfeaf1!important;background:#041b2e!important}
-.site-footer p,.footer-grid p,.footer-bottom{color:#dfeaf1!important}
-.footer-grid a,.footer-grid nav a{color:#fff!important}
-.footer-grid a:hover,.footer-grid a:focus-visible,.footer-grid nav a:hover,.footer-grid nav a:focus-visible{color:#ffc400!important}
-.hero,.quote-card,.service-strip{color:#fff!important;background:#062440!important}
-.hero h1,.hero h2,.hero h3,.hero .eyebrow,.quote-card h2,.quote-card h3,.service-strip h2,.service-strip h3{color:#fff!important}
-.hero p,.quote-content p,.service-grid p{color:#dfeaf1!important}
-.eyebrow.dark{color:#00527d!important}
-.insured-badge{color:#1f3448!important;background:#fff!important}
-.insured-badge small{color:#4a5b6b!important}
-.about-copy p,.testimonial-grid p,.benefits span{color:#405264!important}
-.testimonial-grid span{color:#5a3b00!important}
-#main-content,#main-content article.section{color:#405264!important;background:#f4f7fa!important}
-#main-content h1,#main-content h2,#main-content h3,#main-content h4,#main-content th{color:#062440!important}
-#main-content p,#main-content li,#main-content td,#main-content dd{color:#405264!important}
-#main-content a:not(.btn-yellow):not(.btn-outline){color:#00527d!important;text-decoration:underline!important;text-underline-offset:2px}
-#main-content table th{background:#e5eef5!important;color:#062440!important}
-#main-content table td{background:#fff!important;color:#405264!important}
-.blog-card,.home-blog .blog-card{background:#fff!important;color:#1f3448!important}
-.blog-card p,.blog-cta p,.blog-intro p,.home-blog .blog-card p{color:#405264!important}
-.blog-card h2 a,.blog-link,.blog-back,.home-blog .blog-card h2 a{color:#00527d!important}
-.home-blog .blog-view{color:#00527d!important;background:#fff!important;border:2px solid #00527d!important}
-.home-blog .blog-view:hover,.home-blog .blog-view:focus-visible{color:#fff!important;background:#00527d!important}
-.advantage-section,.faq-section,.testimonial-grid article{background:#f7fafc!important}
-summary{color:#1f3448!important;background:#fff!important}
+.topbar{color:#f3f7fa!important;background:#041b2e!important}.topbar a{color:#fff!important}
+.site-header,.site-header .main-nav.open{background:#fff!important}.site-header .main-nav a,.site-header .main-nav a:visited{color:#1f3448!important}.site-header .main-nav a:hover,.site-header .main-nav a:focus-visible,.site-header .main-nav a.active{color:#00527d!important}.site-header .main-nav.open a,.site-header .main-nav.open a:visited{color:#1f3448!important;background:#fff!important}.site-header .main-nav.open a:hover,.site-header .main-nav.open a:focus-visible,.site-header .main-nav.open a.active{color:#00527d!important;background:#f3f7fa!important}.nav-toggle{color:#062440!important;background:#fff!important}
+.site-footer,.footer-grid{color:#dfeaf1!important;background:#041b2e!important}.site-footer p,.footer-grid p,.footer-bottom{color:#dfeaf1!important}.footer-grid a,.footer-grid nav a{color:#fff!important}.footer-grid a:hover,.footer-grid a:focus-visible,.footer-grid nav a:hover,.footer-grid nav a:focus-visible{color:#ffc400!important}
+.hero,.quote-card,.service-strip{color:#fff!important;background:#062440!important}.hero h1,.hero h2,.hero h3,.hero .eyebrow,.quote-card h2,.quote-card h3,.service-strip h2,.service-strip h3{color:#fff!important}.hero p,.quote-content p,.service-grid p{color:#dfeaf1!important}.eyebrow.dark{color:#00527d!important}.insured-badge{color:#1f3448!important;background:#fff!important}.insured-badge small{color:#4a5b6b!important}.about-copy p,.testimonial-grid p,.benefits span{color:#405264!important}.testimonial-grid span{color:#5a3b00!important}
+#main-content,#main-content article.section{color:#405264!important;background:#f4f7fa!important}#main-content h1,#main-content h2,#main-content h3,#main-content h4,#main-content th{color:#062440!important}#main-content p,#main-content li,#main-content td,#main-content dd{color:#405264!important}#main-content a:not(.btn-yellow):not(.btn-outline){color:#00527d!important;text-decoration:underline!important;text-underline-offset:2px}#main-content table th{background:#e5eef5!important;color:#062440!important}#main-content table td{background:#fff!important;color:#405264!important}
+.blog-card,.home-blog .blog-card{background:#fff!important;color:#1f3448!important}.blog-card p,.blog-cta p,.blog-intro p,.home-blog .blog-card p{color:#405264!important}.blog-card h2 a,.blog-link,.blog-back,.home-blog .blog-card h2 a{color:#00527d!important}.home-blog .blog-view{color:#00527d!important;background:#fff!important;border:2px solid #00527d!important}.home-blog .blog-view:hover,.home-blog .blog-view:focus-visible{color:#fff!important;background:#00527d!important}.advantage-section,.faq-section,.testimonial-grid article{background:#f7fafc!important}summary{color:#1f3448!important;background:#fff!important}
+/* Keep light-blue text off white surfaces: this was the reported contrast failure. */
+.blog-card .blog-date,.home-blog .blog-date{color:#4a5b6b!important}.blog-card a,.home-blog .blog-card a,.blog-link,.blog-back{color:#00527d!important}.blog-card h3,.home-blog .blog-card h3{color:#062440!important}
 :focus-visible{outline:3px solid #00527d!important;outline-offset:3px!important}
 @media(max-width:760px){.main-nav.open{background:#fff!important}.main-nav.open a{color:#1f3448!important}.hero p{color:#dfeaf1!important}.site-footer,.footer-grid{background:#041b2e!important}.footer-grid p,.footer-bottom{color:#dfeaf1!important}.footer-grid nav a,.footer-grid nav>a{color:#fff!important}}
 @media(forced-colors:active){input,textarea,select,button{forced-color-adjust:auto}}

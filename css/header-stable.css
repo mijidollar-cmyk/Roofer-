@@ -1,30 +1,31 @@
 /* Hyper Roof — shared header stabilization layer. */
 .site-header .header-inner{overflow:visible!important}
 
-/* Article/service pages: use a safe two-row header so the navigation never overlaps the CTA. */
-@media (min-width:761px) and (max-width:1200px){
+/* Article/service pages: keep the brand + CTA on row one and navigation on row two.
+   The wider breakpoint prevents tablet/laptop widths from squeezing the nav into the CTA. */
+@media (min-width:761px) and (max-width:1300px){
   body>header.site-header:not(:has(.nav-toggle)){height:auto!important;min-height:126px!important}
   body>header.site-header:not(:has(.nav-toggle)) .header-inner{height:auto!important;min-height:126px!important;padding:8px 14px 0!important;display:flex!important;flex-wrap:wrap!important;align-content:flex-start!important;align-items:center!important;gap:6px!important;overflow:visible!important}
   body>header.site-header:not(:has(.nav-toggle)) .brand{order:1!important;flex:1 1 auto!important;width:auto!important;min-width:0!important;height:44px!important}
-  body>header.site-header:not(:has(.nav-toggle)) .header-cta{order:2!important;flex:0 0 auto!important;min-width:140px!important;width:auto!important;height:44px!important;font-size:11px!important;padding:0 12px!important}
-  body>header.site-header:not(:has(.nav-toggle)) .main-nav{order:3!important;display:flex!important;flex:0 0 100%!important;width:100%!important;min-width:0!important;height:56px!important;justify-content:flex-start!important;align-items:center!important;gap:0!important;overflow-x:auto!important;overflow-y:hidden!important;scrollbar-width:none!important;white-space:nowrap!important;border-top:1px solid #e8eef2!important;touch-action:pan-x!important;-webkit-overflow-scrolling:touch!important}
+  body>header.site-header:not(:has(.nav-toggle)) .header-cta{order:2!important;flex:0 0 auto!important;min-width:140px!important;width:auto!important;height:44px!important;font-size:11px!important;padding:0 12px!important;white-space:nowrap!important;z-index:2!important}
+  body>header.site-header:not(:has(.nav-toggle)) .main-nav{order:3!important;display:flex!important;flex:0 0 100%!important;width:100%!important;min-width:0!important;height:56px!important;justify-content:flex-start!important;align-items:center!important;gap:0!important;overflow-x:auto!important;overflow-y:hidden!important;scrollbar-width:none!important;white-space:nowrap!important;border-top:1px solid #e8eef2!important;position:relative!important;z-index:3!important;touch-action:pan-x!important;-webkit-overflow-scrolling:touch!important}
   body>header.site-header:not(:has(.nav-toggle)) .main-nav::-webkit-scrollbar{display:none!important}
-  body>header.site-header:not(:has(.nav-toggle)) .main-nav a{flex:0 0 auto!important;width:auto!important;min-width:max-content!important;height:44px!important;min-height:44px!important;padding:0 11px!important;font-size:12px!important;line-height:1!important;white-space:nowrap!important}
+  body>header.site-header:not(:has(.nav-toggle)) .main-nav a{flex:0 0 auto!important;width:auto!important;min-width:max-content!important;height:44px!important;min-height:44px!important;padding:0 11px!important;font-size:12px!important;line-height:1!important;white-space:nowrap!important;pointer-events:auto!important;cursor:pointer!important;touch-action:manipulation!important}
 }
 
-/* Small article/service pages without a hamburger: keep nav below the brand/CTA. */
+/* Small article/service pages without a hamburger: same stable two-row header. */
 @media (max-width:760px){
   body>header.site-header:not(:has(.nav-toggle)){height:auto!important;min-height:116px!important}
   body>header.site-header:not(:has(.nav-toggle)) .header-inner{height:auto!important;min-height:116px!important;padding:8px 14px 0!important;display:flex!important;flex-wrap:wrap!important;align-content:flex-start!important;gap:6px!important;overflow:visible!important}
   body>header.site-header:not(:has(.nav-toggle)) .brand{order:1!important;flex:1 1 auto!important;width:auto!important;min-width:0!important;height:44px!important}
-  body>header.site-header:not(:has(.nav-toggle)) .header-cta{order:2!important;flex:0 0 auto!important;min-width:120px!important;width:auto!important;height:44px!important;font-size:11px!important;padding:0 10px!important}
-  body>header.site-header:not(:has(.nav-toggle)) .main-nav{order:3!important;display:flex!important;flex:0 0 100%!important;width:100%!important;min-width:0!important;height:52px!important;justify-content:flex-start!important;align-items:center!important;gap:0!important;overflow-x:auto!important;overflow-y:hidden!important;white-space:nowrap!important;scrollbar-width:none!important;border-top:1px solid #e8eef2!important;touch-action:pan-x!important;-webkit-overflow-scrolling:touch!important}
+  body>header.site-header:not(:has(.nav-toggle)) .header-cta{order:2!important;flex:0 0 auto!important;min-width:120px!important;width:auto!important;height:44px!important;font-size:11px!important;padding:0 10px!important;white-space:nowrap!important;z-index:2!important}
+  body>header.site-header:not(:has(.nav-toggle)) .main-nav{order:3!important;display:flex!important;flex:0 0 100%!important;width:100%!important;min-width:0!important;height:52px!important;justify-content:flex-start!important;align-items:center!important;gap:0!important;overflow-x:auto!important;overflow-y:hidden!important;white-space:nowrap!important;scrollbar-width:none!important;border-top:1px solid #e8eef2!important;position:relative!important;z-index:3!important;touch-action:pan-x!important;-webkit-overflow-scrolling:touch!important}
   body>header.site-header:not(:has(.nav-toggle)) .main-nav::-webkit-scrollbar{display:none!important}
-  body>header.site-header:not(:has(.nav-toggle)) .main-nav a{flex:0 0 auto!important;min-width:max-content!important;width:auto!important;height:44px!important;min-height:44px!important;padding:0 10px!important;font-size:11px!important;white-space:nowrap!important}
+  body>header.site-header:not(:has(.nav-toggle)) .main-nav a{flex:0 0 auto!important;min-width:max-content!important;width:auto!important;height:44px!important;min-height:44px!important;padding:0 10px!important;font-size:11px!important;white-space:nowrap!important;pointer-events:auto!important;cursor:pointer!important;touch-action:manipulation!important}
 }
 
-/* Homepage/blog pages with a hamburger: keep the menu closed until tapped. */
-@media (min-width:761px) and (max-width:1200px){
+/* Homepage/blog listing pages with a hamburger: keep the menu closed until tapped. */
+@media (min-width:761px) and (max-width:1300px){
   body>header.site-header:has(.nav-toggle) .main-nav{display:none!important}
   body>header.site-header:has(.nav-toggle) .nav-toggle{display:inline-flex!important}
 }

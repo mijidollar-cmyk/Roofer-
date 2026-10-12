@@ -1,0 +1,41 @@
+name: Sync shared footer
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'footer.html'
+      - '.github/workflows/sync-footer.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Sync footer into HTML pages
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+
+          footer = Path('footer.html').read_text(encoding='utf-8').strip()
+          for path in Path('.').glob('*.html'):
+              if path.name == 'footer.html':
+                  continue
+              text = path.read_text(encoding='utf-8')
+              new_text, count = re.subn(r'<footer\b[^>]*>.*?</footer>', footer, text, flags=re.I | re.S)
+              if count:
+                  path.write_text(new_text, encoding='utf-8')
+
+      - name: Commit synchronized footers
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add '*.html'
+          git diff --cached --quiet && exit 0
+          git commit -m "Sync footer across site"
+          git push

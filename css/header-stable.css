@@ -1,31 +1,71 @@
-/* Hyper Roof — shared header stabilization layer. */
-.site-header .header-inner{overflow:visible!important}
+/* Hyper Roof — shared responsive header + overflow stabilization. */
+.site-header .header-inner{overflow:visible!important;min-width:0!important}
+.site-header .brand,.site-header .main-nav,.site-header .header-cta{min-width:0}
 
-/* Article/service pages: keep the brand + CTA on row one and navigation on row two.
-   The wider breakpoint prevents tablet/laptop widths from squeezing the nav into the CTA. */
-@media (min-width:761px) and (max-width:1300px){
-  body>header.site-header:not(:has(.nav-toggle)){height:auto!important;min-height:126px!important}
-  body>header.site-header:not(:has(.nav-toggle)) .header-inner{height:auto!important;min-height:126px!important;padding:8px 14px 0!important;display:flex!important;flex-wrap:wrap!important;align-content:flex-start!important;align-items:center!important;gap:6px!important;overflow:visible!important}
-  body>header.site-header:not(:has(.nav-toggle)) .brand{order:1!important;flex:1 1 auto!important;width:auto!important;min-width:0!important;height:44px!important}
-  body>header.site-header:not(:has(.nav-toggle)) .header-cta{order:2!important;flex:0 0 auto!important;min-width:140px!important;width:auto!important;height:44px!important;font-size:11px!important;padding:0 12px!important;white-space:nowrap!important;z-index:2!important}
-  body>header.site-header:not(:has(.nav-toggle)) .main-nav{order:3!important;display:flex!important;flex:0 0 100%!important;width:100%!important;min-width:0!important;height:56px!important;justify-content:flex-start!important;align-items:center!important;gap:0!important;overflow-x:auto!important;overflow-y:hidden!important;scrollbar-width:none!important;white-space:nowrap!important;border-top:1px solid #e8eef2!important;position:relative!important;z-index:3!important;touch-action:pan-x!important;-webkit-overflow-scrolling:touch!important}
-  body>header.site-header:not(:has(.nav-toggle)) .main-nav::-webkit-scrollbar{display:none!important}
-  body>header.site-header:not(:has(.nav-toggle)) .main-nav a{flex:0 0 auto!important;width:auto!important;min-width:max-content!important;height:44px!important;min-height:44px!important;padding:0 11px!important;font-size:12px!important;line-height:1!important;white-space:nowrap!important;pointer-events:auto!important;cursor:pointer!important;touch-action:manipulation!important}
+/* Desktop: restore the original horizontal navigation tabs. */
+@media (min-width:1301px){
+  .site-header .header-inner{min-height:82px!important;display:flex!important;align-items:center!important;gap:12px!important}
+  .site-header .brand{flex:0 0 220px!important;width:220px!important;min-width:220px!important}
+  .site-header .main-nav{display:flex!important;flex:1 1 auto!important;min-width:0!important;margin-left:auto!important;justify-content:center!important;align-items:center!important;gap:7px!important;overflow:visible!important;white-space:nowrap!important}
+  .site-header .main-nav a{flex:0 0 auto!important;width:auto!important;min-width:44px!important;padding:0 4px!important;font-size:13px!important;white-space:nowrap!important}
+  .site-header .header-cta{display:inline-flex!important;flex:0 0 166px!important;width:166px!important;min-width:166px!important;height:48px!important}
+  .site-header .nav-toggle{display:none!important}
 }
 
-/* Small article/service pages without a hamburger: same stable two-row header. */
+/* Tablet/laptop: keep the same tabs, but move them to a second row so they never overlap the CTA. */
+@media (min-width:761px) and (max-width:1300px){
+  .site-header{height:auto!important;min-height:126px!important}
+  .site-header .header-inner{height:auto!important;min-height:126px!important;padding:8px 14px 0!important;display:flex!important;flex-wrap:wrap!important;align-content:flex-start!important;align-items:center!important;gap:6px!important}
+  .site-header .brand{order:1!important;flex:1 1 auto!important;width:auto!important;min-width:0!important;height:44px!important}
+  .site-header .header-cta{order:2!important;flex:0 0 auto!important;width:auto!important;min-width:140px!important;height:44px!important;padding:0 12px!important;font-size:11px!important;white-space:nowrap!important}
+  .site-header .nav-toggle{display:none!important}
+  .site-header .main-nav{order:3!important;display:flex!important;flex:0 0 100%!important;width:100%!important;min-width:0!important;height:56px!important;margin:0!important;padding:0!important;justify-content:flex-start!important;align-items:center!important;gap:0!important;overflow-x:auto!important;overflow-y:hidden!important;white-space:nowrap!important;scrollbar-width:none!important;border-top:1px solid #e8eef2!important;position:relative!important;z-index:3!important;touch-action:pan-x!important;-webkit-overflow-scrolling:touch!important}
+  .site-header .main-nav::-webkit-scrollbar{display:none!important}
+  .site-header .main-nav a{display:inline-flex!important;flex:0 0 auto!important;width:auto!important;min-width:max-content!important;height:44px!important;min-height:44px!important;padding:0 11px!important;font-size:12px!important;line-height:1!important;white-space:nowrap!important;pointer-events:auto!important;cursor:pointer!important;touch-action:manipulation!important}
+}
+
+/* Mobile: compact brand + CTA + menu button, with a reliable dropdown. */
 @media (max-width:760px){
-  body>header.site-header:not(:has(.nav-toggle)){height:auto!important;min-height:116px!important}
-  body>header.site-header:not(:has(.nav-toggle)) .header-inner{height:auto!important;min-height:116px!important;padding:8px 14px 0!important;display:flex!important;flex-wrap:wrap!important;align-content:flex-start!important;gap:6px!important;overflow:visible!important}
-  body>header.site-header:not(:has(.nav-toggle)) .brand{order:1!important;flex:1 1 auto!important;width:auto!important;min-width:0!important;height:44px!important}
-  body>header.site-header:not(:has(.nav-toggle)) .header-cta{order:2!important;flex:0 0 auto!important;min-width:120px!important;width:auto!important;height:44px!important;font-size:11px!important;padding:0 10px!important;white-space:nowrap!important;z-index:2!important}
-  body>header.site-header:not(:has(.nav-toggle)) .main-nav{order:3!important;display:flex!important;flex:0 0 100%!important;width:100%!important;min-width:0!important;height:52px!important;justify-content:flex-start!important;align-items:center!important;gap:0!important;overflow-x:auto!important;overflow-y:hidden!important;white-space:nowrap!important;scrollbar-width:none!important;border-top:1px solid #e8eef2!important;position:relative!important;z-index:3!important;touch-action:pan-x!important;-webkit-overflow-scrolling:touch!important}
-  body>header.site-header:not(:has(.nav-toggle)) .main-nav::-webkit-scrollbar{display:none!important}
-  body>header.site-header:not(:has(.nav-toggle)) .main-nav a{flex:0 0 auto!important;min-width:max-content!important;width:auto!important;height:44px!important;min-height:44px!important;padding:0 10px!important;font-size:11px!important;white-space:nowrap!important;pointer-events:auto!important;cursor:pointer!important;touch-action:manipulation!important}
+  .site-header{height:auto!important;min-height:68px!important;position:relative!important;inset:auto!important;transform:none!important}
+  .site-header .header-inner{width:100%!important;max-width:none!important;height:68px!important;min-height:68px!important;padding:8px 14px!important;display:flex!important;flex-wrap:nowrap!important;align-items:center!important;gap:6px!important;overflow:visible!important}
+  .site-header .brand{order:1!important;flex:1 1 auto!important;width:auto!important;min-width:0!important;height:44px!important;display:flex!important;align-items:center!important;gap:8px!important;overflow:hidden!important}
+  .site-header .brand-mark{width:38px!important;height:38px!important;min-width:38px!important;flex:0 0 38px!important}
+  .site-header .brand>span:last-child{min-width:0!important;overflow:hidden!important}
+  .site-header .brand strong{font-size:18px!important;line-height:1!important;white-space:nowrap!important}
+  .site-header .brand small{display:none!important}
+  .site-header .header-cta{order:2!important;flex:0 1 auto!important;width:auto!important;max-width:150px!important;min-width:0!important;height:44px!important;padding:0 10px!important;font-size:11px!important;white-space:nowrap!important;overflow:hidden!important}
+  .site-header .nav-toggle{order:3!important;display:inline-flex!important;flex:0 0 44px!important;width:44px!important;height:44px!important;min-width:44px!important;min-height:44px!important;margin:0!important;padding:0!important;border:0!important;background:transparent!important;color:#062440!important;align-items:center!important;justify-content:center!important;font-size:25px!important;line-height:1!important;cursor:pointer!important;position:relative!important;z-index:102!important}
+  .site-header .main-nav{display:none!important;position:absolute!important;left:0!important;right:0!important;top:68px!important;width:100%!important;min-width:0!important;height:auto!important;max-height:calc(100vh - 68px)!important;margin:0!important;padding:8px 14px 12px!important;background:#fff!important;border-top:1px solid #e8eef2!important;border-bottom:1px solid #dfe7ed!important;box-shadow:0 8px 18px rgba(6,36,64,.12)!important;overflow-x:hidden!important;overflow-y:auto!important;flex-direction:column!important;align-items:stretch!important;gap:2px!important;z-index:101!important}
+  .site-header .main-nav.open{display:flex!important}
+  .site-header .main-nav a{display:flex!important;align-items:center!important;justify-content:flex-start!important;width:100%!important;min-width:0!important;height:44px!important;min-height:44px!important;padding:0 12px!important;font-size:13px!important;line-height:1.2!important;white-space:nowrap!important;word-break:normal!important;border:0!important;border-radius:2px!important}
+  .site-header .main-nav a:hover,.site-header .main-nav a.active{background:#f3f7fa!important;border:0!important}
 }
 
-/* Homepage/blog listing pages with a hamburger: keep the menu closed until tapped. */
-@media (min-width:761px) and (max-width:1300px){
-  body>header.site-header:has(.nav-toggle) .main-nav{display:none!important}
-  body>header.site-header:has(.nav-toggle) .nav-toggle{display:inline-flex!important}
+@media (max-width:360px){
+  .site-header .header-inner{padding-left:10px!important;padding-right:10px!important;gap:4px!important}
+  .site-header .brand-mark{width:36px!important;height:36px!important;min-width:36px!important;flex-basis:36px!important}
+  .site-header .brand strong{font-size:17px!important}
+  .site-header .header-cta{max-width:140px!important;font-size:10px!important;padding:0 8px!important}
+}
+
+/* Prevent grid/flex children from creating hidden horizontal overflow on content pages. */
+.container,.two-col,.advantage-grid,.faq-grid,.testimonial-grid,.benefits,.project-row,.service-grid,.footer-grid,.home-blog .blog-grid{min-width:0}
+.two-col>*,.advantage-grid>*,.faq-grid>*,.testimonial-grid>*,.benefits>*,.service-grid>*,.footer-grid>*,.home-blog .blog-card{min-width:0}
+#main-content img{max-width:100%;height:auto}
+#main-content h1,#main-content h2,#main-content h3,#main-content p,#main-content li{overflow-wrap:anywhere}
+
+@media (max-width:760px){
+  .container{padding-left:14px!important;padding-right:14px!important}
+  .section{padding:56px 0!important}
+  .hero-content{padding-top:20px!important}
+  .hero h1{font-size:clamp(34px,10vw,44px)!important;overflow-wrap:anywhere}
+  .hero-actions{width:100%!important}
+  .hero-actions .btn-yellow,.hero-actions .btn-outline{max-width:100%!important}
+  .service-grid{grid-template-columns:1fr 1fr!important}
+  .service-grid article{min-width:0!important;padding:24px 14px!important}
+  .footer-grid{grid-template-columns:1fr 1fr!important}
+}
+@media (max-width:480px){
+  .service-grid,.footer-grid{grid-template-columns:1fr!important}
+  .service-grid article{padding:22px 14px!important}
 }

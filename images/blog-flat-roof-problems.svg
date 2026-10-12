@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+<title id="title">Flat roof problems in Miami</title>
+<desc id="desc">Illustration of a low-slope roof with drainage, flashing and rain.</desc>
+<rect width="1200" height="675" fill="#eaf2f6"/>
+<rect y="430" width="1200" height="245" fill="#d7e1e7"/>
+<path d="M90 430 L1080 430 L1140 500 L35 500 Z" fill="#344b5e"/>
+<path d="M130 400 L1035 400 L1080 430 L90 430 Z" fill="#5e7485"/>
+<path d="M155 375 L1005 375 L1035 400 L130 400 Z" fill="#758b99"/>
+<rect x="210" y="385" width="150" height="18" rx="4" fill="#c5d1d8"/>
+<rect x="410" y="385" width="170" height="18" rx="4" fill="#c5d1d8"/>
+<rect x="640" y="385" width="130" height="18" rx="4" fill="#c5d1d8"/>
+<rect x="825" y="385" width="120" height="18" rx="4" fill="#c5d1d8"/>
+<path d="M930 430 V550 H990 V430" fill="#273b4a"/>
+<path d="M930 550 H990" stroke="#c1ced5" stroke-width="10"/>
+<circle cx="190" cy="450" r="16" fill="#1d3445"/>
+<path d="M190 466 V505" stroke="#1d3445" stroke-width="8"/>
+<path d="M140 475 C160 485 180 485 205 475" fill="none" stroke="#7fc4df" stroke-width="6"/>
+<path d="M250 115 L245 250 M350 80 L345 220 M450 125 L445 265 M550 70 L545 210 M650 120 L645 255 M750 85 L745 225 M850 130 L845 270 M950 75 L945 215" stroke="#83b9cf" stroke-width="8" stroke-linecap="round"/>
+<path d="M120 560 C310 535 450 580 630 550 S950 535 1080 565" fill="none" stroke="#9db1bd" stroke-width="5" stroke-dasharray="14 16"/>
+<text x="80" y="90" font-family="Arial, Helvetica, sans-serif" font-size="44" font-weight="700" fill="#062440">Flat Roof Problems in Miami</text>
+<text x="82" y="135" font-family="Arial, Helvetica, sans-serif" font-size="24" fill="#405264">Ponding water • seams • flashing • drainage • leaks</text>
+</svg>

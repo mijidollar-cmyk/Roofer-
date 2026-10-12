@@ -19,7 +19,7 @@
 #main-content article.section th,#main-content article.section td{padding:14px;border:1px solid #d8e1e8;text-align:left;vertical-align:top}
 #main-content article.section th{background:#edf7ff;color:var(--navy);font-weight:800}
 
-/* Stable article header: brand/CTA stay on the first row and navigation gets its own row. */
+/* Stable article header: brand + CTA share the first row; navigation always gets its own row. */
 @media(min-width:761px) and (max-width:1200px){
 html body>header.site-header{height:auto!important;min-height:126px!important;overflow:visible!important}
 html body>header.site-header .header-inner{height:auto!important;min-height:126px!important;display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;grid-template-rows:58px 56px!important;align-items:center!important;gap:0 10px!important;padding:6px 14px 0!important;overflow:visible!important}
@@ -58,6 +58,11 @@ html body>header.site-header .main-nav a{font-size:10px!important;padding:0 9px!
 #main-content article.section>.container{padding-left:14px;padding-right:14px}
 #main-content article.section>.container>h1{font-size:34px}
 }
+
+/* Defensive image rules: SVG/PNG/JPG article images keep intrinsic ratio and never collapse or overflow. */
+#main-content figure.blog-hero-image{box-sizing:border-box!important;aspect-ratio:16/9!important}
+#main-content figure.blog-hero-image img{object-fit:cover!important;object-position:center!important}
+#main-content figure.blog-hero-image img[width][height]{height:auto!important}
 
 /* Footer consistency: simple legacy article footers use the same visual system as the home footer. */
 .site-footer{margin-top:0!important;background:#062440!important;color:#fff!important}

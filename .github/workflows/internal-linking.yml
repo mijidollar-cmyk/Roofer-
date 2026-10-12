@@ -1,0 +1,94 @@
+name: Strengthen internal linking
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/internal-linking.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  link:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Strengthen homepage service links
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text()
+          replacements = {
+            '<h3>Roof Repair</h3>':'<h3><a href="roof-repair-miami.html">Roof Repair</a></h3>',
+            '<h3>Roof Replacement</h3>':'<h3><a href="roof-replacement-miami.html">Roof Replacement</a></h3>',
+            '<h3>New Roof Installation</h3>':'<h3><a href="roof-replacement-miami.html">New Roof Installation</a></h3>',
+            '<h3>Emergency Roofing</h3>':'<h3><a href="emergency-roof-repair-miami.html">Emergency Roofing</a></h3>',
+            '<h3>Commercial Roofing</h3>':'<h3><a href="commercial-roofing-miami.html">Commercial Roofing</a></h3>',
+          }
+          for old, new in replacements.items():
+              s = s.replace(old, new, 1)
+          marker = '<section class="section advantage-section"'
+          hub = '''<section class="section local-service-hub" aria-labelledby="local-service-title"><div class="container"><span class="eyebrow dark">MIAMI AREA ROOFING</span><h2 id="local-service-title">Roofing Resources by Miami Area</h2><p>Explore local roofing guidance for communities across Miami-Dade County, including repair, replacement, storm damage and inspection topics.</p><div class="local-grid"><a class="local-card" href="miami-beach-roofing.html"><strong>Miami Beach Roofing</strong><span>Coastal exposure, storm damage and roof maintenance.</span></a><a class="local-card" href="coral-gables-roofing.html"><strong>Coral Gables Roofing</strong><span>Repair, replacement and property-specific roofing guidance.</span></a><a class="local-card" href="kendall-roofing.html"><strong>Kendall Roofing</strong><span>Roof leaks, replacement decisions and storm preparation.</span></a><a class="local-card" href="doral-roofing.html"><strong>Doral Roofing</strong><span>Residential and commercial roofing considerations.</span></a><a class="local-card" href="hialeah-roofing.html"><strong>Hialeah Roofing</strong><span>Roof repair, replacement and severe-weather guidance.</span></a></div></div></section>\n'''
+          if 'class="section local-service-hub"' not in s and marker in s:
+              s = s.replace(marker, hub + marker, 1)
+          p.write_text(s)
+          PY
+
+      - name: Add topical links to homepage CSS
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text()
+          css = '.local-service-hub{background:#fff}.local-service-hub .local-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;margin-top:24px}.local-service-hub .local-card{display:block;padding:18px;border:1px solid #dfe7ed;border-radius:8px;background:#f8fafc;text-decoration:none}.local-service-hub .local-card strong{display:block;color:#062440;margin-bottom:6px}.local-service-hub .local-card span{display:block;color:#405264;line-height:1.45;font-size:14px}.service-grid article h3 a{color:inherit;text-decoration:none}.service-grid article h3 a:hover{text-decoration:underline}@media(max-width:900px){.local-service-hub .local-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:600px){.local-service-hub .local-grid{grid-template-columns:1fr}}'
+          if '.local-service-hub{' not in s:
+              s = s.replace('</style>', css + '\n</style>', 1)
+          p.write_text(s)
+          PY
+
+      - name: Add contextual service links to blog hub
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('blog.html')
+          s = p.read_text()
+          marker = '<div class="blog-cta">'
+          block = '''<section class="section blog-service-links" aria-labelledby="blog-service-links-title"><div class="container"><span class="eyebrow dark">ROOFING SERVICES</span><h2 id="blog-service-links-title">Explore Miami Roofing Services</h2><p>Use our service pages to move from research to the next step when you need roofing help.</p><p><a href="roof-repair-miami.html">Miami roof repair</a> · <a href="roof-replacement-miami.html">Miami roof replacement</a> · <a href="emergency-roof-repair-miami.html">emergency roof repair</a> · <a href="commercial-roofing-miami.html">commercial roofing</a> · <a href="roof-inspection-miami.html">roof inspections</a></p></div></section>\n'''
+          if 'id="blog-service-links-title"' not in s and marker in s:
+              s = s.replace(marker, block + marker, 1)
+          p.write_text(s)
+          PY
+
+      - name: Add stronger hub links to local pages
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          pages = ['miami-beach-roofing.html','coral-gables-roofing.html','kendall-roofing.html','doral-roofing.html','hialeah-roofing.html']
+          for name in pages:
+              p = Path(name)
+              if not p.exists():
+                  continue
+              s = p.read_text()
+              marker = '<h2>Related Miami roofing services</h2>'
+              if marker in s and 'Roof replacement cost guide' not in s[s.index(marker):s.index(marker)+900]:
+                  extra = '<p><a href="roof-replacement-cost-miami.html">Miami roof replacement cost guide</a> · <a href="hurricane-roof-damage-miami.html">Miami hurricane roof damage guide</a> · <a href="miami-dade-roofing-requirements.html">Miami-Dade roofing requirements</a> · <a href="blog.html">All Miami roofing guides</a></p>'
+                  s = s.replace(marker, marker + extra, 1)
+                  p.write_text(s)
+          PY
+
+      - name: Commit changes
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html blog.html miami-beach-roofing.html coral-gables-roofing.html kendall-roofing.html doral-roofing.html hialeah-roofing.html
+          if git diff --cached --quiet; then
+            echo 'No internal-linking changes needed.'
+          else
+            git commit -m 'Strengthen Miami roofing internal linking'
+            git push
+          fi

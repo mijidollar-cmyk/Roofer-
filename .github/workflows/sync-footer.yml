@@ -8,6 +8,7 @@ on:
       - 'css/header-stable.css'
       - 'css/responsive-audit.css'
       - 'css/blog-layout.css'
+      - 'css/blog-articles.css'
       - '*.html'
       - '.github/workflows/sync-footer.yml'
 
@@ -29,6 +30,7 @@ jobs:
           footer = Path('footer.html').read_text(encoding='utf-8').strip()
           header_link = '<link rel="stylesheet" href="css/header-stable.css?v=20261013-3">'
           responsive_link = '<link rel="stylesheet" href="css/responsive-audit.css?v=20261013-2">'
+          article_link = '<link rel="stylesheet" href="css/blog-articles.css?v=20261013-2">'
 
           blog_articles = {
               'roof-replacement-cost-miami.html',
@@ -58,8 +60,12 @@ jobs:
               text = re.sub(r'<footer\b[^>]*>.*?</footer>', footer, text, flags=re.I | re.S)
               text = re.sub(r'\s*<link\s+rel=["\']stylesheet["\']\s+href=["\']css/header-stable\.css[^>]*>', '', text, flags=re.I)
               text = re.sub(r'\s*<link\s+rel=["\']stylesheet["\']\s+href=["\']css/responsive-audit\.css[^>]*>', '', text, flags=re.I)
+              text = re.sub(r'\s*<link\s+rel=["\']stylesheet["\']\s+href=["\']css/blog-articles\.css[^>]*>', '', text, flags=re.I)
               if re.search(r'</head>', text, flags=re.I):
-                  text = re.sub(r'</head>', f'  {header_link}\n  {responsive_link}\n</head>', text, count=1, flags=re.I)
+                  links = f'  {header_link}\n  {responsive_link}'
+                  if path.name in blog_articles:
+                      links += f'\n  {article_link}'
+                  text = re.sub(r'</head>', links + '\n</head>', text, count=1, flags=re.I)
 
               if path.name == 'blog.html':
                   text = re.sub(r'<style>.*?</style>\s*', '', text, count=1, flags=re.I | re.S)
@@ -77,7 +83,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add '*.html' 'css/header-stable.css' '.github/workflows/sync-footer.yml'
+          git add '*.html' 'css/header-stable.css' 'css/responsive-audit.css' 'css/blog-articles.css' '.github/workflows/sync-footer.yml'
           git diff --cached --quiet && exit 0
-          git commit -m "Refresh responsive header CSS cache"
+          git commit -m "Fix blog article header overlap"
           git push

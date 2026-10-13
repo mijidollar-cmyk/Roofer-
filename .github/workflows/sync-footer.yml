@@ -7,6 +7,8 @@ on:
       - 'footer.html'
       - 'css/header-stable.css'
       - 'css/responsive-audit.css'
+      - 'css/blog-layout.css'
+      - 'blog.html'
       - '.github/workflows/sync-footer.yml'
 
 permissions:
@@ -63,6 +65,13 @@ jobs:
               if re.search(r'</head>', text, flags=re.I):
                   text = re.sub(r'</head>', f'  {header_link}\n  {responsive_link}\n</head>', text, count=1, flags=re.I)
 
+              # Blog listing page gets the exact same shared header as the homepage.
+              if path.name == 'blog.html':
+                  # Remove legacy blog-only header CSS. The shared header system is authoritative.
+                  text = re.sub(r'<style>.*?</style>\s*', '', text, count=1, flags=re.I | re.S)
+                  text = re.sub(r'<div class="topbar">.*?</div>\s*<header\b[^>]*>.*?</header>', shared_blog_header, text, count=1, flags=re.I | re.S)
+                  text = re.sub(r'<header\b[^>]*class=["\']site-header["\'][^>]*>.*?</header>', shared_blog_header, text, count=1, flags=re.I | re.S)
+
               # Blog article pages use the exact same header as the homepage,
               # including the topbar, mobile toggle and navigation order.
               if path.name in blog_articles:
@@ -70,8 +79,7 @@ jobs:
                   if not re.search(r'<header\b[^>]*class=["\']site-header["\']', text, flags=re.I):
                       text = re.sub(r'<header\b[^>]*>.*?</header>', shared_blog_header, text, count=1, flags=re.I | re.S)
                   else:
-                      text = re.sub(r'<header\b[^>]*class=["\']site-header["\'][^>]*>.*?</header>', shared_blog_header, text, count=1, flags=re.I | re.S)
-                      # If the article did not have a topbar, insert the shared one immediately before the header.
+                      text = re.sub(r'<header\b[^>]*class=["\']site-header["\'][^>]*>.*?</header>', shared_blog_header, text, count=1, flags=re.I)
                       if not re.search(r'<div class="topbar">', text, flags=re.I):
                           text = re.sub(r'<header\b[^>]*class=["\']site-header["\']', shared_blog_header.split('\n          <header', 1)[0] + '\n          <header', text, count=1, flags=re.I)
 
@@ -83,5 +91,5 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add '*.html'
           git diff --cached --quiet && exit 0
-          git commit -m "Standardize blog article headers"
+          git commit -m "Fix blog page mobile header layout"
           git push

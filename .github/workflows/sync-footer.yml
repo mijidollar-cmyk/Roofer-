@@ -1,4 +1,4 @@
-name: Sync shared footer and responsive layout
+name: Sync shared footer, responsive layout and blog headers
 
 on:
   push:
@@ -18,7 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Sync shared footer, header CSS and responsive audit fixes
+      - name: Sync shared footer, header CSS, responsive fixes and blog headers
         shell: python
         run: |
           from pathlib import Path
@@ -27,6 +27,24 @@ jobs:
           footer = Path('footer.html').read_text(encoding='utf-8').strip()
           header_link = '<link rel="stylesheet" href="css/header-stable.css?v=20261013-2">'
           responsive_link = '<link rel="stylesheet" href="css/responsive-audit.css?v=20261013-1">'
+
+          blog_articles = {
+              'roof-replacement-cost-miami.html',
+              'roof-insurance-claims-miami.html',
+              'hurricane-roof-damage-miami.html',
+              'how-long-does-a-roof-last-in-miami.html',
+              'how-do-i-know-if-i-need-a-new-roof.html',
+              'what-to-do-when-roof-starts-leaking.html',
+              'tile-vs-shingle-roofing-miami.html',
+              'miami-dade-roofing-requirements.html',
+              'how-often-should-you-inspect-roof-florida.html',
+              'signs-you-need-emergency-roof-repair.html',
+              'flat-roof-problems-miami.html',
+              'storm-damage-roof-repair-miami.html',
+          }
+
+          shared_blog_header = '''<div class="topbar"><div class="container-fluid topbar-inner"><span aria-hidden="true">📍</span><span>Miami, FL 33101</span><a href="tel:+15555550187" aria-label="Call Hyper Roof"><span aria-hidden="true">☎</span> +1 (555) 555-0187</a></div></div>
+          <header class="site-header"><div class="container header-inner"><a class="brand" href="index.html" aria-label="Hyper Roof home"><span class="brand-mark" aria-hidden="true">⌂</span><span><strong>Hyper <b>Roof</b></strong><small>STRONGER ROOFS. BETTER TOMORROW.</small></span></a><nav id="primary-navigation" class="main-nav" aria-label="Primary navigation"><a href="index.html">Home</a><a href="index.html#about">About Us</a><a href="index.html#services">Services</a><a href="index.html#projects">Projects</a><a href="index.html#faq">FAQ</a><a href="blog.html" class="active" aria-current="page">Blog</a><a href="index.html#contact">Contact</a></nav><a class="btn-yellow header-cta" href="tel:+15555550187" aria-label="Call Hyper Roof for a free roofing estimate">Call for a Free Estimate <span aria-hidden="true">→</span></a><button id="nav-toggle" class="nav-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="primary-navigation">☰</button></div></header>'''
 
           for path in Path('.').glob('*.html'):
               if path.name == 'footer.html':
@@ -45,6 +63,18 @@ jobs:
               if re.search(r'</head>', text, flags=re.I):
                   text = re.sub(r'</head>', f'  {header_link}\n  {responsive_link}\n</head>', text, count=1, flags=re.I)
 
+              # Blog article pages use the exact same header as the homepage,
+              # including the topbar, mobile toggle and navigation order.
+              if path.name in blog_articles:
+                  text = re.sub(r'<div class="topbar">.*?</div>\s*<header\b[^>]*>.*?</header>', shared_blog_header, text, count=1, flags=re.I | re.S)
+                  if not re.search(r'<header\b[^>]*class=["\']site-header["\']', text, flags=re.I):
+                      text = re.sub(r'<header\b[^>]*>.*?</header>', shared_blog_header, text, count=1, flags=re.I | re.S)
+                  else:
+                      text = re.sub(r'<header\b[^>]*class=["\']site-header["\'][^>]*>.*?</header>', shared_blog_header, text, count=1, flags=re.I | re.S)
+                      # If the article did not have a topbar, insert the shared one immediately before the header.
+                      if not re.search(r'<div class="topbar">', text, flags=re.I):
+                          text = re.sub(r'<header\b[^>]*class=["\']site-header["\']', shared_blog_header.split('\n          <header', 1)[0] + '\n          <header', text, count=1, flags=re.I)
+
               path.write_text(text, encoding='utf-8')
 
       - name: Commit synchronized layout fixes
@@ -53,5 +83,5 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add '*.html'
           git diff --cached --quiet && exit 0
-          git commit -m "Apply responsive desktop and mobile design fixes"
+          git commit -m "Standardize blog article headers"
           git push

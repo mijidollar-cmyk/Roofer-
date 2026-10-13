@@ -38,13 +38,42 @@ jobs:
           s = s.replace(old_about, miami_tile)
           s = s.replace(old_project_2, roof_workers)
 
-          # Use moderate WebP quality: sharper than the previous q=28/30 while still keeping files small.
           s = re.sub(r'(&q=)(?:28|30)(?=[&\" ])', r'\g<1>55', s)
 
           s = s.replace('Roofing crew installing new roof tiles on a residential building', 'Miami residential roof and tropical waterfront home')
           s = s.replace('Roofing workers installing new roof panels on a house', 'Florida-style tile roof on a Miami-area home')
           s = s.replace('Crew installing roof tiles on a residential project', 'Miami-area residential roof project with tile roofing')
           s = s.replace('Roofers fitting dark roof tiles during construction', 'Roofing workers installing tile roofing')
+
+          # Remove placeholder contact details until a real business phone is supplied.
+          s = s.replace('<a href="tel:+15555550187"><span aria-hidden="true">☎</span> (555) 555-0187</a>', '<a href="mailto:info@hyperroof.com"><span aria-hidden="true">✉</span> info@hyperroof.com</a>')
+          s = s.replace('href="tel:+15555550187" aria-label="Call Hyper Roof for a free estimate"', 'href="#contact" aria-label="Request a free roofing estimate from Hyper Roof"')
+          s = s.replace('Get a Free Estimate <span aria-hidden="true">→</span>', 'Request a Free Estimate <span aria-hidden="true">→</span>')
+
+          # Keep homepage claims consistent with an independent information/referral service.
+          replacements = {
+            'Licensed &amp; Insured</strong><small>Your Safety Our Priority': 'Independent Roofing Referral Service</strong><small>Local Miami contractor options',
+            'Licensed &amp; Insured</strong><span>Professional protection and peace of mind.': 'Independent Roofing Guidance</strong><span>Clear information and contractor referral options.',
+            '<strong>15+</strong><span>Years<br>of Experience</span>': '<strong>Miami</strong><span>Local Roofing<br>Focus</span>',
+            'Hyper Roof helps Miami property owners protect what matters with dependable roofing services, quality materials, and professional workmanship. Whether you need a small roof repair, a complete roof replacement, or a new commercial roof, our team focuses on durable results and clear communication.': 'Hyper Roof helps Miami property owners understand roofing needs and connect with participating roofing contractors. Whether you need a roof repair, replacement, storm-damage help, or commercial roofing, we make it easier to compare your options and request an estimate.',
+            '<li>Experienced &amp; Certified Team</li>': '<li>Participating Roofing Professionals</li>',
+            '<li>High-Quality Roofing Materials</li>': '<li>Miami-Specific Roofing Guidance</li>',
+            '<li>Clear, Competitive Pricing</li>': '<li>Clear Estimate Requests</li>',
+            '<li>Customer-Focused Service</li>': '<li>Independent Referral Support</li>',
+            'Talk to Our Roofing Team <span aria-hidden="true">→</span>': 'Request Roofing Help <span aria-hidden="true">→</span>',
+            'Reliable Roofing Services in Miami, FL': 'Independent Roofing Help in Miami, FL',
+            '<strong>Quality Workmanship</strong><span>Roofing built for dependable long-term performance.</span>': '<strong>Quality-Focused Options</strong><span>Explore roofing professionals for your property needs.</span>',
+            '<strong>Responsive Service</strong><span>We respect your schedule and communicate clearly.</span>': '<strong>Local Referral Support</strong><span>Start with clear information about your roofing needs.</span>',
+            '<strong>Fair Pricing</strong><span>Transparent recommendations without unnecessary work.</span>': '<strong>Clear Recommendations</strong><span>Compare repair, replacement and other roofing options.</span>'
+          }
+          for old, new in replacements.items():
+              s = s.replace(old, new)
+
+          s = s.replace('Get dependable roof repair, roof replacement, new roof installation, emergency roofing, and commercial roofing for Miami homes and businesses. Start with a clear recommendation and a free estimate.', 'Explore roof repair, roof replacement, new roof installation, emergency roofing, and commercial roofing options for Miami homes and businesses. Start with local guidance and request a free estimate from a participating contractor.')
+          s = s.replace('Professional new roof installation with careful workmanship from preparation through final inspection.', 'Explore new roof installation options and connect with a participating roofing contractor for project guidance.')
+          s = s.replace('Reliable roofing solutions for offices, retail properties, and other commercial buildings in Miami.', 'Compare commercial roofing options for offices, retail properties, and other commercial buildings in Miami.')
+          s = s.replace('Repair leaks, missing shingles, storm damage, and other roofing problems before they become costly.', 'Learn about leaks, missing shingles, storm damage, and other roofing problems before they become more costly.')
+          s = s.replace('Replace aging or damaged roofs with durable materials selected for your property and budget.', 'Learn when an aging or damaged roof may need replacement and what options may fit your property and budget.')
 
           p.write_text(s)
           PY
@@ -67,8 +96,8 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add index.html css/style.css
           if git diff --cached --quiet; then
-            echo 'No homepage image changes needed.'
+            echo 'No homepage image or copy changes needed.'
           else
-            git commit -m 'Refresh homepage imagery for Miami roofing'
+            git commit -m 'Align homepage trust claims with referral model'
             git push
           fi

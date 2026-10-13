@@ -8,7 +8,7 @@ on:
       - 'css/header-stable.css'
       - 'css/responsive-audit.css'
       - 'css/blog-layout.css'
-      - 'blog.html'
+      - '*.html'
       - '.github/workflows/sync-footer.yml'
 
 permissions:
@@ -27,7 +27,7 @@ jobs:
           import re
 
           footer = Path('footer.html').read_text(encoding='utf-8').strip()
-          header_link = '<link rel="stylesheet" href="css/header-stable.css?v=20261013-2">'
+          header_link = '<link rel="stylesheet" href="css/header-stable.css?v=20261013-3">'
           responsive_link = '<link rel="stylesheet" href="css/responsive-audit.css?v=20261013-1">'
 
           blog_articles = {
@@ -45,7 +45,8 @@ jobs:
               'storm-damage-roof-repair-miami.html',
           }
 
-          shared_blog_header = '''<div class="topbar"><div class="container-fluid topbar-inner"><span aria-hidden="true">📍</span><span>Miami, FL 33101</span><a href="tel:+15555550187" aria-label="Call Hyper Roof"><span aria-hidden="true">☎</span> +1 (555) 555-0187</a></div></div>
+          topbar = '<div class="topbar"><div class="container-fluid topbar-inner"><span aria-hidden="true">📍</span><span>Miami, FL 33101</span><a href="tel:+15555550187" aria-label="Call Hyper Roof"><span aria-hidden="true">☎</span> +1 (555) 555-0187</a></div></div>'
+          shared_blog_header = topbar + '''
           <header class="site-header"><div class="container header-inner"><a class="brand" href="index.html" aria-label="Hyper Roof home"><span class="brand-mark" aria-hidden="true">⌂</span><span><strong>Hyper <b>Roof</b></strong><small>STRONGER ROOFS. BETTER TOMORROW.</small></span></a><nav id="primary-navigation" class="main-nav" aria-label="Primary navigation"><a href="index.html">Home</a><a href="index.html#about">About Us</a><a href="index.html#services">Services</a><a href="index.html#projects">Projects</a><a href="index.html#faq">FAQ</a><a href="blog.html" class="active" aria-current="page">Blog</a><a href="index.html#contact">Contact</a></nav><a class="btn-yellow header-cta" href="tel:+15555550187" aria-label="Call Hyper Roof for a free roofing estimate">Call for a Free Estimate <span aria-hidden="true">→</span></a><button id="nav-toggle" class="nav-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="primary-navigation">☰</button></div></header>'''
 
           for path in Path('.').glob('*.html'):
@@ -57,31 +58,29 @@ jobs:
               # Replace every existing footer with the shared footer.
               text = re.sub(r'<footer\b[^>]*>.*?</footer>', footer, text, flags=re.I | re.S)
 
-              # Keep one current copy of the stable header CSS.
+              # Keep one current copy of the stable header CSS and responsive audit CSS.
               text = re.sub(r'\s*<link\s+rel=["\']stylesheet["\']\s+href=["\']css/header-stable\.css[^>]*>', '', text, flags=re.I)
-              # Keep one current copy of the responsive audit CSS.
               text = re.sub(r'\s*<link\s+rel=["\']stylesheet["\']\s+href=["\']css/responsive-audit\.css[^>]*>', '', text, flags=re.I)
-
               if re.search(r'</head>', text, flags=re.I):
                   text = re.sub(r'</head>', f'  {header_link}\n  {responsive_link}\n</head>', text, count=1, flags=re.I)
 
-              # Blog listing page gets the exact same shared header as the homepage.
               if path.name == 'blog.html':
-                  # Remove legacy blog-only header CSS. The shared header system is authoritative.
+                  # Remove all legacy blog-only header CSS and all existing topbar/header copies.
                   text = re.sub(r'<style>.*?</style>\s*', '', text, count=1, flags=re.I | re.S)
-                  text = re.sub(r'<div class="topbar">.*?</div>\s*<header\b[^>]*>.*?</header>', shared_blog_header, text, count=1, flags=re.I | re.S)
-                  text = re.sub(r'<header\b[^>]*class=["\']site-header["\'][^>]*>.*?</header>', shared_blog_header, text, count=1, flags=re.I | re.S)
+                  text = re.sub(r'(?:\s*<div class="topbar">.*?</div>\s*)+', '\n', text, flags=re.I | re.S)
+                  text = re.sub(r'(?:\s*<header\b[^>]*class=["\']site-header["\'][^>]*>.*?</header>\s*)+', '\n', text, flags=re.I | re.S)
+                  text = re.sub(r'(<body[^>]*>\s*<a\b[^>]*class=["\']skip-link["\'][^>]*>.*?</a>)', r'\1\n' + shared_blog_header, text, count=1, flags=re.I | re.S)
 
-              # Blog article pages use the exact same header as the homepage,
-              # including the topbar, mobile toggle and navigation order.
               if path.name in blog_articles:
-                  text = re.sub(r'<div class="topbar">.*?</div>\s*<header\b[^>]*>.*?</header>', shared_blog_header, text, count=1, flags=re.I | re.S)
-                  if not re.search(r'<header\b[^>]*class=["\']site-header["\']', text, flags=re.I):
-                      text = re.sub(r'<header\b[^>]*>.*?</header>', shared_blog_header, text, count=1, flags=re.I | re.S)
-                  else:
-                      text = re.sub(r'<header\b[^>]*class=["\']site-header["\'][^>]*>.*?</header>', shared_blog_header, text, count=1, flags=re.I)
-                      if not re.search(r'<div class="topbar">', text, flags=re.I):
-                          text = re.sub(r'<header\b[^>]*class=["\']site-header["\']', shared_blog_header.split('\n          <header', 1)[0] + '\n          <header', text, count=1, flags=re.I)
+                  # Normalize article headers to exactly one shared topbar + header.
+                  text = re.sub(r'(?:\s*<div class="topbar">.*?</div>\s*)+', '\n', text, flags=re.I | re.S)
+                  text = re.sub(r'(?:\s*<header\b[^>]*class=["\']site-header["\'][^>]*>.*?</header>\s*)+', '\n', text, flags=re.I | re.S)
+                  if re.search(r'<body[^>]*>', text, flags=re.I):
+                      text = re.sub(r'(<body[^>]*>)', r'\1\n' + shared_blog_header, text, count=1, flags=re.I)
+
+              # Prevent accidental repeated topbars or site headers on every HTML page.
+              text = re.sub(r'(<div class="topbar">.*?</div>)\s*\1', r'\1', text, flags=re.I | re.S)
+              text = re.sub(r'(<header\b[^>]*class=["\']site-header["\'][^>]*>.*?</header>)\s*\1', r'\1', text, flags=re.I | re.S)
 
               path.write_text(text, encoding='utf-8')
 
@@ -89,7 +88,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add '*.html'
+          git add '*.html' 'css/header-stable.css' '.github/workflows/sync-footer.yml'
           git diff --cached --quiet && exit 0
-          git commit -m "Fix blog page mobile header layout"
+          git commit -m "Fix duplicated headers and desktop CTA alignment"
           git push

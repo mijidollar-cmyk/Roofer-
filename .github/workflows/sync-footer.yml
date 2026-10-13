@@ -65,22 +65,18 @@ jobs:
                   text = re.sub(r'</head>', f'  {header_link}\n  {responsive_link}\n</head>', text, count=1, flags=re.I)
 
               if path.name == 'blog.html':
-                  # Remove all legacy blog-only header CSS and all existing topbar/header copies.
                   text = re.sub(r'<style>.*?</style>\s*', '', text, count=1, flags=re.I | re.S)
-                  text = re.sub(r'(?:\s*<div class="topbar">.*?</div>\s*)+', '\n', text, flags=re.I | re.S)
-                  text = re.sub(r'(?:\s*<header\b[^>]*class=["\']site-header["\'][^>]*>.*?</header>\s*)+', '\n', text, flags=re.I | re.S)
-                  text = re.sub(r'(<body[^>]*>\s*<a\b[^>]*class=["\']skip-link["\'][^>]*>.*?</a>)', r'\1\n' + shared_blog_header, text, count=1, flags=re.I | re.S)
 
-              if path.name in blog_articles:
-                  # Normalize article headers to exactly one shared topbar + header.
-                  text = re.sub(r'(?:\s*<div class="topbar">.*?</div>\s*)+', '\n', text, flags=re.I | re.S)
-                  text = re.sub(r'(?:\s*<header\b[^>]*class=["\']site-header["\'][^>]*>.*?</header>\s*)+', '\n', text, flags=re.I | re.S)
-                  if re.search(r'<body[^>]*>', text, flags=re.I):
-                      text = re.sub(r'(<body[^>]*>)', r'\1\n' + shared_blog_header, text, count=1, flags=re.I)
+              if path.name == 'blog.html' or path.name in blog_articles:
+                  # Remove exact shared topbar copies, then replace everything between body/skip-link and main with one header.
+                  text = text.replace(topbar, '')
+                  text = re.sub(r'(<body[^>]*>\s*<a\b[^>]*class=["\']skip-link["\'][^>]*>.*?</a>).*?(?=<main\b)', r'\1\n' + shared_blog_header + '\n', text, count=1, flags=re.I | re.S)
+                  # If an older page has no skip-link, still normalize directly after <body>.
+                  text = re.sub(r'(<body[^>]*>)\s*(?:<div class=["\']topbar["\'].*?</header>|<header\b[^>]*class=["\']site-header["\'][^>]*>.*?</header>)\s*', r'\1\n' + shared_blog_header + '\n', text, count=1, flags=re.I | re.S)
 
-              # Prevent accidental repeated topbars or site headers on every HTML page.
-              text = re.sub(r'(<div class="topbar">.*?</div>)\s*\1', r'\1', text, flags=re.I | re.S)
-              text = re.sub(r'(<header\b[^>]*class=["\']site-header["\'][^>]*>.*?</header>)\s*\1', r'\1', text, flags=re.I | re.S)
+              # Exact-copy cleanup: never allow two adjacent shared topbars or site headers.
+              text = re.sub(r'(?:' + re.escape(topbar) + r'\s*){2,}', topbar + '\n', text, flags=re.I)
+              text = re.sub(r'(</header>)\s*\1', r'\1', text, flags=re.I)
 
               path.write_text(text, encoding='utf-8')
 
@@ -90,5 +86,5 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add '*.html' 'css/header-stable.css' '.github/workflows/sync-footer.yml'
           git diff --cached --quiet && exit 0
-          git commit -m "Fix duplicated headers and desktop CTA alignment"
+          git commit -m "Normalize shared headers and remove duplicates"
           git push

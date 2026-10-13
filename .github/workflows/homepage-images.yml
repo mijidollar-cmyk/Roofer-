@@ -17,7 +17,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Improve homepage image presentation
+      - name: Replace generic homepage images with Miami-focused imagery
         run: |
           python - <<'PY'
           from pathlib import Path
@@ -26,11 +26,25 @@ jobs:
           p = Path('index.html')
           s = p.read_text()
 
-          # Improve clarity without making the homepage images unnecessarily large.
-          s = re.sub(r'(images\.unsplash\.com/[^\"\']+?&q=)(?:28|30)', r'\g<1>45', s)
+          old_hero = 'https://images.unsplash.com/photo-1773432114061-2ae201208630'
+          old_about = 'https://images.unsplash.com/photo-1763665814605-a6489a3bf2a0'
+          old_project_2 = 'https://images.unsplash.com/photo-1763665814965-b5c4b3547908'
 
-          # Keep the hero image responsive and reserve its display area for stable LCP.
-          s = s.replace('w=800&q=45" imagesizes="100vw" fetchpriority="high"', 'w=800&q=45" imagesizes="100vw" fetchpriority="high"')
+          miami_home = 'https://images.unsplash.com/photo-1578439297699-eb414262c2de'
+          miami_tile = 'https://images.unsplash.com/photo-1611601147344-66391134330f'
+          roof_workers = 'https://images.unsplash.com/photo-1681049400158-0ff6249ac315'
+
+          s = s.replace(old_hero, miami_home)
+          s = s.replace(old_about, miami_tile)
+          s = s.replace(old_project_2, roof_workers)
+
+          # Use moderate WebP quality: sharper than the previous q=28/30 while still keeping files small.
+          s = re.sub(r'(&q=)(?:28|30)(?=[&\" ])', r'\g<1>55', s)
+
+          s = s.replace('Roofing crew installing new roof tiles on a residential building', 'Miami residential roof and tropical waterfront home')
+          s = s.replace('Roofing workers installing new roof panels on a house', 'Florida-style tile roof on a Miami-area home')
+          s = s.replace('Crew installing roof tiles on a residential project', 'Miami-area residential roof project with tile roofing')
+          s = s.replace('Roofers fitting dark roof tiles during construction', 'Roofing workers installing tile roofing')
 
           p.write_text(s)
           PY
@@ -41,8 +55,7 @@ jobs:
           from pathlib import Path
           p = Path('css/style.css')
           s = p.read_text()
-
-          additions = '''\n.hero-image{image-rendering:auto}.about-section .image-card img{aspect-ratio:3/2;object-fit:cover}.projects-mini .project-row{grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch}.projects-mini .project-row img{width:100%;aspect-ratio:3/2;height:auto;object-fit:cover;border-radius:4px}.projects-mini .project-row img{box-shadow:0 3px 12px #06244018}@media(max-width:760px){.projects-mini .project-row{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:480px){.projects-mini .project-row{grid-template-columns:1fr}}\n'''
+          additions = '''\n.hero-image{image-rendering:auto}.about-section .image-card img{aspect-ratio:3/2;object-fit:cover}.projects-mini .project-row{grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch}.projects-mini .project-row img{width:100%;aspect-ratio:3/2;height:auto;object-fit:cover;border-radius:4px;box-shadow:0 3px 12px #06244018}@media(max-width:760px){.projects-mini .project-row{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:480px){.projects-mini .project-row{grid-template-columns:1fr}}\n'''
           if '.projects-mini .project-row img{' not in s:
               s += additions
           p.write_text(s)
@@ -56,6 +69,6 @@ jobs:
           if git diff --cached --quiet; then
             echo 'No homepage image changes needed.'
           else
-            git commit -m 'Improve homepage image quality and consistency'
+            git commit -m 'Refresh homepage imagery for Miami roofing'
             git push
           fi

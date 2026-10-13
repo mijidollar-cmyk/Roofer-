@@ -1,4 +1,4 @@
-name: Sync shared footer and header
+name: Sync shared footer and responsive layout
 
 on:
   push:
@@ -6,6 +6,7 @@ on:
     paths:
       - 'footer.html'
       - 'css/header-stable.css'
+      - 'css/responsive-audit.css'
       - '.github/workflows/sync-footer.yml'
 
 permissions:
@@ -17,14 +18,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Sync shared footer and stable header into HTML pages
+      - name: Sync shared footer, header CSS and responsive audit fixes
         shell: python
         run: |
           from pathlib import Path
           import re
 
           footer = Path('footer.html').read_text(encoding='utf-8').strip()
-          header_link = '<link rel="stylesheet" href="css/header-stable.css?v=20261012-2">'
+          header_link = '<link rel="stylesheet" href="css/header-stable.css?v=20261013-2">'
+          responsive_link = '<link rel="stylesheet" href="css/responsive-audit.css?v=20261013-1">'
 
           for path in Path('.').glob('*.html'):
               if path.name == 'footer.html':
@@ -35,10 +37,13 @@ jobs:
               # Replace every existing footer with the shared footer.
               text = re.sub(r'<footer\b[^>]*>.*?</footer>', footer, text, flags=re.I | re.S)
 
-              # Ensure every page gets the current stable header CSS and remove older duplicates.
+              # Keep one current copy of the stable header CSS.
               text = re.sub(r'\s*<link\s+rel=["\']stylesheet["\']\s+href=["\']css/header-stable\.css[^>]*>', '', text, flags=re.I)
+              # Keep one current copy of the responsive audit CSS.
+              text = re.sub(r'\s*<link\s+rel=["\']stylesheet["\']\s+href=["\']css/responsive-audit\.css[^>]*>', '', text, flags=re.I)
+
               if re.search(r'</head>', text, flags=re.I):
-                  text = re.sub(r'</head>', f'  {header_link}\n</head>', text, count=1, flags=re.I)
+                  text = re.sub(r'</head>', f'  {header_link}\n  {responsive_link}\n</head>', text, count=1, flags=re.I)
 
               path.write_text(text, encoding='utf-8')
 
@@ -48,5 +53,5 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add '*.html'
           git diff --cached --quiet && exit 0
-          git commit -m "Sync responsive header cache version"
+          git commit -m "Apply responsive desktop and mobile design fixes"
           git push

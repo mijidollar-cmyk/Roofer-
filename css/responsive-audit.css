@@ -13,14 +13,19 @@ body{min-width:0;overflow-x:hidden}
   .site-header .header-cta{flex:0 0 auto!important}
 }
 
-/* Mobile: prevent cramped CTA/header controls and make navigation predictable. */
+/* Mobile: enforce the exact visual order: LOGO → CTA → ☰ MENU. */
 @media (max-width:760px){
   .topbar-inner{justify-content:center!important;text-align:center!important;min-height:38px!important;padding:5px 12px!important}
   .topbar-inner a{margin-left:0!important}
-  .site-header .header-inner{padding-left:12px!important;padding-right:12px!important}
-  .site-header .brand{flex:1 1 auto!important;min-width:0!important}
-  .site-header .header-cta{flex:0 1 auto!important;max-width:145px!important;min-width:0!important;padding:0 9px!important;font-size:10px!important}
-  .site-header .nav-toggle{flex:0 0 44px!important}
+  .site-header{height:auto!important;min-height:68px!important;position:relative!important;inset:auto!important;transform:none!important}
+  .site-header .header-inner{width:100%!important;max-width:none!important;height:68px!important;min-height:68px!important;padding-left:12px!important;padding-right:12px!important;display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;align-items:center!important;justify-content:flex-start!important;gap:6px!important;overflow:visible!important}
+  .site-header .brand{order:1!important;flex:1 1 auto!important;width:auto!important;min-width:0!important;height:44px!important;display:flex!important;align-items:center!important;overflow:hidden!important}
+  .site-header .header-cta{order:2!important;display:inline-flex!important;flex:0 0 auto!important;width:auto!important;max-width:145px!important;min-width:0!important;height:44px!important;margin:0!important;padding:0 9px!important;font-size:10px!important;white-space:nowrap!important;overflow:hidden!important;align-items:center!important;justify-content:center!important}
+  .site-header .nav-toggle{order:3!important;display:inline-flex!important;flex:0 0 44px!important;width:44px!important;height:44px!important;min-width:44px!important;min-height:44px!important;margin:0!important;padding:0!important;align-items:center!important;justify-content:center!important;position:relative!important;z-index:102!important}
+  .site-header .main-nav{order:4!important;display:none!important;position:absolute!important;left:0!important;right:0!important;top:68px!important;width:100%!important;min-width:0!important;height:auto!important;max-height:calc(100vh - 68px)!important;margin:0!important;padding:8px 14px 12px!important;background:#fff!important;border-top:1px solid #e8eef2!important;border-bottom:1px solid #dfe7ed!important;box-shadow:0 8px 18px rgba(6,36,64,.12)!important;overflow-x:hidden!important;overflow-y:auto!important;flex-direction:column!important;align-items:stretch!important;gap:2px!important;z-index:101!important}
+  .site-header .main-nav.open{display:flex!important}
+  .site-header .main-nav a{display:flex!important;align-items:center!important;justify-content:flex-start!important;width:100%!important;min-width:0!important;height:44px!important;min-height:44px!important;padding:0 12px!important;font-size:13px!important;line-height:1.2!important;white-space:nowrap!important;word-break:normal!important;border:0!important;border-radius:2px!important}
+  .site-header .main-nav a:hover,.site-header .main-nav a.active{background:#f3f7fa!important;border:0!important}
   .hero{min-height:560px!important}
   .hero-content{padding-top:28px!important;padding-bottom:28px!important}
   .hero-copy{max-width:100%!important}
@@ -40,7 +45,7 @@ body{min-width:0;overflow-x:hidden}
 }
 
 @media (max-width:380px){
-  .site-header .header-inner{padding-left:8px!important;padding-right:8px!important}
+  .site-header .header-inner{padding-left:8px!important;padding-right:8px!important;gap:4px!important}
   .site-header .brand-mark{width:34px!important;height:34px!important;min-width:34px!important;flex-basis:34px!important}
   .site-header .brand strong{font-size:16px!important}
   .site-header .header-cta{max-width:126px!important;font-size:9px!important;padding:0 7px!important}

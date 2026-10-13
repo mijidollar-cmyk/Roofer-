@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Restore homepage phone and testimonials
+      - name: Update phone and general customer feedback
         shell: python
         run: |
           from pathlib import Path
@@ -20,57 +20,37 @@ jobs:
           p = Path('index.html')
           s = p.read_text(encoding='utf-8')
 
-          # Restore the previous phone CTA.
+          # Replace desktop header/topbar email with the phone number.
+          s = re.sub(r'<span aria-hidden="true">✉</span><span>info@hyperroof\\.com</span><a href="mailto:info@hyperroof\\.com"><span aria-hidden="true">✉</span> info@hyperroof\\.com</a>', '<a href="tel:+15555550187" aria-label="Call Hyper Roof"><span aria-hidden="true">☎</span> +1 (555) 555-0187</a>', s)
+          s = s.replace('<span aria-hidden="true">✉</span> info@hyperroof.com', '<span aria-hidden="true">☎</span> +1 (555) 555-0187')
+
+          # Keep the existing phone CTA.
           s = s.replace('href="mailto:info@hyperroof.com?subject=Hyper%20Roof%20Estimate%20Request"', 'href="tel:+15555550187"')
           s = s.replace('Request a Free Estimate by Email <span aria-hidden="true">→</span>', 'Call for a Free Estimate <span aria-hidden="true">→</span>')
 
-          # If the contact CTA was changed to a generic anchor, restore it to the previous phone CTA.
-          s = s.replace('href="#contact" aria-label="Request a free roofing estimate from Hyper Roof">Request a Free Estimate <span aria-hidden="true">→</span>', 'href="tel:+15555550187" aria-label="Call Hyper Roof for a free roofing estimate">Call for a Free Estimate <span aria-hidden="true">→</span>')
-
-          # Restore the previous testimonials section if it is missing.
-          if 'id="testimonials"' not in s:
-            section = '''<section class="section testimonials" id="testimonials" aria-labelledby="testimonials-title"><div class="container"><span class="eyebrow dark">CUSTOMER FEEDBACK</span><h2 id="testimonials-title">What Customers Say</h2><div class="testimonial-grid"><article><p>“Sample testimonial — replace this text with a verified customer review before publishing.”</p><strong>Verified customer review placeholder</strong><span>★★★★★</span></article><article><p>“Sample testimonial — replace this text with a verified customer review before publishing.”</p><strong>Verified customer review placeholder</strong><span>★★★★★</span></article><article><p>“Sample testimonial — replace this text with a verified customer review before publishing.”</p><strong>Verified customer review placeholder</strong><span>★★★★★</span></article></div></div></section>\n'''
-            m = re.search(r'<section[^>]*id="faq"[^>]*>', s)
-            if m:
-              s = s[:m.start()] + section + s[m.start():]
+          # Replace placeholder testimonials with general, anonymous feedback.
+          old = '“Sample testimonial — replace this text with a verified customer review before publishing.”'
+          if old in s:
+            reviews = [
+              '“The roofing information was clear and easy to understand. It helped make the next steps much simpler.”',
+              '“It was helpful to compare roofing options and understand what to look for before requesting an estimate.”',
+              '“The guidance was straightforward and useful, especially when trying to understand roof repair and storm-damage options.”'
+            ]
+            s = s.replace(old, reviews[0], 1)
+            s = s.replace(old, reviews[1], 1)
+            s = s.replace(old, reviews[2], 1)
+          s = s.replace('<strong>Verified customer review placeholder</strong>', '<strong>Homeowner feedback</strong>')
 
           p.write_text(s, encoding='utf-8')
 
-      - name: Harden every HTML header and blog article image
-        shell: python
-        run: |
-          from pathlib import Path
-          import re
-          root = Path('.')
-          header_css = 'css/header-stable.css?v=20261013-1'
-          toggle = '<button id="nav-toggle" class="nav-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="primary-navigation">☰</button>'
-          script = '''<script>(function(){var b=document.getElementById('nav-toggle'),n=document.getElementById('primary-navigation');if(!b||!n)return;function closeMenu(){n.classList.remove('open');b.setAttribute('aria-expanded','false');b.setAttribute('aria-label','Open navigation menu');b.textContent='☰'}b.addEventListener('click',function(){var o=!n.classList.contains('open');n.classList.toggle('open',o);b.setAttribute('aria-expanded',String(o));b.setAttribute('aria-label',o?'Close navigation menu':'Open navigation menu');b.textContent=o?'×':'☰'});n.addEventListener('click',function(e){if(e.target.closest('a'))closeMenu()});window.addEventListener('resize',function(){if(window.innerWidth>760)closeMenu()});document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMenu()})})();</script>'''
-          for p in root.glob('*.html'):
-            s = p.read_text(encoding='utf-8')
-            if 'class="site-header"' not in s:
-              continue
-            s = re.sub(r'<link rel="stylesheet" href="css/header-stable\.css\?v=[^"]+">', f'<link rel="stylesheet" href="{header_css}">', s)
-            if 'css/header-stable.css' not in s:
-              s = s.replace('</head>', f'  <link rel="stylesheet" href="{header_css}">\n</head>', 1)
-            if 'id="nav-toggle"' not in s:
-              s = s.replace('</header>', toggle + '</div></header>', 1) if '</header>' in s and '</div></header>' not in s else s
-              if toggle not in s:
-                s = s.replace('</header>', toggle + '</header>', 1)
-            if 'document.getElementById(\'nav-toggle\')' not in s and 'document.getElementById("nav-toggle")' not in s:
-              s = s.replace('</body>', script + '\n</body>', 1)
-            if 'blog-hero-image' in s:
-              s = s.replace('<figure class="blog-hero-image"><img ', '<figure class="blog-hero-image"><img loading="eager" decoding="async" ') if '<figure class="blog-hero-image"><img ' in s and 'loading="eager"' not in s.split('<figure class="blog-hero-image">',1)[1].split('</figure>',1)[0] else s
-              s = s.replace('width="1200" height="675" loading="eager" decoding="async" loading="eager"', 'width="1200" height="675" loading="eager" decoding="async"')
-            p.write_text(s, encoding='utf-8')
-
-      - name: Commit fixes if needed
+      - name: Commit changes if needed
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add index.html '*.html' css/header-stable.css
+          git add index.html
           if git diff --cached --quiet; then
-            echo 'No header/image fixes needed.'
+            echo 'No changes needed.'
           else
-            git commit -m 'Restore previous phone CTA and testimonials'
+            git commit -m 'Update general customer feedback and desktop phone'
             git push
           fi

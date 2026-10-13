@@ -28,7 +28,7 @@ jobs:
 
           footer = Path('footer.html').read_text(encoding='utf-8').strip()
           header_link = '<link rel="stylesheet" href="css/header-stable.css?v=20261013-3">'
-          responsive_link = '<link rel="stylesheet" href="css/responsive-audit.css?v=20261013-1">'
+          responsive_link = '<link rel="stylesheet" href="css/responsive-audit.css?v=20261013-2">'
 
           blog_articles = {
               'roof-replacement-cost-miami.html',
@@ -68,7 +68,6 @@ jobs:
                   text = text.replace(topbar, '')
                   text = text.replace(skip, '')
                   text = re.sub(r'(<body[^>]*>).*?(?=<main\b)', r'\1\n' + skip + '\n' + shared_blog_header + '\n', text, count=1, flags=re.I | re.S)
-                  # Remove any orphaned closing divs left between the header and main by older sync versions.
                   text = re.sub(r'(</header>)\s*(?:</div>\s*)+(?=<main\b)', r'\1\n', text, flags=re.I | re.S)
                   text = re.sub(r'(</header>)\s*(?:</div>\s*)+', r'\1\n', text, count=1, flags=re.I | re.S)
 
@@ -80,5 +79,5 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add '*.html' 'css/header-stable.css' '.github/workflows/sync-footer.yml'
           git diff --cached --quiet && exit 0
-          git commit -m "Clean article header markup"
+          git commit -m "Refresh responsive header CSS cache"
           git push

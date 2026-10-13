@@ -54,11 +54,7 @@ jobs:
                   continue
 
               text = path.read_text(encoding='utf-8')
-
-              # Replace every existing footer with the shared footer.
               text = re.sub(r'<footer\b[^>]*>.*?</footer>', footer, text, flags=re.I | re.S)
-
-              # Keep one current copy of the stable header CSS and responsive audit CSS.
               text = re.sub(r'\s*<link\s+rel=["\']stylesheet["\']\s+href=["\']css/header-stable\.css[^>]*>', '', text, flags=re.I)
               text = re.sub(r'\s*<link\s+rel=["\']stylesheet["\']\s+href=["\']css/responsive-audit\.css[^>]*>', '', text, flags=re.I)
               if re.search(r'</head>', text, flags=re.I):
@@ -68,15 +64,12 @@ jobs:
                   text = re.sub(r'<style>.*?</style>\s*', '', text, count=1, flags=re.I | re.S)
 
               if path.name == 'blog.html' or path.name in blog_articles:
-                  # Remove exact shared topbar copies, then replace everything between body/skip-link and main with one header.
                   text = text.replace(topbar, '')
                   text = re.sub(r'(<body[^>]*>\s*<a\b[^>]*class=["\']skip-link["\'][^>]*>.*?</a>).*?(?=<main\b)', r'\1\n' + shared_blog_header + '\n', text, count=1, flags=re.I | re.S)
-                  # If an older page has no skip-link, still normalize directly after <body>.
                   text = re.sub(r'(<body[^>]*>)\s*(?:<div class=["\']topbar["\'].*?</header>|<header\b[^>]*class=["\']site-header["\'][^>]*>.*?</header>)\s*', r'\1\n' + shared_blog_header + '\n', text, count=1, flags=re.I | re.S)
-
-              # Exact-copy cleanup: never allow two adjacent shared topbars or site headers.
-              text = re.sub(r'(?:' + re.escape(topbar) + r'\s*){2,}', topbar + '\n', text, flags=re.I)
-              text = re.sub(r'(</header>)\s*\1', r'\1', text, flags=re.I)
+                  # Clean artifacts left by older nested-div removal and guarantee main follows the header.
+                  text = re.sub(r'(</a>\n' + re.escape(shared_blog_header) + r')\s*(?:</div>\s*)+(?=<main\b)', r'\1\n', text, flags=re.I | re.S)
+                  text = re.sub(r'(<body[^>]*>\s*<a\b[^>]*class=["\']skip-link["\'][^>]*>.*?</a>\s*' + re.escape(shared_blog_header) + r')\s*(?:</div>\s*)+(?=<main\b)', r'\1\n', text, count=1, flags=re.I | re.S)
 
               path.write_text(text, encoding='utf-8')
 
@@ -86,5 +79,5 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add '*.html' 'css/header-stable.css' '.github/workflows/sync-footer.yml'
           git diff --cached --quiet && exit 0
-          git commit -m "Normalize shared headers and remove duplicates"
+          git commit -m "Finalize duplicate header cleanup"
           git push

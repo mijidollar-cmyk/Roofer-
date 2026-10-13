@@ -16,15 +16,24 @@ jobs:
         shell: python
         run: |
           from pathlib import Path
+          import re
           p = Path('index.html')
           s = p.read_text(encoding='utf-8')
+
+          # Restore the previous phone CTA.
           s = s.replace('href="mailto:info@hyperroof.com?subject=Hyper%20Roof%20Estimate%20Request"', 'href="tel:+15555550187"')
           s = s.replace('Request a Free Estimate by Email <span aria-hidden="true">→</span>', 'Call for a Free Estimate <span aria-hidden="true">→</span>')
+
+          # If the contact CTA was changed to a generic anchor, restore it to the previous phone CTA.
+          s = s.replace('href="#contact" aria-label="Request a free roofing estimate from Hyper Roof">Request a Free Estimate <span aria-hidden="true">→</span>', 'href="tel:+15555550187" aria-label="Call Hyper Roof for a free roofing estimate">Call for a Free Estimate <span aria-hidden="true">→</span>')
+
+          # Restore the previous testimonials section if it is missing.
           if 'id="testimonials"' not in s:
-            marker = '<section class="section" id="faq"'
             section = '''<section class="section testimonials" id="testimonials" aria-labelledby="testimonials-title"><div class="container"><span class="eyebrow dark">CUSTOMER FEEDBACK</span><h2 id="testimonials-title">What Customers Say</h2><div class="testimonial-grid"><article><p>“Sample testimonial — replace this text with a verified customer review before publishing.”</p><strong>Verified customer review placeholder</strong><span>★★★★★</span></article><article><p>“Sample testimonial — replace this text with a verified customer review before publishing.”</p><strong>Verified customer review placeholder</strong><span>★★★★★</span></article><article><p>“Sample testimonial — replace this text with a verified customer review before publishing.”</p><strong>Verified customer review placeholder</strong><span>★★★★★</span></article></div></div></section>\n'''
-            if marker in s:
-              s = s.replace(marker, section + marker, 1)
+            m = re.search(r'<section[^>]*id="faq"[^>]*>', s)
+            if m:
+              s = s[:m.start()] + section + s[m.start():]
+
           p.write_text(s, encoding='utf-8')
 
       - name: Harden every HTML header and blog article image
@@ -62,6 +71,6 @@ jobs:
           if git diff --cached --quiet; then
             echo 'No header/image fixes needed.'
           else
-            git commit -m 'Fix mobile headers and blog article layout'
+            git commit -m 'Restore previous phone CTA and testimonials'
             git push
           fi

@@ -46,6 +46,7 @@ jobs:
           }
 
           topbar = '<div class="topbar"><div class="container-fluid topbar-inner"><span aria-hidden="true">📍</span><span>Miami, FL 33101</span><a href="tel:+15555550187" aria-label="Call Hyper Roof"><span aria-hidden="true">☎</span> +1 (555) 555-0187</a></div></div>'
+          skip = '<a class="skip-link" href="#main-content">Skip to main content</a>'
           shared_blog_header = topbar + '''
           <header class="site-header"><div class="container header-inner"><a class="brand" href="index.html" aria-label="Hyper Roof home"><span class="brand-mark" aria-hidden="true">⌂</span><span><strong>Hyper <b>Roof</b></strong><small>STRONGER ROOFS. BETTER TOMORROW.</small></span></a><nav id="primary-navigation" class="main-nav" aria-label="Primary navigation"><a href="index.html">Home</a><a href="index.html#about">About Us</a><a href="index.html#services">Services</a><a href="index.html#projects">Projects</a><a href="index.html#faq">FAQ</a><a href="blog.html" class="active" aria-current="page">Blog</a><a href="index.html#contact">Contact</a></nav><a class="btn-yellow header-cta" href="tel:+15555550187" aria-label="Call Hyper Roof for a free roofing estimate">Call for a Free Estimate <span aria-hidden="true">→</span></a><button id="nav-toggle" class="nav-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="primary-navigation">☰</button></div></header>'''
 
@@ -65,11 +66,11 @@ jobs:
 
               if path.name == 'blog.html' or path.name in blog_articles:
                   text = text.replace(topbar, '')
-                  text = re.sub(r'(<body[^>]*>\s*<a\b[^>]*class=["\']skip-link["\'][^>]*>.*?</a>).*?(?=<main\b)', r'\1\n' + shared_blog_header + '\n', text, count=1, flags=re.I | re.S)
-                  text = re.sub(r'(<body[^>]*>)\s*(?:<div class=["\']topbar["\'].*?</header>|<header\b[^>]*class=["\']site-header["\'][^>]*>.*?</header>)\s*', r'\1\n' + shared_blog_header + '\n', text, count=1, flags=re.I | re.S)
-                  # Clean artifacts left by older nested-div removal and guarantee main follows the header.
-                  text = re.sub(r'(</a>\n' + re.escape(shared_blog_header) + r')\s*(?:</div>\s*)+(?=<main\b)', r'\1\n', text, flags=re.I | re.S)
-                  text = re.sub(r'(<body[^>]*>\s*<a\b[^>]*class=["\']skip-link["\'][^>]*>.*?</a>\s*' + re.escape(shared_blog_header) + r')\s*(?:</div>\s*)+(?=<main\b)', r'\1\n', text, count=1, flags=re.I | re.S)
+                  text = text.replace(skip, '')
+                  text = re.sub(r'(<body[^>]*>).*?(?=<main\b)', r'\1\n' + skip + '\n' + shared_blog_header + '\n', text, count=1, flags=re.I | re.S)
+                  # Remove any orphaned closing divs left between the header and main by older sync versions.
+                  text = re.sub(r'(</header>)\s*(?:</div>\s*)+(?=<main\b)', r'\1\n', text, flags=re.I | re.S)
+                  text = re.sub(r'(</header>)\s*(?:</div>\s*)+', r'\1\n', text, count=1, flags=re.I | re.S)
 
               path.write_text(text, encoding='utf-8')
 
@@ -79,5 +80,5 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add '*.html' 'css/header-stable.css' '.github/workflows/sync-footer.yml'
           git diff --cached --quiet && exit 0
-          git commit -m "Finalize duplicate header cleanup"
+          git commit -m "Clean article header markup"
           git push

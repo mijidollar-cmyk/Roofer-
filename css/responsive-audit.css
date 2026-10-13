@@ -1,0 +1,73 @@
+/* Hyper Roof — cross-device design audit fixes. */
+html{overflow-x:hidden}
+body{min-width:0;overflow-x:hidden}
+.container,.container-fluid{width:100%;min-width:0}
+
+/* Keep the header readable without forcing horizontal scrolling. */
+@media (min-width:761px) and (max-width:1300px){
+  .site-header .header-inner{padding-left:18px!important;padding-right:18px!important}
+  .site-header .brand{flex:0 1 210px!important;min-width:180px!important}
+  .site-header .main-nav{flex:1 1 auto!important;min-width:0!important;overflow-x:auto!important;scrollbar-width:none!important}
+  .site-header .main-nav::-webkit-scrollbar{display:none}
+  .site-header .main-nav a{flex:0 0 auto!important}
+  .site-header .header-cta{flex:0 0 auto!important}
+}
+
+/* Mobile: prevent cramped CTA/header controls and make navigation predictable. */
+@media (max-width:760px){
+  .topbar-inner{justify-content:center!important;text-align:center!important;min-height:38px!important;padding:5px 12px!important}
+  .topbar-inner a{margin-left:0!important}
+  .site-header .header-inner{padding-left:12px!important;padding-right:12px!important}
+  .site-header .brand{flex:1 1 auto!important;min-width:0!important}
+  .site-header .header-cta{flex:0 1 auto!important;max-width:145px!important;min-width:0!important;padding:0 9px!important;font-size:10px!important}
+  .site-header .nav-toggle{flex:0 0 44px!important}
+  .hero{min-height:560px!important}
+  .hero-content{padding-top:28px!important;padding-bottom:28px!important}
+  .hero-copy{max-width:100%!important}
+  .hero h1{font-size:clamp(34px,9.5vw,46px)!important;line-height:1.05!important;letter-spacing:-.02em!important}
+  .hero p{font-size:16px!important;line-height:1.6!important}
+  .hero-actions{width:100%!important;align-items:stretch!important}
+  .hero-actions .btn-yellow,.hero-actions .btn-outline{width:100%!important;max-width:420px!important}
+  .service-grid article{min-height:0!important}
+  .section{padding:52px 0!important}
+  .two-col,.advantage-grid,.faq-grid,.testimonial-grid{gap:34px!important}
+  .about-copy h2,.advantage-section h2,.testimonials h2,.faq-section h2{font-size:clamp(30px,8vw,38px)!important}
+  .benefits{gap:20px!important}
+  .project-row{gap:12px!important}
+  .quote-content{padding:34px 24px!important}
+  .quote-content h2{font-size:32px!important;line-height:1.12!important}
+  .footer-bottom .container{padding-left:14px!important;padding-right:14px!important}
+}
+
+@media (max-width:380px){
+  .site-header .header-inner{padding-left:8px!important;padding-right:8px!important}
+  .site-header .brand-mark{width:34px!important;height:34px!important;min-width:34px!important;flex-basis:34px!important}
+  .site-header .brand strong{font-size:16px!important}
+  .site-header .header-cta{max-width:126px!important;font-size:9px!important;padding:0 7px!important}
+  .hero{min-height:540px!important}
+  .hero h1{font-size:32px!important}
+  .container{padding-left:12px!important;padding-right:12px!important}
+}
+
+/* Desktop spacing and typography: preserve the strong hero while reducing oversized blocks. */
+@media (min-width:1301px){
+  .hero h1{font-size:clamp(52px,5vw,64px)!important;max-width:760px}
+  .hero-copy{max-width:720px!important}
+  .section{padding:78px 0!important}
+}
+
+/* Content pages: keep headings, tables and long words inside the viewport. */
+#main-content{min-width:0}
+#main-content pre,#main-content table{max-width:100%}
+#main-content pre{overflow:auto}
+#main-content a{overflow-wrap:anywhere}
+
+/* Improve touch targets without making cards visually bloated. */
+@media (max-width:760px){
+  .service-grid h3 a,.local-service-hub .local-card,.testimonial-grid article a{min-height:44px}
+  .local-service-hub .local-card{padding:16px!important}
+  details{padding:14px 16px!important}
+}
+
+/* Avoid accidental layout shifts from media with unknown intrinsic dimensions. */
+.hero-image,.image-card img,.project-row img,.blog-hero-image img{max-width:100%;height:auto}

@@ -43,3 +43,5 @@ jobs:
             git commit -m 'Restore phone CTA and testimonials'
             git push
           fi
+
+# Triggered 2026-10-13 to ensure the homepage restoration is applied.

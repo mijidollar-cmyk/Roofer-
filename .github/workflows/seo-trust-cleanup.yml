@@ -20,6 +20,7 @@ jobs:
           p = Path('index.html')
           s = p.read_text(encoding='utf-8')
           s = s.replace('href="#testimonials">Testimonials</a>', 'href="#faq">FAQ</a>')
+          s = s.replace('<a href="#faq">FAQ</a><a href="#faq">FAQ</a>', '<a href="#faq">FAQ</a>')
           s = re.sub(r'<section class="section testimonials" id="testimonials".*?</section>\n', '', s, flags=re.S)
           s = s.replace('OUR PROJECTS', 'ROOFING EXAMPLES')
           s = s.replace('Recent Roofing Projects in Miami', 'Miami Roofing Examples')

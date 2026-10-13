@@ -12,25 +12,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Remove unsupported homepage claims
+      - name: Restore requested phone and testimonial section
         shell: python
         run: |
           from pathlib import Path
-          import re
           p = Path('index.html')
           s = p.read_text(encoding='utf-8')
-          s = s.replace('href="#testimonials">Testimonials</a>', 'href="#faq">FAQ</a>')
-          s = s.replace('<a href="#faq">FAQ</a><a href="#faq">FAQ</a>', '<a href="#faq">FAQ</a>')
-          s = re.sub(r'<section class="section testimonials" id="testimonials".*?</section>\n', '', s, flags=re.S)
+          s = s.replace('href="mailto:info@hyperroof.com?subject=Hyper%20Roof%20Estimate%20Request"', 'href="tel:+15555550187"')
+          s = s.replace('Request a Free Estimate by Email <span aria-hidden="true">→</span>', 'Call for a Free Estimate <span aria-hidden="true">→</span>')
+          s = s.replace('href="#testimonials">Testimonials</a>', 'href="#testimonials">Testimonials</a>')
+          if 'id="testimonials"' not in s:
+            marker = '<section class="section" id="faq"'
+            section = '''<section class="section testimonials" id="testimonials" aria-labelledby="testimonials-title"><div class="container"><span class="eyebrow dark">CUSTOMER FEEDBACK</span><h2 id="testimonials-title">What Customers Say</h2><div class="two-col"><blockquote><p>“Sample testimonial — replace this text with a verified customer review before publishing.”</p><footer>Verified customer review placeholder</footer></blockquote><blockquote><p>“Sample testimonial — replace this text with a verified customer review before publishing.”</p><footer>Verified customer review placeholder</footer></blockquote></div></div></section>\n'''
+            if marker in s:
+              s = s.replace(marker, section + marker, 1)
           s = s.replace('OUR PROJECTS', 'ROOFING EXAMPLES')
           s = s.replace('Recent Roofing Projects in Miami', 'Miami Roofing Examples')
           s = s.replace('Miami-area residential roof project with tile roofing', 'Miami-area roofing example')
           s = s.replace('Roofing workers installing tile roofing', 'Roofing installation example')
           s = s.replace('Roofing crew working on a steep residential roof', 'Residential roofing example')
-          s = s.replace('href="tel:+15555550187"', 'href="mailto:info@hyperroof.com?subject=Hyper%20Roof%20Estimate%20Request"')
-          s = s.replace('Call for a Free Estimate <span aria-hidden="true">→</span>', 'Request a Free Estimate by Email <span aria-hidden="true">→</span>')
-          s = s.replace('Talk to our Miami roofing team about repairs, replacement, new installation, or commercial roofing.', 'Request roofing information or contractor referral help for repairs, replacement, new installation, or commercial roofing.')
-          s = s.replace('Yes. Hyper Roof provides urgent response for active leaks and storm-related roof damage so you can protect your property and plan the next repair.', 'Hyper Roof provides information and contractor referral options for active leaks and storm-related roof damage. Physical emergency work is performed by participating contractors.')
           p.write_text(s, encoding='utf-8')
       - name: Commit cleanup if needed
         run: |
@@ -40,6 +40,6 @@ jobs:
           if git diff --cached --quiet; then
             echo 'No homepage cleanup changes needed.'
           else
-            git commit -m 'Fix homepage trust and conversion claims'
+            git commit -m 'Restore phone CTA and testimonials'
             git push
           fi

@@ -1,0 +1,61 @@
+name: Improve homepage images
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/homepage-images.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  images:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Improve homepage image presentation
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          p = Path('index.html')
+          s = p.read_text()
+
+          # Improve clarity without making the homepage images unnecessarily large.
+          s = re.sub(r'(images\.unsplash\.com/[^\"\']+?&q=)(?:28|30)', r'\g<1>45', s)
+
+          # Keep the hero image responsive and reserve its display area for stable LCP.
+          s = s.replace('w=800&q=45" imagesizes="100vw" fetchpriority="high"', 'w=800&q=45" imagesizes="100vw" fetchpriority="high"')
+
+          p.write_text(s)
+          PY
+
+      - name: Improve image sizing and visual polish
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('css/style.css')
+          s = p.read_text()
+
+          additions = '''\n.hero-image{image-rendering:auto}.about-section .image-card img{aspect-ratio:3/2;object-fit:cover}.projects-mini .project-row{grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch}.projects-mini .project-row img{width:100%;aspect-ratio:3/2;height:auto;object-fit:cover;border-radius:4px}.projects-mini .project-row img{box-shadow:0 3px 12px #06244018}@media(max-width:760px){.projects-mini .project-row{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:480px){.projects-mini .project-row{grid-template-columns:1fr}}\n'''
+          if '.projects-mini .project-row img{' not in s:
+              s += additions
+          p.write_text(s)
+          PY
+
+      - name: Commit changes
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html css/style.css
+          if git diff --cached --quiet; then
+            echo 'No homepage image changes needed.'
+          else
+            git commit -m 'Improve homepage image quality and consistency'
+            git push
+          fi

@@ -79,6 +79,19 @@ main>section,main>article,main>.section{position:relative;width:100%;clear:both}
 .experience{z-index:2!important;max-width:calc(100% - 12px);overflow:hidden}
 .benefits{align-items:start!important}
 .benefits>div{min-width:0!important;overflow-wrap:anywhere!important}
+
+/* IMPORTANT: trust-section benefits have no icon column. The legacy .benefits rule
+   gives every item a 38px icon track, which causes the heading and description to
+   collide on both desktop and mobile. Make these three trust steps explicit cards. */
+.trust-section .benefits{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:28px!important;margin-top:32px!important}
+.trust-section .benefits>div{display:block!important;min-width:0!important;width:100%!important;padding:0!important}
+.trust-section .benefits>div strong{display:block!important;width:100%!important;margin:0 0 8px!important;font-size:17px!important;line-height:1.3!important;color:var(--ink,#0a1d33)!important}
+.trust-section .benefits>div span{display:block!important;width:100%!important;margin:0!important;font-size:14px!important;line-height:1.6!important;color:var(--muted,#53606d)!important;overflow-wrap:anywhere!important}
+.trust-section> .container > p:last-child{margin-top:28px!important;line-height:1.6!important}
+@media(max-width:900px){.trust-section .benefits{grid-template-columns:1fr 1fr!important;gap:24px!important}}
+@media(max-width:600px){.trust-section .benefits{grid-template-columns:1fr!important;gap:22px!important;margin-top:28px!important}.trust-section .benefits>div strong{font-size:18px!important}.trust-section .benefits>div span{font-size:16px!important;line-height:1.55!important}}
+
+.benefits>div{min-width:0!important;overflow-wrap:anywhere!important}
 .projects-mini{min-width:0!important}
 .project-row{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;align-items:stretch!important}
 .project-row img{aspect-ratio:3/2!important;object-fit:cover!important}

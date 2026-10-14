@@ -1,0 +1,141 @@
+/* Hyper Roof — final cross-device overlap/spacing guardrails. Loaded last. */
+*{box-sizing:border-box}
+html,body{width:100%;max-width:100%;overflow-x:hidden}
+body{min-width:0}
+img,svg,video,iframe{max-width:100%}
+
+/* Prevent adjacent sections from collapsing into each other. */
+main{display:block;width:100%;min-width:0}
+main>section,main>article,main>.section{position:relative;width:100%;clear:both}
+.section{display:block;isolation:isolate;overflow:visible}
+.section>.container{width:100%;max-width:1180px;margin-left:auto;margin-right:auto}
+.section h1,.section h2,.section h3,.section p,.section ul,.section ol{position:relative;z-index:1}
+
+/* Grid/flex children must be allowed to shrink instead of overlapping. */
+.two-col,.advantage-grid,.faq-grid,.testimonial-grid,.benefits,.project-row,.service-grid,.footer-grid,.home-blog .blog-grid,.local-service-hub .local-grid{min-width:0}
+.two-col>*,.advantage-grid>*,.faq-grid>*,.testimonial-grid>*,.benefits>*,.project-row>*,.service-grid>*,.footer-grid>*,.home-blog .blog-card,.local-service-hub .local-card{min-width:0;max-width:100%}
+.two-col img,.advantage-grid img,.project-row img,.home-blog img{display:block;width:100%;height:auto}
+
+/* Header: one authoritative geometry at each breakpoint. */
+.site-header{position:relative!important;z-index:100!important;overflow:visible!important}
+.site-header .header-inner{position:relative!important;width:100%!important;max-width:1240px!important;margin:0 auto!important;min-width:0!important;overflow:visible!important}
+.site-header .brand,.site-header .main-nav,.site-header .header-cta,.site-header .nav-toggle{min-width:0}
+@media(min-width:1201px){
+ .site-header .header-inner{height:78px!important;min-height:78px!important;display:grid!important;grid-template-columns:minmax(190px,220px) minmax(0,1fr) minmax(150px,180px)!important;gap:14px!important;align-items:center!important;padding:0 20px!important}
+ .site-header .brand{grid-column:1!important;width:100%!important;min-width:0!important}
+ .site-header .main-nav{grid-column:2!important;display:flex!important;justify-content:center!important;align-items:center!important;gap:2px!important;width:100%!important;min-width:0!important;margin:0!important;overflow:visible!important}
+ .site-header .main-nav a{flex:0 1 auto!important;min-width:44px!important;max-width:none!important;padding:0 6px!important;white-space:nowrap!important}
+ .site-header .header-cta{grid-column:3!important;width:100%!important;min-width:150px!important;max-width:180px!important;justify-self:end!important}
+ .site-header .nav-toggle{display:none!important}
+}
+@media(min-width:761px) and (max-width:1200px){
+ .site-header .header-inner{height:auto!important;min-height:72px!important;display:flex!important;flex-wrap:wrap!important;align-items:center!important;gap:8px!important;padding:8px 16px 0!important}
+ .site-header .brand{order:1!important;flex:1 1 180px!important;width:auto!important;min-width:160px!important}
+ .site-header .header-cta{order:2!important;flex:0 0 auto!important;width:auto!important;min-width:132px!important;max-width:180px!important;height:44px!important}
+ .site-header .nav-toggle{order:3!important;display:inline-flex!important;flex:0 0 44px!important;width:44px!important;height:44px!important}
+ .site-header .main-nav{order:4!important;display:none!important}
+ .site-header .main-nav.open{display:flex!important;position:absolute!important;top:72px!important;left:16px!important;right:16px!important;width:auto!important;max-height:calc(100vh - 72px)!important;flex-direction:column!important;align-items:stretch!important;overflow:auto!important;background:#fff!important;z-index:101!important}
+ .site-header .main-nav a{width:100%!important;min-height:44px!important;justify-content:flex-start!important}
+}
+@media(max-width:760px){
+ .site-header .header-inner{height:68px!important;min-height:68px!important;width:100%!important;display:flex!important;flex-wrap:nowrap!important;align-items:center!important;gap:6px!important;padding:8px 12px!important;overflow:visible!important}
+ .site-header .brand{order:1!important;flex:1 1 auto!important;width:auto!important;min-width:0!important;max-width:none!important;overflow:hidden!important}
+ .site-header .brand>span:last-child{min-width:0!important;overflow:hidden!important}
+ .site-header .brand strong{white-space:nowrap!important}
+ .site-header .header-cta{order:2!important;flex:0 1 auto!important;width:auto!important;min-width:0!important;max-width:145px!important;height:44px!important;padding:0 9px!important;white-space:nowrap!important;overflow:hidden!important}
+ .site-header .nav-toggle{order:3!important;display:inline-flex!important;flex:0 0 44px!important;width:44px!important;height:44px!important;min-width:44px!important;min-height:44px!important;margin:0!important}
+ .site-header .main-nav{order:4!important;display:none!important;position:absolute!important;top:68px!important;left:0!important;right:0!important;width:100%!important;max-height:calc(100vh - 68px)!important;margin:0!important;padding:8px 12px 12px!important;flex-direction:column!important;align-items:stretch!important;gap:2px!important;overflow-x:hidden!important;overflow-y:auto!important;background:#fff!important;z-index:101!important}
+ .site-header .main-nav.open{display:flex!important}
+ .site-header .main-nav a{display:flex!important;width:100%!important;height:44px!important;min-height:44px!important;justify-content:flex-start!important;align-items:center!important;padding:0 12px!important;white-space:nowrap!important}
+}
+
+/* Hero: prevent text/actions/badges from colliding at smaller widths. */
+.hero{position:relative!important;width:100%!important;overflow:hidden!important}
+.hero-content{position:relative!important;z-index:2!important;width:100%!important}
+.hero-copy{min-width:0!important;max-width:760px!important}
+.hero h1,.hero p{overflow-wrap:break-word!important}
+.hero-actions{display:flex!important;flex-wrap:wrap!important;align-items:center!important;min-width:0!important}
+.hero-actions>a{flex:0 1 auto!important;min-width:44px!important;max-width:100%!important}
+.insured-badge{z-index:3!important;max-width:calc(100% - 40px)!important}
+@media(max-width:760px){
+ .hero{min-height:0!important;height:auto!important}
+ .hero-content{padding-top:56px!important;padding-bottom:56px!important}
+ .hero-actions{flex-direction:column!important;align-items:stretch!important;width:100%!important;gap:12px!important}
+ .hero-actions>a{width:100%!important;max-width:420px!important}
+ .insured-badge{display:none!important}
+}
+
+/* Service cards: fixed track sizing eliminates uneven/overlapping content. */
+.service-grid{display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;align-items:stretch!important}
+.service-grid article{min-width:0!important;height:100%!important;overflow-wrap:anywhere!important}
+.service-grid h3,.service-grid p{overflow-wrap:anywhere!important}
+@media(max-width:900px){.service-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:480px){.service-grid{grid-template-columns:1fr!important}}
+
+/* Standard content sections. */
+.about-section .two-col,.advantage-section .advantage-grid,.faq-section .faq-grid{align-items:start!important}
+.image-card{width:100%;min-width:0!important;overflow:hidden}
+.image-card img{aspect-ratio:3/2;object-fit:cover}
+.experience{z-index:2!important;max-width:calc(100% - 12px);overflow:hidden}
+.benefits{align-items:start!important}
+.benefits>div{min-width:0!important;overflow-wrap:anywhere!important}
+.projects-mini{min-width:0!important}
+.project-row{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;align-items:stretch!important}
+.project-row img{aspect-ratio:3/2!important;object-fit:cover!important}
+@media(max-width:760px){
+ .two-col,.advantage-grid,.faq-grid,.testimonial-grid{grid-template-columns:1fr!important;gap:34px!important}
+ .benefits{grid-template-columns:1fr!important}
+ .project-row{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media(max-width:480px){.project-row{grid-template-columns:1fr!important}}
+
+/* Local-area cards and related-local-areas were previously vulnerable to unstyled/collapsed blocks. */
+.local-service-hub{position:relative;display:block;width:100%;clear:both}
+.local-service-hub .local-grid{display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;align-items:stretch!important}
+.local-service-hub .local-card{height:100%!important;overflow-wrap:anywhere!important}
+.related-local-areas{display:block!important;position:relative!important;clear:both!important;width:100%!important;margin:0!important;padding:42px max(20px,calc((100% - 1140px)/2)) 48px!important;background:#f4f7fa!important;border-top:1px solid #dfe7ed!important}
+.related-local-areas h2{margin:0 0 12px!important;color:#062440!important;line-height:1.2!important}
+.related-local-areas p{margin:0!important;line-height:1.7!important;color:#405264!important}
+.related-local-areas a{color:#00527d!important;font-weight:700!important;text-decoration:underline!important;text-underline-offset:2px!important}
+@media(max-width:900px){.local-service-hub .local-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:600px){
+ .local-service-hub .local-grid{grid-template-columns:1fr!important}
+ .related-local-areas{padding:34px 14px 40px!important}
+}
+
+/* FAQ/details: keep summaries and answer blocks inside their cards. */
+details{position:relative!important;overflow:hidden!important}
+details summary{overflow-wrap:anywhere!important}
+details>*:not(summary){max-width:100%!important;overflow-wrap:anywhere!important}
+
+/* Blog/content pages: eliminate image/table/text collisions. */
+#main-content article.section>.container{width:100%!important;max-width:920px!important;margin:0 auto!important;min-width:0!important}
+#main-content article.section table{display:block!important;width:100%!important;max-width:100%!important;overflow-x:auto!important}
+#main-content article.section th,#main-content article.section td{overflow-wrap:anywhere!important}
+.blog-hero-image{width:100%!important;overflow:hidden!important}
+.blog-hero-image img{width:100%!important;aspect-ratio:16/9!important;object-fit:cover!important}
+
+/* Footer: stable columns and no text/links sitting on top of each other. */
+.site-footer{position:relative!important;clear:both!important;width:100%!important;overflow:hidden!important}
+.site-footer .footer-grid{display:grid!important;grid-template-columns:minmax(0,1.6fr) repeat(3,minmax(0,1fr))!important;align-items:start!important;gap:24px!important}
+.site-footer .footer-grid>div,.site-footer .footer-grid>nav{min-width:0!important;overflow-wrap:anywhere!important}
+.site-footer .footer-grid nav ul{display:flex!important;flex-direction:column!important;gap:2px!important;margin:0!important;padding:0!important;list-style:none!important}
+.site-footer .footer-grid nav a{width:100%!important;min-height:36px!important;height:auto!important;line-height:1.35!important;white-space:normal!important;overflow-wrap:anywhere!important}
+.site-footer .footer-bottom{position:relative!important;clear:both!important}
+@media(max-width:900px){.site-footer .footer-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:600px){
+ .site-footer .footer-grid{grid-template-columns:1fr!important;gap:10px!important}
+ .site-footer .footer-grid>div,.site-footer .footer-grid>nav{grid-column:auto!important}
+}
+
+/* Prevent fixed/absolute elements from creating horizontal overlap on tiny phones. */
+@media(max-width:380px){
+ .container{padding-left:12px!important;padding-right:12px!important}
+ .site-header .header-inner{padding-left:8px!important;padding-right:8px!important;gap:4px!important}
+ .site-header .header-cta{max-width:126px!important;font-size:10px!important;padding:0 7px!important}
+ .hero-content{padding-top:46px!important;padding-bottom:46px!important}
+}
+
+/* Ensure every section ends before the next begins. */
+main>section+section,main>article+section,main>section+article{margin-top:0}
+.clearfix::after{content:"";display:table;clear:both}

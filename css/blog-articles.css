@@ -1,10 +1,10 @@
 /* Standard blog article structure */
 #main-content article.section{padding:0!important;background:#f4f7fa!important;contain:none}
-#main-content article.section>.container{max-width:920px;margin:0 auto;padding:42px 20px 76px;display:block}
+#main-content article.section>.container{max-width:920px;margin:0 auto;padding:42px 20px 76px;display:block;box-sizing:border-box}
 #main-content article.section>.container>.eyebrow{display:block;margin:0 0 14px}
-#main-content article.section>.container>.blog-hero-image{display:block!important;width:100%;height:auto!important;min-height:0!important;margin:0 0 34px;overflow:hidden;background:#edf3f7;border-radius:6px;line-height:0;position:relative}
+#main-content article.section>.container>.blog-hero-image{display:block!important;width:100%;height:auto!important;min-height:0!important;margin:0 0 34px;overflow:hidden;background:#edf3f7;border-radius:6px;line-height:0;position:relative;box-sizing:border-box}
 #main-content article.section .blog-hero-image img,#main-content article.section .blog-hero-image svg{display:block!important;width:100%!important;height:auto!important;min-height:0!important;aspect-ratio:16/9!important;object-fit:contain;max-width:100%;margin:0}
-#main-content article.section>.container>h1{font-size:clamp(38px,5vw,58px);line-height:1.06;letter-spacing:-.02em;color:var(--navy);margin:0 0 22px;max-width:850px;overflow-wrap:anywhere}
+#main-content article.section>.container>h1{font-size:clamp(38px,5vw,58px);line-height:1.06;letter-spacing:-.02em;color:var(--navy);margin:0 0 22px;max-width:850px;overflow-wrap:anywhere;word-break:normal}
 #main-content article.section>.container>p:first-of-type{font-size:20px;line-height:1.75;color:#405264;margin:0 0 30px;padding:0 0 30px;border-bottom:1px solid #dbe3e9;max-width:850px}
 #main-content article.section>.container>h2{font-size:30px;line-height:1.2;color:var(--navy);margin:50px 0 18px;padding:24px 0 0;border-top:1px solid #dbe3e9;max-width:850px;overflow-wrap:anywhere}
 #main-content article.section>.container>h2:first-of-type{margin-top:8px}
@@ -23,6 +23,31 @@
 #main-content figure.blog-hero-image{box-sizing:border-box!important;aspect-ratio:16/9!important}
 #main-content figure.blog-hero-image img{object-fit:cover!important;object-position:center!important}
 #main-content figure.blog-hero-image img[width][height]{height:auto!important}
+
+/* Mobile article-header hardening: headings must always clear the site header and fit the viewport. */
+@media (max-width:760px){
+  #main-content article.section>.container{width:100%;max-width:100%;padding:28px 14px 56px!important}
+  #main-content article.section>.container>.eyebrow{margin-bottom:12px;line-height:1.25}
+  #main-content article.section>.container>.blog-hero-image{width:100%;margin:0 0 26px;border-radius:5px}
+  #main-content article.section .blog-hero-image img,#main-content article.section .blog-hero-image svg{width:100%!important;height:auto!important;aspect-ratio:16/9!important;object-fit:cover!important}
+  #main-content article.section>.container>h1{font-size:clamp(30px,8.8vw,40px)!important;line-height:1.12!important;letter-spacing:-.015em!important;margin:0 0 18px!important;max-width:100%!important;overflow-wrap:anywhere!important;word-break:normal!important}
+  #main-content article.section>.container>p:first-of-type{font-size:17px;line-height:1.65;margin-bottom:24px;padding-bottom:24px}
+  #main-content article.section>.container>h2{font-size:26px!important;line-height:1.2!important;margin:38px 0 14px!important;padding:18px 0 0!important}
+  #main-content article.section>.container>h2:first-of-type{margin-top:4px!important}
+  #main-content article.section>.container>h3{font-size:19px!important;line-height:1.35!important;margin:24px 0 8px!important}
+  #main-content article.section>.container>p,#main-content article.section>.container>li{font-size:16px;line-height:1.7}
+  #main-content article.section>.container>.check-list{padding:16px 18px;margin:16px 0 26px}
+  #main-content article.section>.container>.check-list li{margin:10px 0}
+  #main-content article.section table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;font-size:14px}
+  #main-content article.section .btn-yellow{max-width:100%;min-height:48px;box-sizing:border-box}
+  #main-content .related-resources{margin:0 14px 24px!important;line-height:1.6}
+}
+
+@media (max-width:380px){
+  #main-content article.section>.container{padding-left:12px!important;padding-right:12px!important}
+  #main-content article.section>.container>h1{font-size:29px!important;line-height:1.12!important}
+  #main-content article.section>.container>h2{font-size:24px!important}
+}
 
 /* Footer consistency: simple legacy article footers use the same visual system as the home footer. */
 .site-footer{margin-top:0!important;background:#062440!important;color:#fff!important}

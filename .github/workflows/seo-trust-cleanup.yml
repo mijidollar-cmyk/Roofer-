@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Fix priority SEO, trust, phone and local-page issues
+      - name: Fix priority SEO, trust, phone, domain and local-page issues
         shell: python
         run: |
           from pathlib import Path
@@ -61,6 +61,18 @@ jobs:
           # Keep FAQ structured data aligned with visible, truthful copy.
           s = s.replace('Hyper Roof provides information and contractor options for roof repair, roof replacement, new roof installation, emergency roofing and commercial roofing in Miami.', 'Hyper Roof provides Miami-focused roofing information and helps property owners request estimates from participating roofing contractors for roof repair, roof replacement, new roof installation, emergency roofing and commercial roofing.')
           p.write_text(s, encoding='utf-8')
+
+          # Remove the old HyperRoof.com domain from all site SEO URLs and references.
+          # The intended production domain is roofer.miami.
+          domain_paths = list(Path('.').glob('*.html')) + list(Path('.').glob('*.md')) + list(Path('.').glob('*.xml')) + list(Path('css').glob('*.css')) + list(Path('js').glob('*.js'))
+          for path in domain_paths:
+              try:
+                  text = path.read_text(encoding='utf-8')
+              except Exception:
+                  continue
+              updated = text.replace('https://hyperroof.com', 'https://roofer.miami')
+              if updated != text:
+                  path.write_text(updated, encoding='utf-8')
 
           # Fix all HTML/Markdown/CSS wording errors site-wide.
           replacements = [
@@ -130,10 +142,10 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add '*.html' '*.md' 'css/*.css' index.html
+          git add '*.html' '*.md' '*.xml' 'css/*.css' 'js/*.js' index.html
           if git diff --cached --quiet; then
             echo 'No changes needed.'
           else
-            git commit -m 'Fix priority SEO trust and local-page issues'
+            git commit -m 'Remove hyperroof.com domain references'
             git push
           fi

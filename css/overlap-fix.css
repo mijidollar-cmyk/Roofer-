@@ -145,3 +145,46 @@ details>*:not(summary){max-width:100%!important;overflow-wrap:anywhere!important
 
 main>section+section,main>article+section,main>section+article{margin-top:0}
 .clearfix::after{content:"";display:table;clear:both}
+
+
+/* Header CTA overlap fix: reserve separate space for brand, nav, and CTA. */
+.site-header,
+.site-header .header-inner{box-sizing:border-box!important;min-width:0!important}
+.site-header .header-inner{overflow:visible!important}
+.site-header .brand,.site-header .main-nav,.site-header .header-cta,.site-header .nav-toggle{min-width:0!important}
+.site-header .header-cta{box-sizing:border-box!important;flex-shrink:0!important;max-width:100%!important;overflow:visible!important;text-overflow:clip!important;line-height:1.15!important;gap:6px!important}
+.site-header .header-cta span{flex:0 0 auto!important}
+@media (min-width:1201px){
+ .site-header .header-inner{display:grid!important;grid-template-columns:minmax(190px,220px) minmax(0,1fr) 180px!important;column-gap:12px!important}
+ .site-header .brand{grid-column:1!important;width:100%!important;min-width:0!important}
+ .site-header .main-nav{grid-column:2!important;width:100%!important;min-width:0!important;gap:2px!important;justify-content:center!important}
+ .site-header .main-nav a{min-width:0!important;padding-inline:5px!important;font-size:12px!important}
+ .site-header .header-cta{grid-column:3!important;width:180px!important;min-width:180px!important;max-width:180px!important;padding-inline:10px!important;font-size:12px!important;justify-self:end!important;white-space:nowrap!important}
+}
+@media (min-width:1101px) and (max-width:1200px){
+ .site-header .header-inner{display:grid!important;grid-template-columns:minmax(180px,205px) minmax(0,1fr) 174px!important;column-gap:8px!important}
+ .site-header .brand{grid-column:1!important;width:100%!important;min-width:0!important}
+ .site-header .main-nav{grid-column:2!important;width:100%!important;min-width:0!important;gap:0!important;justify-content:center!important}
+ .site-header .main-nav a{min-width:0!important;padding-inline:4px!important;font-size:11px!important}
+ .site-header .header-cta{grid-column:3!important;width:174px!important;min-width:174px!important;max-width:174px!important;padding-inline:8px!important;font-size:11px!important;justify-self:end!important}
+}
+@media (min-width:761px) and (max-width:1100px){
+ .site-header .header-inner{display:flex!important;flex-wrap:wrap!important;align-items:center!important;row-gap:6px!important;padding-top:8px!important}
+ .site-header .brand{order:1!important;flex:1 1 180px!important;width:auto!important;min-width:0!important}
+ .site-header .header-cta{order:2!important;flex:0 0 174px!important;width:174px!important;min-width:174px!important;max-width:174px!important;height:44px!important;padding-inline:8px!important;font-size:11px!important;margin-left:auto!important}
+ .site-header .main-nav{order:3!important;flex:0 0 100%!important;width:100%!important;min-width:0!important;margin:0!important;justify-content:center!important;overflow-x:auto!important}
+}
+@media (max-width:760px){
+ .site-header .header-inner{display:flex!important;flex-wrap:nowrap!important;gap:6px!important;overflow:visible!important}
+ .site-header .brand{flex:1 1 auto!important;width:auto!important;min-width:0!important;overflow:hidden!important}
+ .site-header .brand>span:last-child{min-width:0!important;overflow:hidden!important}
+ .site-header .header-cta{display:inline-flex!important;flex:0 1 auto!important;width:auto!important;min-width:0!important;max-width:136px!important;height:42px!important;min-height:42px!important;padding-inline:8px!important;font-size:10px!important;gap:4px!important;white-space:nowrap!important}
+ .site-header .header-cta span{font-size:10px!important}
+ .site-header .nav-toggle{flex:0 0 44px!important;width:44px!important;min-width:44px!important;margin:0!important}
+}
+@media (max-width:380px){
+ .site-header .header-inner{gap:4px!important;padding-inline:8px!important}
+ .site-header .brand-mark{width:34px!important;min-width:34px!important;flex-basis:34px!important}
+ .site-header .brand strong{font-size:16px!important}
+ .site-header .header-cta{max-width:124px!important;padding-inline:6px!important;font-size:9px!important}
+}

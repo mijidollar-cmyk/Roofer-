@@ -46,8 +46,8 @@ jobs:
           s = s.replace('Roofers fitting dark roof tiles during construction', 'Roofing workers installing tile roofing')
 
           # Remove placeholder contact details until a real business phone is supplied.
-          s = s.replace('<a href="tel:+15555550187"><span aria-hidden="true">☎</span> (555) 555-0187</a>', '<a href="mailto:info@hyperroof.com"><span aria-hidden="true">✉</span> info@hyperroof.com</a>')
-          s = s.replace('href="tel:+15555550187" aria-label="Call Hyper Roof for a free estimate"', 'href="#contact" aria-label="Request a free roofing estimate from Hyper Roof"')
+          s = s.replace('<a href="tel:+15555550187"><span aria-hidden="true">☎</span> (555) 555-0187</a>', '<a href="contact.html" aria-label="Request roofing help">Request Roofing Help <span aria-hidden="true">→</span></a>')
+          s = s.replace('href="contact.html" aria-label="Request a free roofing estimate from Hyper Roof"', 'href="#contact" aria-label="Request a free roofing estimate from Hyper Roof"')
           s = s.replace('Get a Free Estimate <span aria-hidden="true">→</span>', 'Request a Free Estimate <span aria-hidden="true">→</span>')
 
           # Keep homepage claims consistent with an independent information/referral service.

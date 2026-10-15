@@ -9,7 +9,6 @@ on:
       - 'css/responsive-audit.css'
       - 'css/blog-layout.css'
       - 'css/blog-articles.css'
-      - '*.html'
       - '.github/workflows/sync-footer.yml'
 
 permissions:

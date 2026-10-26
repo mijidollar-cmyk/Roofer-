@@ -351,3 +351,9 @@ main>section+section,main>article+section,main>section+article{margin-top:0}
  #projects.advantage-section .project-row{grid-template-columns:1fr;gap:14px}
  #projects.advantage-section .project-row img{aspect-ratio:16/9}
 }
+
+/* Two-image hero layout */
+.hero-image-slides{position:absolute;inset:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));overflow:hidden}
+.hero-image-slides .hero-image{position:relative;inset:auto;display:block;width:100%;height:100%;min-width:0;object-fit:cover}
+.hero-image-slides .hero-image-secondary{border-left:3px solid rgba(255,255,255,.55)}
+@media(max-width:600px){.hero-image-slides{grid-template-columns:1fr 1fr}.hero-image-slides .hero-image-secondary{border-left:2px solid rgba(255,255,255,.45)}}

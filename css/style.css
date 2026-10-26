@@ -32,3 +32,26 @@ body:has(> main#main-content > .hero) .quote-card{min-height:290px!important}
 body:has(> main#main-content > .hero) .quote-content{padding:32px!important}
 @media(max-width:760px){body:has(> main#main-content > .hero) .section{padding-top:38px!important;padding-bottom:38px!important}body:has(> main#main-content > .hero) .hero{min-height:500px!important}body:has(> main#main-content > .hero) .hero h1{font-size:clamp(34px,9vw,42px)!important}body:has(> main#main-content > .hero) .hero p{font-size:15px!important}body:has(> main#main-content > .hero) .service-grid article{padding:18px 14px!important}body:has(> main#main-content > .hero) .advantage-section .projects-mini .project-row img{height:clamp(220px,42vw,290px)!important;min-height:220px!important}body:has(> main#main-content > .hero) .local-service-hub .local-grid{gap:8px!important}body:has(> main#main-content > .hero) .home-blog .blog-grid{gap:14px!important}body:has(> main#main-content > .hero) .quote-content{padding:24px!important}}
 @media(max-width:480px){body:has(> main#main-content > .hero) .section{padding-top:32px!important;padding-bottom:32px!important}body:has(> main#main-content > .hero) .hero{min-height:480px!important}body:has(> main#main-content > .hero) .hero h1{font-size:34px!important}body:has(> main#main-content > .hero) .advantage-section .projects-mini .project-row img{height:auto!important;min-height:0!important;aspect-ratio:4/3!important}}
+
+/* Accessibility contrast corrections (WCAG AA text contrast) */
+:root{--navy:#062440;--navy2:#0b3558;--ink:#0a1d33;--muted:#465563;--pale:#edf7ff}
+body{color:#0a1d33}
+p,li,dd,dt{color:#334454}
+.eyebrow.dark,.brand strong b,.main-nav a:hover,.main-nav a.active,.check-list li:before,.benefits b{color:#004766}
+.topbar{color:#f1f6fa}
+.topbar a{color:#fff}
+.service-grid p{color:#e0eaf2}
+.hero p{color:#fff}
+.insured-badge small{color:#465563}
+.testimonial-grid p{color:#465563}
+.testimonial-grid span{color:#5a3b00}
+.home-blog .blog-date{color:#4a5967}
+.home-blog .blog-card p{color:#334454}
+.home-blog .blog-card a,.local-service-hub .local-card span{color:#004766}
+.local-service-hub .local-card strong{color:#062440}
+.site-footer,.site-footer p,.site-footer a,.footer-bottom{color:#e5eef5}
+.site-footer .footer-grid .footer-brand p{color:#e5eef5!important}
+.site-footer .footer-grid nav a,.site-footer .footer-grid nav>a{color:#fff!important}
+.site-footer .footer-grid nav a:hover,.site-footer .footer-grid nav>a:hover{color:#ffc400!important}
+.btn-yellow{background:#ffc400;color:#111827!important}
+.btn-outline{color:#fff}

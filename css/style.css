@@ -7,3 +7,28 @@ html,body{max-width:100%;overflow-x:hidden}body{-webkit-text-size-adjust:100%;te
 
 /* Miami roofing gallery: larger images and full-width layout */
 .advantage-section .container.advantage-grid{grid-template-columns:minmax(0,1fr)!important;gap:48px!important}.advantage-section .projects-mini{grid-column:1/-1!important;width:100%!important;max-width:none!important;margin-top:12px!important}.advantage-section .projects-mini .project-row{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:24px!important;width:100%!important;margin-top:28px!important}.advantage-section .projects-mini .project-row img{display:block!important;width:100%!important;height:clamp(300px,30vw,440px)!important;min-height:300px!important;aspect-ratio:auto!important;object-fit:cover!important;border-radius:12px!important;box-shadow:0 6px 22px #06244024!important}@media(max-width:760px){.advantage-section .projects-mini .project-row{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:16px!important}.advantage-section .projects-mini .project-row img{height:clamp(230px,48vw,320px)!important;min-height:230px!important}}@media(max-width:480px){.advantage-section .projects-mini .project-row{grid-template-columns:1fr!important;gap:18px!important}.advantage-section .projects-mini .project-row img{height:auto!important;min-height:0!important;aspect-ratio:4/3!important}}
+
+/* Homepage spacing tune: tighter, more balanced vertical rhythm */
+body:has(> main#main-content > .hero) .section{padding-top:54px!important;padding-bottom:54px!important}
+body:has(> main#main-content > .hero) .hero{min-height:500px!important}
+body:has(> main#main-content > .hero) .hero-content{padding-top:16px!important;padding-bottom:16px!important}
+body:has(> main#main-content > .hero) .hero h1{font-size:clamp(40px,4.5vw,56px)!important;line-height:1.05!important;margin-bottom:16px!important}
+body:has(> main#main-content > .hero) .hero p{font-size:16px!important;line-height:1.55!important}
+body:has(> main#main-content > .hero) .hero-actions{margin-top:20px!important}
+body:has(> main#main-content > .hero) .service-grid article{padding:22px 14px!important}
+body:has(> main#main-content > .hero) .service-grid h3{margin:7px 0 5px!important}
+body:has(> main#main-content > .hero) .two-col{gap:44px!important}
+body:has(> main#main-content > .hero) .about-copy h2,body:has(> main#main-content > .hero) .advantage-section h2,body:has(> main#main-content > .hero) .testimonials h2,body:has(> main#main-content > .hero) .faq-section h2{font-size:clamp(30px,3.2vw,38px)!important;margin-bottom:16px!important}
+body:has(> main#main-content > .hero) .local-service-hub .local-grid{margin-top:18px!important;gap:10px!important}
+body:has(> main#main-content > .hero) .local-service-hub .local-card{padding:14px!important}
+body:has(> main#main-content > .hero) .benefits{gap:16px!important;margin-top:20px!important}
+body:has(> main#main-content > .hero) .projects-mini .project-row{margin-top:18px!important;gap:18px!important}
+body:has(> main#main-content > .hero) .advantage-section .projects-mini .project-row img{height:clamp(260px,25vw,360px)!important;min-height:260px!important}
+body:has(> main#main-content > .hero) .home-blog .blog-head{margin-bottom:18px!important}
+body:has(> main#main-content > .hero) .home-blog .blog-grid{gap:16px!important}
+body:has(> main#main-content > .hero) .home-blog .blog-card-content{padding:16px!important}
+body:has(> main#main-content > .hero) .faq-grid{gap:36px!important}
+body:has(> main#main-content > .hero) .quote-card{min-height:290px!important}
+body:has(> main#main-content > .hero) .quote-content{padding:32px!important}
+@media(max-width:760px){body:has(> main#main-content > .hero) .section{padding-top:38px!important;padding-bottom:38px!important}body:has(> main#main-content > .hero) .hero{min-height:500px!important}body:has(> main#main-content > .hero) .hero h1{font-size:clamp(34px,9vw,42px)!important}body:has(> main#main-content > .hero) .hero p{font-size:15px!important}body:has(> main#main-content > .hero) .service-grid article{padding:18px 14px!important}body:has(> main#main-content > .hero) .advantage-section .projects-mini .project-row img{height:clamp(220px,42vw,290px)!important;min-height:220px!important}body:has(> main#main-content > .hero) .local-service-hub .local-grid{gap:8px!important}body:has(> main#main-content > .hero) .home-blog .blog-grid{gap:14px!important}body:has(> main#main-content > .hero) .quote-content{padding:24px!important}}
+@media(max-width:480px){body:has(> main#main-content > .hero) .section{padding-top:32px!important;padding-bottom:32px!important}body:has(> main#main-content > .hero) .hero{min-height:480px!important}body:has(> main#main-content > .hero) .hero h1{font-size:34px!important}body:has(> main#main-content > .hero) .advantage-section .projects-mini .project-row img{height:auto!important;min-height:0!important;aspect-ratio:4/3!important}}

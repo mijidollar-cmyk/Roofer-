@@ -1,0 +1,36 @@
+# Hyper Roof
+
+> Independent roofing information for homeowners and property owners in Miami-Dade County, Florida.
+
+Hyper Roof publishes educational information about roof repair, roof replacement, roof inspections, storm damage, roofing materials, and choosing roofing contractors. The website is an informational resource; it does not currently accept estimate requests or dispatch emergency roofing services.
+
+## Main pages
+
+- [Home](https://roofer.pennycedis.workers.dev/)
+- [About](https://roofer.pennycedis.workers.dev/about.html)
+- [Roof repair in Miami](https://roofer.pennycedis.workers.dev/roof-repair-miami.html)
+- [Roof replacement in Miami](https://roofer.pennycedis.workers.dev/roof-replacement-miami.html)
+- [Emergency roof repair information](https://roofer.pennycedis.workers.dev/emergency-roof-repair-miami.html)
+- [Commercial roofing in Miami](https://roofer.pennycedis.workers.dev/commercial-roofing-miami.html)
+- [Roofing articles](https://roofer.pennycedis.workers.dev/blog.html)
+- [Contact and estimate status](https://roofer.pennycedis.workers.dev/contact.html)
+- [Privacy policy](https://roofer.pennycedis.workers.dev/privacy-policy.html)
+- [Terms and conditions](https://roofer.pennycedis.workers.dev/terms-and-conditions.html)
+- [XML sitemap](https://roofer.pennycedis.workers.dev/sitemap.xml)
+
+## Topics covered
+
+- Roof repair and replacement considerations
+- Florida roof inspections and storm preparation
+- Hurricane and wind-related roof damage
+- Common roofing materials used in South Florida
+- Questions to ask when comparing roofing contractors
+- General information about permits, estimates, and warranties
+
+## Geographic focus
+
+Miami-Dade County, Florida, United States.
+
+## Important context
+
+Content is for general educational purposes and is not a substitute for a qualified roofing professional's on-site assessment, current local code guidance, or emergency services. Verify contractor licensing, insurance, permits, and written project terms independently.

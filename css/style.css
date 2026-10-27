@@ -389,3 +389,8 @@ body:has(> main#main-content > .hero) .hero-image{
 .site-footer .footer-brand p {
   color: #405264 !important;
 }
+
+/* Lighthouse contrast fixes: service-strip copy and blog button on light backgrounds. */
+.service-strip .service-grid p{color:#e0eaf2!important}
+.home-blog .blog-view{color:#062440!important;border-color:#062440!important}
+.home-blog .blog-view:hover,.home-blog .blog-view:focus-visible{color:#062440!important;background:#ffc400!important;border-color:#ffc400!important}

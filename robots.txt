@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://roofer.miami/sitemap.xml
+Sitemap: https://roofer.pennycedis.workers.dev/sitemap.xml

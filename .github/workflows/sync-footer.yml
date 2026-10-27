@@ -46,10 +46,10 @@ jobs:
               'storm-damage-roof-repair-miami.html',
           }
 
-          topbar = '<div class="topbar"><div class="container-fluid topbar-inner"><span aria-hidden="true">📍</span><span>1234 Example Ave, Miami, FL 33131</span><a href="tel:+13055550147" aria-label="Call Hyper Roof">☎ (305) 555-0147</a></div></div>'
+          topbar = '<div class="topbar"><div class="container-fluid topbar-inner"><span aria-hidden="true">📍</span><span>Serving Miami-Dade County, Florida</span></div></div>'
           skip = '<a class="skip-link" href="#main-content">Skip to main content</a>'
           shared_blog_header = topbar + '''
-          <header class="site-header"><div class="container header-inner"><a class="brand" href="index.html" aria-label="Hyper Roof home"><span class="brand-mark" aria-hidden="true">⌂</span><span><strong>Hyper <b>Roof</b></strong><small>STRONGER ROOFS. BETTER TOMORROW.</small></span></a><nav id="primary-navigation" class="main-nav" aria-label="Primary navigation"><a href="index.html">Home</a><a href="index.html#about">About Us</a><a href="index.html#services">Services</a><a href="index.html#projects">Projects</a><a href="index.html#faq">FAQ</a><a href="blog.html" class="active" aria-current="page">Blog</a><a href="index.html#contact">Contact</a></nav><a class="btn-yellow header-cta" href="contact.html" aria-label="Request roofing help">Request Roofing Help <span aria-hidden="true">→</span></a><button id="nav-toggle" class="nav-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="primary-navigation">☰</button></div></header>'''
+          <header class="site-header"><div class="container header-inner"><a class="brand" href="index.html" aria-label="Hyper Roof home"><span class="brand-mark" aria-hidden="true">⌂</span><span><strong>Hyper <b>Roof</b></strong><small>STRONGER ROOFS. BETTER TOMORROW.</small></span></a><nav id="primary-navigation" class="main-nav" aria-label="Primary navigation"><a href="index.html">Home</a><a href="index.html#about">About Us</a><a href="index.html#services">Services</a><a href="index.html#projects">Projects</a><a href="index.html#faq">FAQ</a><a href="blog.html" class="active" aria-current="page">Blog</a><a href="index.html#contact">Contact</a></nav><a class="btn-yellow header-cta" href="index.html#services" aria-label="Explore Hyper Roof roofing information">Explore Roofing Services <span aria-hidden="true">→</span></a><button id="nav-toggle" class="nav-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="primary-navigation">☰</button></div></header>'''
 
           for path in Path('.').glob('*.html'):
               if path.name == 'footer.html':
@@ -84,5 +84,5 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add '*.html' 'css/header-stable.css' 'css/responsive-audit.css' 'css/blog-articles.css' '.github/workflows/sync-footer.yml'
           git diff --cached --quiet && exit 0
-          git commit -m "Sync temporary Miami contact details"
+          git commit -m "Sync truthful shared site layout"
           git push

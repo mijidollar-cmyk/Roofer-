@@ -1,2 +1,1 @@
-/* Hyper Roof — final responsive layer. The overlap-fix stylesheet is intentionally imported here so it loads after the legacy style/header layers. */
-@import url("overlap-fix.css?v=20261014-1");
+/* Hyper Roof — responsive audit layer. Final layout overrides load from overlap-fix.css directly in HTML. */\n

@@ -377,3 +377,15 @@ body:has(> main#main-content > .hero) .hero-image{
 @media(max-width:480px){
   body:has(> main#main-content > .hero) .hero{min-height:460px!important}
 }
+
+
+/* Accessibility: strengthen low-contrast metadata and muted text. */
+.home-blog .blog-date,
+.blog-date,
+.insured-badge small,
+.testimonial-grid p,
+.benefits span,
+.service-grid p,
+.site-footer .footer-brand p {
+  color: #405264 !important;
+}

@@ -150,6 +150,44 @@ jobs:
                   p.write_text(new)
           PY
 
+      - name: Optimize existing WebP images and remove empty render-blocking stylesheet
+        run: |
+          python -m pip install --quiet Pillow
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          import re
+
+          # Re-encode WebP assets to a practical quality and cap oversized
+          # source images at 1600px wide. Keep the existing filenames stable.
+          for p in Path('images').rglob('*.webp'):
+              try:
+                  with Image.open(p) as im:
+                      im.load()
+                      if im.mode not in ('RGB', 'RGBA'):
+                          im = im.convert('RGB')
+                      if im.width > 1600:
+                          height = round(im.height * 1600 / im.width)
+                          im = im.resize((1600, height), Image.Resampling.LANCZOS)
+                      im.save(p, 'WEBP', quality=74, method=6)
+              except Exception as e:
+                  print(f'Skipping WebP optimization for {p}: {e}')
+
+          # responsive-audit.css is an empty placeholder. Remove its extra
+          # render-blocking request; keep overlap-fix.css as the final layout layer.
+          for p in Path('.').rglob('*.html'):
+              if any(part.startswith('.') for part in p.parts):
+                  continue
+              s = p.read_text()
+              s = re.sub(r'\s*<link\s+rel=["']stylesheet["']\s+href=["']css/responsive-audit\.css(?:\?[^"']*)?["']\s*/?>', '', s, flags=re.I)
+              marker = '<link rel="stylesheet" href="css/overlap-fix.css?v=20261014-1">'
+              if marker not in s and 'css/overlap-fix.css' not in s:
+                  insert_after = re.search(r'<link\s+rel=["']stylesheet["']\s+href=["']css/header-stable\.css[^"']*["']\s*/?>', s, re.I)
+                  if insert_after:
+                      s = s[:insert_after.end()] + '\n  ' + marker + s[insert_after.end():]
+              p.write_text(s)
+          PY
+
       - name: Commit changes
         run: |
           git config user.name 'github-actions[bot]'

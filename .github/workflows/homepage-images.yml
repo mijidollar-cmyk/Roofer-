@@ -94,6 +94,27 @@ jobs:
           p.write_text(s)
           PY
 
+      - name: Remove chained CSS import to shorten render-blocking request chain
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          # The @import inside responsive-audit.css is discovered only after
+          # that stylesheet downloads. Link the final layer directly from HTML
+          # so the browser can request both stylesheets in parallel.
+          css = Path('css/responsive-audit.css')
+          css.write_text('/* Hyper Roof — responsive audit layer. Final layout overrides load from overlap-fix.css directly in HTML. */\\n')
+
+          for p in Path('.').rglob('*.html'):
+              if any(part.startswith('.') for part in p.parts):
+                  continue
+              s = p.read_text()
+              marker = '<link rel="stylesheet" href="css/responsive-audit.css?v=20261013-2">'
+              replacement = marker + '\\n  <link rel="stylesheet" href="css/overlap-fix.css?v=20261014-1">'
+              if marker in s and 'css/overlap-fix.css?v=20261014-1' not in s:
+                  p.write_text(s.replace(marker, replacement))
+          PY
+
       - name: Convert local JPEG assets to optimized WebP
         run: |
           python -m pip install --quiet Pillow

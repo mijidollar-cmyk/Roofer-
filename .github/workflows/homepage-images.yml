@@ -179,10 +179,10 @@ jobs:
               if any(part.startswith('.') for part in p.parts):
                   continue
               s = p.read_text()
-              s = re.sub(r'\s*<link\s+rel=["']stylesheet["']\s+href=["']css/responsive-audit\.css(?:\?[^"']*)?["']\s*/?>', '', s, flags=re.I)
+              s = re.sub(r"""\s*<link\s+rel=["']stylesheet["']\s+href=["']css/responsive-audit\.css(?:\?[^"']*)?["']\s*/?>""", '', s, flags=re.I)
               marker = '<link rel="stylesheet" href="css/overlap-fix.css?v=20261014-1">'
               if marker not in s and 'css/overlap-fix.css' not in s:
-                  insert_after = re.search(r'<link\s+rel=["']stylesheet["']\s+href=["']css/header-stable\.css[^"']*["']\s*/?>', s, re.I)
+                  insert_after = re.search(r"""<link\s+rel=["']stylesheet["']\s+href=["']css/header-stable\.css[^"']*["']\s*/?>""", s, re.I)
                   if insert_after:
                       s = s[:insert_after.end()] + '\n  ' + marker + s[insert_after.end():]
               p.write_text(s)

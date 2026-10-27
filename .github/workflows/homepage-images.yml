@@ -5,6 +5,11 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/homepage-images.yml'
+      - 'images/**'
+      - '*.jpg'
+      - '*.jpeg'
+      - '*.html'
+      - 'css/**'
   workflow_dispatch:
 
 permissions:
@@ -87,6 +92,41 @@ jobs:
           if '.projects-mini .project-row img{' not in s:
               s += additions
           p.write_text(s)
+          PY
+
+      - name: Convert local JPEG assets to optimized WebP
+        run: |
+          python -m pip install --quiet Pillow
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          import re
+
+          # Create optimized WebP versions of local JPEG assets while retaining
+          # original JPEGs as a fallback in the repository.
+          for p in list(Path('.').rglob('*')):
+              if not p.is_file() or p.suffix.lower() not in {'.jpg', '.jpeg'}:
+                  continue
+              if any(part.startswith('.') for part in p.parts):
+                  continue
+              try:
+                  with Image.open(p) as im:
+                      if im.mode not in ('RGB', 'RGBA'):
+                          im = im.convert('RGB')
+                      out = p.with_suffix('.webp')
+                      im.save(out, 'WEBP', quality=78, method=6)
+              except Exception as e:
+                  print(f'Skipping {p}: {e}')
+
+          # Point local HTML/CSS image references at WebP assets.
+          pattern = re.compile(r'''(?P<quote>["'])(?P<path>(?!https?://)[^"']+?)\.(?:jpg|jpeg)(?P<suffix>(?:\?[^"']*)?)(?P=quote)''', re.I)
+          for p in [*Path('.').rglob('*.html'), *Path('.').rglob('*.css')]:
+              if any(part.startswith('.') for part in p.parts):
+                  continue
+              old = p.read_text()
+              new = pattern.sub(lambda m: f"{m.group('quote')}{m.group('path')}.webp{m.group('suffix')}{m.group('quote')}", old)
+              if new != old:
+                  p.write_text(new)
           PY
 
       - name: Commit changes

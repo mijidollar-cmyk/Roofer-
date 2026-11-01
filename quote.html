@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Request a roofing quote in Miami-Dade. Send your name, phone, ZIP code, roof type and project details for a free quote request.">
+<meta name="theme-color" content="#062440">
+<link rel="canonical" href="https://roofer.pennycedis.workers.dev/quote.html">
+<title>Request a Free Roofing Quote | Hyper Roof</title>
+<style>
+:root{--navy:#062440;--yellow:#ffc400;--text:#17283a;--muted:#5c6b79;--border:#d5dfe7;--bg:#f4f7fa;--white:#fff;--error:#a42626;--success:#176b3a}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.5}.page{min-height:100vh;padding:24px 14px 56px}.wrap{width:100%;max-width:760px;margin:auto}.top{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:24px}.brand{color:var(--navy);font-weight:900;text-decoration:none;font-size:22px}.brand b{color:#00527d}.call{color:var(--navy);font-weight:800;text-decoration:none}.hero{text-align:center;margin-bottom:22px}.eyebrow{display:inline-block;margin-bottom:8px;padding:5px 11px;border-radius:999px;background:#e8f0f5;color:var(--navy);font-size:12px;font-weight:900;letter-spacing:.04em}.hero h1{margin:0 0 10px;color:var(--navy);font-size:clamp(30px,7vw,46px);line-height:1.08;letter-spacing:-.025em}.hero p{max-width:620px;margin:0 auto;color:var(--muted);font-size:16px}.card{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:22px;box-shadow:0 12px 35px rgba(6,36,64,.08)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:17px}.field{display:flex;flex-direction:column}.full{grid-column:1/-1}label{margin-bottom:7px;color:var(--navy);font-size:14px;font-weight:800}input,select,textarea{width:100%;min-height:50px;padding:13px 14px;border:1px solid #c6d1da;border-radius:9px;background:#fff;color:var(--text);font:inherit;outline:0}textarea{min-height:135px;resize:vertical}input:focus,select:focus,textarea:focus{border-color:var(--navy);box-shadow:0 0 0 3px rgba(6,36,64,.12)}.help{margin-top:5px;color:var(--muted);font-size:12px}.required{color:#b42318}.submit{width:100%;min-height:56px;margin-top:20px;border:0;border-radius:9px;background:var(--yellow);color:#111827;font:inherit;font-size:17px;font-weight:900;cursor:pointer}.submit:hover{filter:brightness(.95)}.submit:disabled{opacity:.65;cursor:not-allowed}.status{display:none;margin-top:15px;padding:13px 14px;border-radius:8px;font-size:14px;font-weight:700}.status.success{display:block;background:#eaf7ef;border:1px solid #b9e2c8;color:var(--success)}.status.error{display:block;background:#fff0f0;border:1px solid #efbcbc;color:var(--error)}.privacy{margin:14px 0 0;color:var(--muted);font-size:12px;text-align:center}.honeypot{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}.back{text-align:center;margin-top:17px;font-size:13px}.back a{color:var(--navy);font-weight:800}@media(max-width:620px){.page{padding:18px 12px 40px}.top{align-items:flex-start}.call{font-size:14px}.card{padding:17px;border-radius:13px}.grid{grid-template-columns:1fr;gap:15px}.full{grid-column:auto}input,select,textarea{font-size:16px}.hero p{font-size:15px}}
+</style>
+</head>
+<body>
+<main class="page">
+<div class="wrap">
+<header class="top"><a class="brand" href="index.html" aria-label="Hyper Roof home">Hyper <b>Roof</b></a><a class="call" href="tel:+19342212911">Call (934) 221-2911</a></header>
+<section class="hero" aria-labelledby="quote-title"><span class="eyebrow">FREE ROOFING QUOTE</span><h1 id="quote-title">Request a Roofing Quote</h1><p>Tell us about your roofing project. Submit the short form and we'll follow up with you about your request.</p></section>
+<section class="card" aria-label="Roofing quote request form">
+<form id="quote-form" novalidate>
+<div class="grid">
+<div class="field"><label for="name">Full Name <span class="required">*</span></label><input id="name" name="name" type="text" autocomplete="name" maxlength="100" required placeholder="John Smith"></div>
+<div class="field"><label for="phone">Phone Number <span class="required">*</span></label><input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="25" required placeholder="(305) 555-0123"></div>
+<div class="field"><label for="zip">ZIP Code <span class="required">*</span></label><input id="zip" name="zip" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="5" pattern="[0-9]{5}" required placeholder="33136"><span class="help">Enter the ZIP code for the property.</span></div>
+<div class="field"><label for="roofType">Roof Type <span class="required">*</span></label><select id="roofType" name="roofType" required><option value="">Select roof type</option><option>Shingle</option><option>Tile</option><option>Metal</option><option>Flat</option><option>Other / Not sure</option></select></div>
+<div class="field full"><label for="message">Message</label><textarea id="message" name="message" maxlength="2000" placeholder="Tell us about leaks, storm damage, roof age, repair needs, or anything else we should know."></textarea><span class="help">Up to 2,000 characters.</span></div>
+<div class="honeypot" aria-hidden="true"><label for="website">Website</label><input id="website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+</div>
+<button class="submit" id="submit" type="submit">Get My Free Roofing Quote</button>
+<div id="status" class="status" role="status" aria-live="polite"></div>
+<p class="privacy">Your information is used to respond to this roofing quote request. Please do not submit passwords or other sensitive information.</p>
+</form>
+</section>
+<p class="back"><a href="index.html">← Back to Hyper Roof</a></p>
+</div>
+</main>
+<script>
+const form=document.getElementById('quote-form');const button=document.getElementById('submit');const status=document.getElementById('status');
+function showStatus(text,type){status.textContent=text;status.className='status '+type}
+form.addEventListener('submit',async e=>{e.preventDefault();if(!form.checkValidity()){form.reportValidity();return}const phone=document.getElementById('phone').value.trim();const digits=phone.replace(/\D/g,'');if(digits.length<10||digits.length>15){showStatus('Please enter a valid phone number.','error');return}button.disabled=true;button.textContent='Sending Request…';status.className='status';try{const response=await fetch('/api/quote',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:document.getElementById('name').value.trim(),phone,zip:document.getElementById('zip').value.trim(),roofType:document.getElementById('roofType').value,message:document.getElementById('message').value.trim(),website:document.getElementById('website').value})});let data={};try{data=await response.json()}catch{}if(!response.ok)throw new Error(data.error||'Unable to send your request right now.');form.reset();showStatus('Thank you! Your quote request has been received. We will contact you shortly.','success')}catch(err){showStatus(err.message||'Something went wrong. Please call us directly.','error')}finally{button.disabled=false;button.textContent='Get My Free Roofing Quote'}});
+</script>
+</body>
+</html>

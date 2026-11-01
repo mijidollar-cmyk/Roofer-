@@ -1,59 +1,57 @@
 # Hyper Roof
 
-Static roofing website prepared for Cloudflare Pages.
+Static roofing website with a Cloudflare Worker entry point and quote-request API.
 
-## Cloudflare Pages settings
+## Cloudflare Workers deployment (for roofer.pennycedis.workers.dev)
 
-- Production branch: `main`
-- Framework preset: `None`
-- Build command: `exit 0`
-- Build output directory: `.`
-- Root directory: `/`
-- Make sure `index.html` is at the repository root.
+The repository includes:
+- `wrangler.jsonc` — Worker name, entry point, and static asset configuration.
+- `worker.js` — serves the quote API and hands other requests to static assets.
+- `functions/api/quote.js` — validates quote submissions and sends them through Resend.
+- `.assetsignore` — keeps Worker source/configuration files out of public static assets.
 
-After deployment, Cloudflare Pages provides a `*.pages.dev` URL. If the URL is not appearing, open Workers & Pages > your project > Deployments and check the latest Build log.
+Connect this repository to the existing **Worker** in Cloudflare Workers & Pages. Use:
+- Git branch: `main`
+- Root directory: repository root (`/`)
+- Build command: leave blank
+- Deploy command: `npx wrangler deploy`
+- Preview command: leave the Cloudflare default
 
-## Roofing quote form
+The Worker name in `wrangler.jsonc` is `roofer` and must match the existing Worker name. If the Cloudflare project uses a different name, update the `name` field before deploying.
 
-The repository now includes:
+Workers Builds uses a separate build step (optional) and deploy step (default `npx wrangler deploy`). See https://developers.cloudflare.com/workers/ci-cd/builds/configuration/.
 
-- `quote.html` — mobile-responsive quote form.
-- `functions/api/quote.js` — Cloudflare Pages Function that validates the submission server-side and sends the lead through Resend.
+## Quote form configuration
 
-The form posts to `/api/quote`, so the Resend API key is never exposed to visitors.
-
-### Required Cloudflare variables/secrets
-
-In the Cloudflare Pages project, open **Settings → Variables and Secrets** and add:
-
+In Cloudflare, open the Worker > Settings > Variables and Secrets and add:
 - `RESEND_API_KEY` — Secret containing the Resend API key.
-- `QUOTE_EMAIL` — Variable containing the email address that should receive quote leads.
+- `QUOTE_EMAIL` — Variable containing the inbox that should receive quote requests.
 - `EMAIL_FROM` — Variable containing a verified Resend sender, for example `Hyper Roof <quotes@yourdomain.com>`.
 
-Do not put `RESEND_API_KEY` in GitHub, HTML, JavaScript, or a plaintext `vars` configuration. Cloudflare recommends Worker/Pages secrets for API keys and other sensitive values. See: https://developers.cloudflare.com/workers/configuration/secrets/
+Do not commit the Resend API key to GitHub or put it in browser JavaScript.
 
 ### Resend setup
 
 1. Create a Resend account.
-2. Add and verify the sending domain you will use for `EMAIL_FROM`.
+2. Add and verify the sending domain used by `EMAIL_FROM`.
 3. Create a Resend API key.
-4. Add the API key as the Cloudflare secret `RESEND_API_KEY`.
-5. Set `QUOTE_EMAIL` to the inbox where roofing leads should arrive.
-6. Set `EMAIL_FROM` to a verified sender on the Resend domain.
-7. Redeploy the Pages project.
+4. Add it to Cloudflare as the `RESEND_API_KEY` secret.
+5. Set `QUOTE_EMAIL` and `EMAIL_FROM` in Worker runtime settings.
+6. Redeploy the Worker after configuration.
 
-### Test
+The form posts to `POST /api/quote`. Test it with a sample request after deployment and confirm the message arrives at `QUOTE_EMAIL`.
 
-Open `/quote.html`, submit a test lead, and confirm it arrives at `QUOTE_EMAIL`.
+## Alternative: Cloudflare Pages
 
-The API endpoint is `POST /api/quote`.
+If this repository is connected to a **Pages** project instead of a Worker, use:
+- Production branch: `main`
+- Framework preset: `None`
+- Build command: `exit 0`
+- Build output directory: `.`
+- Root directory: repository root (`/`)
 
-The form includes server-side validation and a honeypot field for basic bot filtering. For high-volume pay-per-call traffic, add Cloudflare Turnstile and/or rate limiting before scaling the form.
+Pages uses `functions/api/quote.js` as a Pages Function. Pages projects normally receive a `*.pages.dev` URL; the Worker configuration above is intended for the `workers.dev` deployment.
 
 ## Important
 
-The complete binary-asset package is available as the fixed website ZIP from the project workspace. The GitHub connector used for this repository does not accept local file paths for binary uploads, so binary assets must be uploaded through GitHub's web interface or deployed directly to Cloudflare Pages.
-
-## Deployment
-
-Latest site changes are committed to `main` and are ready for the connected Cloudflare Pages deployment.
+The address and phone number currently shown on the website are clearly marked temporary placeholders. Replace them with genuine business contact details before advertising or launch.

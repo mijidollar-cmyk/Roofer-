@@ -27,7 +27,7 @@
 </head>
 <body>
 <a class="skip-link" href="#main-content">Skip to main content</a>
-<div class="topbar"><div class="container-fluid topbar-inner"><span aria-hidden="true">📍</span><span>Serving Miami-Dade County, Florida</span></div></div>
+<div class="topbar"><div class="container-fluid topbar-inner"><span aria-hidden="true">📍</span><span>Serving Miami-Dade County, Florida</span><a class="topbar-phone" href="tel:+19342212911" aria-label="Call Hyper Roof at 934 221 2911">Call: (934) 221-2911</a></div></div>
 <header class="site-header"><div class="container header-inner"><a class="brand" href="index.html" aria-label="Hyper Roof home"><span class="brand-mark" aria-hidden="true">⌂</span><span><strong>Hyper <b>Roof</b></strong><small>MIAMI ROOFING INFORMATION &amp; QUOTE REQUESTS</small></span></a><nav id="primary-navigation" class="main-nav" aria-label="Primary navigation"><a href="index.html">Home</a><a href="about.html">About Us</a><a href="index.html#services">Services</a><a href="index.html#projects">Projects</a><a href="index.html#faq">FAQ</a><a href="/blog">Blog</a><a href="contact.html">Contact</a></nav><a class="btn-yellow header-cta" href="quote.html">Request a Quote <span aria-hidden="true">→</span></a><button id="nav-toggle" class="nav-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="primary-navigation">☰</button></div></header>
 <main id="main-content" class="page"><div class="wrap">
 
@@ -57,5 +57,6 @@ function showStatus(text,type){status.textContent=text;status.className='status 
 form.addEventListener('submit',async e=>{e.preventDefault();if(!form.checkValidity()){form.reportValidity();return}const phone=document.getElementById('phone').value.trim();const digits=phone.replace(/\D/g,'');if(digits.length<10||digits.length>15){showStatus('Please enter a valid phone number.','error');return}button.disabled=true;button.textContent='Sending…';status.className='status';try{const response=await fetch('/api/quote',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:document.getElementById('name').value.trim(),phone,zip:document.getElementById('zip').value.trim(),roofType:document.getElementById('roofType').value,message:document.getElementById('message').value.trim(),website:document.getElementById('website').value})});let data={};try{data=await response.json()}catch{}if(!response.ok)throw new Error(data.error||'Unable to submit your request right now.');form.reset();showStatus('Thank you. Your request has been received and will be reviewed for follow-up.','success')}catch(err){showStatus(err.message||'Something went wrong. Please try again.','error')}finally{button.disabled=false;button.textContent='Submit Quote Request'}});
 </script>
 <script src="js/mobile-menu.js" defer></script>
+<a class="floating-call" href="tel:+19342212911" aria-label="Call Hyper Roof now">☎ <span>Call Now</span><strong>(934) 221-2911</strong></a>
 </body>
 </html>

@@ -12,11 +12,25 @@
 :root{--navy:#062440;--yellow:#ffc400;--text:#17283a;--muted:#5c6b79;--border:#d5dfe7;--bg:#f4f7fa;--white:#fff;--error:#a42626;--success:#176b3a}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.5}.page{min-height:100vh;padding:24px 14px 56px}.wrap{width:100%;max-width:760px;margin:auto}.top{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:24px}.brand{color:var(--navy);font-weight:900;text-decoration:none;font-size:22px}.brand b{color:#00527d}.back-top{color:var(--navy);font-weight:800;text-decoration:none}.hero{text-align:center;margin-bottom:22px}.eyebrow{display:inline-block;margin-bottom:8px;padding:5px 11px;border-radius:999px;background:#e8f0f5;color:var(--navy);font-size:12px;font-weight:900;letter-spacing:.04em}.hero h1{margin:0 0 10px;color:var(--navy);font-size:clamp(30px,7vw,46px);line-height:1.08;letter-spacing:-.025em}.hero p{max-width:620px;margin:0 auto;color:var(--muted);font-size:16px}.card{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:22px;box-shadow:0 12px 35px rgba(6,36,64,.08)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:17px}.field{display:flex;flex-direction:column}.full{grid-column:1/-1}label{margin-bottom:7px;color:var(--navy);font-size:14px;font-weight:800}input,select,textarea{width:100%;min-height:50px;padding:13px 14px;border:1px solid #c6d1da;border-radius:9px;background:#fff;color:var(--text);font:inherit;outline:0}textarea{min-height:135px;resize:vertical}input:focus,select:focus,textarea:focus{border-color:var(--navy);box-shadow:0 0 0 3px rgba(6,36,64,.12)}.help{margin-top:5px;color:var(--muted);font-size:12px}.required{color:#b42318}.submit{width:100%;min-height:56px;margin-top:20px;border:0;border-radius:9px;background:var(--yellow);color:#111827;font:inherit;font-size:17px;font-weight:900;cursor:pointer}.submit:hover{filter:brightness(.95)}.submit:disabled{opacity:.65;cursor:not-allowed}.status{display:none;margin-top:15px;padding:13px 14px;border-radius:8px;font-size:14px;font-weight:700}.status.success{display:block;background:#eaf7ef;border:1px solid #b9e2c8;color:var(--success)}.status.error{display:block;background:#fff0f0;border:1px solid #efbcbc;color:var(--error)}.privacy{margin:14px 0 0;color:var(--muted);font-size:12px;text-align:center}.honeypot{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}.notice{margin:0 0 18px;padding:13px 14px;background:#f8fafc;border:1px solid #dfe7ed;border-radius:9px;color:#405264;font-size:13px}.back{text-align:center;margin-top:17px;font-size:13px}.back a{color:var(--navy);font-weight:800}@media(max-width:620px){.page{padding:18px 12px 40px}.top{align-items:flex-start}.back-top{font-size:14px}.card{padding:17px;border-radius:13px}.grid{grid-template-columns:1fr;gap:15px}.full{grid-column:auto}input,select,textarea{font-size:16px}.hero p{font-size:15px}}
 </style>
-  <link rel="stylesheet" href="css/header-stable.css?v=20261013-3">\n  <link rel="stylesheet" href="css/overlap-fix.css?v=20261014-1">
+  <link rel="stylesheet" href="css/header-stable.css?v=20261013-3">
+  <link rel="stylesheet" href="css/overlap-fix.css?v=20261014-1">
+
+<link rel="stylesheet" href="css/style.css?v=20261103-2">
+<link rel="stylesheet" href="css/header-stable.css?v=20261103-2">
+<link rel="stylesheet" href="css/overlap-fix.css?v=20261103-2">
+<style>
+.page .hero{min-height:0!important;height:auto!important;position:static!important;display:block!important;overflow:visible!important;background:transparent!important;color:var(--text)!important;align-items:initial!important;padding:0!important}
+.page .hero h1{font-size:clamp(30px,7vw,46px)!important;line-height:1.08!important;color:var(--navy)!important;margin:0 0 10px!important;max-width:none!important}
+.page .hero p{max-width:620px!important;color:var(--muted)!important;font-size:16px!important;line-height:1.5!important}
+.page .hero .eyebrow{color:var(--navy)!important}
+</style>
 </head>
 <body>
-<main class="page"><div class="wrap">
-<header class="top"><a class="brand" href="index.html" aria-label="Hyper Roof home">Hyper <b>Roof</b></a><a class="back-top" href="contact.html">Contact</a></header>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<div class="topbar"><div class="container-fluid topbar-inner"><span aria-hidden="true">📍</span><span>Serving Miami-Dade County, Florida</span></div></div>
+<header class="site-header"><div class="container header-inner"><a class="brand" href="index.html" aria-label="Hyper Roof home"><span class="brand-mark" aria-hidden="true">⌂</span><span><strong>Hyper <b>Roof</b></strong><small>MIAMI ROOFING INFORMATION &amp; QUOTE REQUESTS</small></span></a><nav id="primary-navigation" class="main-nav" aria-label="Primary navigation"><a href="index.html">Home</a><a href="about.html">About Us</a><a href="index.html#services">Services</a><a href="index.html#projects">Projects</a><a href="index.html#faq">FAQ</a><a href="/blog">Blog</a><a href="contact.html">Contact</a></nav><a class="btn-yellow header-cta" href="quote.html">Request a Quote <span aria-hidden="true">→</span></a><button id="nav-toggle" class="nav-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="primary-navigation">☰</button></div></header>
+<main id="main-content" class="page"><div class="wrap">
+
 <section class="hero" aria-labelledby="quote-title"><span class="eyebrow">ROOFING QUOTE REQUEST</span><h1 id="quote-title">Tell Us About Your Roofing Project</h1><p>Share a few details about the property and the roofing work you are considering. We use the information you submit to respond to your inquiry.</p></section>
 <section class="card" aria-label="Roofing quote request form">
 <p class="notice"><strong>Please note:</strong> This is an inquiry form, not a contract or guarantee of service. Submitting the form does not guarantee a quote, price, financing, insurance coverage, contractor availability or project acceptance.</p>
@@ -31,14 +45,17 @@
 </div>
 <button class="submit" id="submit" type="submit">Submit Quote Request</button>
 <div id="status" class="status" role="status" aria-live="polite"></div>
-<p class="privacy">We use the information you submit to respond to this inquiry. Please do not submit passwords, payment information or other sensitive information.</p>
+<p class="privacy">We use the information you submit to respond to this inquiry. Please do not submit passwords, payment information or other sensitive information. Read our <a href="privacy-policy.html">Privacy Policy</a>.</p>
 </form>
 </section>
 <p class="back"><a href="index.html">← Back to Hyper Roof</a></p>
 </div></main>
+<footer class="site-footer"><div class="container"><div class="footer-grid"><div class="footer-brand"><strong>Hyper Roof</strong><p>Miami-Dade roofing information and quote-request resources.</p><p><strong>Service area:</strong> Miami-Dade County, Florida</p><p><a href="contact.html">Contact</a> · <a href="quote.html">Request a quote</a></p></div><nav aria-label="Footer roofing services"><strong>Roofing Services</strong><ul><li><a href="roof-repair-miami.html">Roof Repair</a></li><li><a href="roof-replacement-miami.html">Roof Replacement</a></li><li><a href="emergency-roof-repair-miami.html">Emergency Roofing</a></li><li><a href="commercial-roofing-miami.html">Commercial Roofing</a></li><li><a href="roof-inspection-miami.html">Roof Inspections</a></li></ul></nav><nav aria-label="Footer website links"><strong>Explore</strong><ul><li><a href="index.html">Home</a></li><li><a href="about.html">About Us</a></li><li><a href="/blog">Blog</a></li><li><a href="contact.html">Contact</a></li><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="terms-and-conditions.html">Terms &amp; Conditions</a></li></ul></nav></div><div class="footer-bottom"><small>© 2026 Hyper Roof. All rights reserved.</small><small>Serving Miami-Dade County, Florida</small></div></div></footer>
 <script>
 const form=document.getElementById('quote-form');const button=document.getElementById('submit');const status=document.getElementById('status');
 function showStatus(text,type){status.textContent=text;status.className='status '+type}
 form.addEventListener('submit',async e=>{e.preventDefault();if(!form.checkValidity()){form.reportValidity();return}const phone=document.getElementById('phone').value.trim();const digits=phone.replace(/\D/g,'');if(digits.length<10||digits.length>15){showStatus('Please enter a valid phone number.','error');return}button.disabled=true;button.textContent='Sending…';status.className='status';try{const response=await fetch('/api/quote',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:document.getElementById('name').value.trim(),phone,zip:document.getElementById('zip').value.trim(),roofType:document.getElementById('roofType').value,message:document.getElementById('message').value.trim(),website:document.getElementById('website').value})});let data={};try{data=await response.json()}catch{}if(!response.ok)throw new Error(data.error||'Unable to submit your request right now.');form.reset();showStatus('Thank you. Your request has been received and will be reviewed for follow-up.','success')}catch(err){showStatus(err.message||'Something went wrong. Please try again.','error')}finally{button.disabled=false;button.textContent='Submit Quote Request'}});
 </script>
-</body></html>
+<script src="js/mobile-menu.js" defer></script>
+</body>
+</html>

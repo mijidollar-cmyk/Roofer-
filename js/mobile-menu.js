@@ -9,6 +9,7 @@
       "roof-replacement-cost-miami.html",
       "roof-repair-vs-replacement-miami.html",
       "miami-roof-inspection-guide.html",
+      "miami-roofing-resource-center.html",
       "storm-damage-roof-repair-miami.html",
       "hurricane-roof-damage-miami.html",
       "roof-insurance-claims-miami.html",

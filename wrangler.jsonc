@@ -3,6 +3,12 @@
   "name": "roofer",
   "main": "worker.js",
   "compatibility_date": "2026-11-01",
+  "routes": [
+    {
+      "pattern": "roof.miami",
+      "custom_domain": true
+    }
+  ],
   "assets": {
     "directory": "./",
     "binding": "ASSETS",

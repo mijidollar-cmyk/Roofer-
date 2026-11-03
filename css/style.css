@@ -394,3 +394,12 @@ body:has(> main#main-content > .hero) .hero-image{
 .service-strip .service-grid p{color:#e0eaf2!important}
 .home-blog .blog-view{color:#062440!important;border-color:#062440!important}
 .home-blog .blog-view:hover,.home-blog .blog-view:focus-visible{color:#062440!important;background:#ffc400!important;border-color:#ffc400!important}
+
+/* Prominent click-to-call contact options */
+.topbar-phone{display:inline-flex!important;align-items:center;min-height:38px!important;margin-left:auto!important;padding:0 12px;color:#fff!important;font-size:14px;font-weight:800;text-decoration:none;white-space:nowrap;border-left:1px solid #ffffff35}
+.topbar-phone:hover{text-decoration:underline}
+.floating-call{position:fixed;right:22px;bottom:22px;z-index:1000;display:flex;align-items:center;justify-content:center;gap:9px;min-height:56px;padding:10px 18px;background:#ffc400;color:#111827!important;border:2px solid #062440;border-radius:5px;box-shadow:0 5px 20px #0004;text-decoration:none;font-size:15px;font-weight:800}
+.floating-call span{white-space:nowrap}.floating-call strong{white-space:nowrap}
+.floating-call:hover{background:#ffd633;transform:translateY(-2px)}
+@media(max-width:760px){.topbar-inner{justify-content:space-between}.topbar-phone{margin-left:auto!important;padding:0 0 0 8px;font-size:13px}.floating-call{left:14px;right:14px;bottom:12px;width:auto;min-height:56px;box-shadow:0 4px 18px #0005}.site-footer{padding-bottom:74px}}
+@media(prefers-reduced-motion:reduce){.floating-call{transition:none}}

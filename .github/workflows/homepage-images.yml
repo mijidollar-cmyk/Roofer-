@@ -8,8 +8,6 @@ on:
       - 'images/**'
       - '*.jpg'
       - '*.jpeg'
-      - '*.html'
-      - 'css/**'
   workflow_dispatch:
 
 permissions:

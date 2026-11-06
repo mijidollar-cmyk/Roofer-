@@ -1,36 +1,40 @@
-# Hyper Roof
+# Hyper Roof Miami
 
-> Independent roofing information for homeowners and property owners in Miami-Dade County, Florida.
+> Roofing contractor serving residential and commercial property owners across Miami-Dade County, Florida.
 
-Hyper Roof publishes educational information about roof repair, roof replacement, roof inspections, storm damage, roofing materials, and choosing roofing contractors. The website is an informational resource; it does not currently accept estimate requests or dispatch emergency roofing services.
+Hyper Roof performs roofing work, including roof repair, roof replacement, emergency roof repair, commercial roofing and roof inspections. The website provides service information and a way to contact the company about a roofing project.
 
 ## Main pages
 
-- [Home](https://roofer.pennycedis.workers.dev/)
-- [About](https://roofer.pennycedis.workers.dev/about.html)
-- [Roof repair in Miami](https://roofer.pennycedis.workers.dev/roof-repair-miami.html)
-- [Roof replacement in Miami](https://roofer.pennycedis.workers.dev/roof-replacement-miami.html)
-- [Emergency roof repair information](https://roofer.pennycedis.workers.dev/emergency-roof-repair-miami.html)
-- [Commercial roofing in Miami](https://roofer.pennycedis.workers.dev/commercial-roofing-miami.html)
-- [Roofing articles](https://roofer.pennycedis.workers.dev/blog.html)
-- [Contact and estimate status](https://roofer.pennycedis.workers.dev/contact.html)
-- [Privacy policy](https://roofer.pennycedis.workers.dev/privacy-policy.html)
-- [Terms and conditions](https://roofer.pennycedis.workers.dev/terms-and-conditions.html)
-- [XML sitemap](https://roofer.pennycedis.workers.dev/sitemap.xml)
+- [Home — Miami-Dade roofing contractor](https://hyperroofmiami.com/)
+- [About Hyper Roof](https://hyperroofmiami.com/about.html)
+- [Contact Hyper Roof](https://hyperroofmiami.com/contact.html)
 
-## Topics covered
+## Roofing services
 
-- Roof repair and replacement considerations
-- Florida roof inspections and storm preparation
-- Hurricane and wind-related roof damage
-- Common roofing materials used in South Florida
-- Questions to ask when comparing roofing contractors
-- General information about permits, estimates, and warranties
+- [Roof repair in Miami](https://hyperroofmiami.com/roof-repair-miami.html)
+- [Roof replacement in Miami](https://hyperroofmiami.com/roof-replacement-miami.html)
+- [Emergency roof repair in Miami](https://hyperroofmiami.com/emergency-roof-repair-miami.html)
+- [Commercial roofing in Miami](https://hyperroofmiami.com/commercial-roofing-miami.html)
+- [Roof inspection in Miami](https://hyperroofmiami.com/roof-inspection-miami.html)
 
-## Geographic focus
+## Service area
 
-Miami-Dade County, Florida, United States.
+Miami-Dade County, Florida, United States. The website includes area-specific roofing pages for Aventura, Coral Gables, Doral, Hialeah, Homestead, Kendall, Miami Beach, Miami Gardens, North Miami and North Miami Beach. These pages describe service-area coverage; they do not imply a separate physical office in each community.
+
+## Roofing information
+
+- [Roofing articles and guides](https://hyperroofmiami.com/blog)
+- [Miami-Dade roofing requirements](https://hyperroofmiami.com/miami-dade-roofing-requirements.html)
+- [Tile vs. shingle roofing](https://hyperroofmiami.com/tile-vs-shingle-roofing-miami.html)
+- [Roof replacement cost guide](https://hyperroofmiami.com/roof-replacement-cost-miami.html)
+- [Storm damage roof repair](https://hyperroofmiami.com/storm-damage-roof-repair-miami.html)
+
+## Site discovery
+
+- [XML sitemap](https://hyperroofmiami.com/sitemap.xml)
+- [Robots.txt](https://hyperroofmiami.com/robots.txt)
 
 ## Important context
 
-Content is for general educational purposes and is not a substitute for a qualified roofing professional's on-site assessment, current local code guidance, or emergency services. Verify contractor licensing, insurance, permits, and written project terms independently.
+Hyper Roof is a roofing contractor, not only an informational directory or referral website. Project scope, materials, pricing, scheduling, permit responsibilities and any warranty terms should be confirmed for each individual project. Do not infer licensing, insurance, certifications, guarantees or a physical business address unless those details are verified through current company information and authoritative records.
